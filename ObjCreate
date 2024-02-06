@@ -1,0 +1,458 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3:
+
+DirHome="$(dirname $0)"
+ArchDefObj=${DirHome}/ObjDef.json
+DirConn="${DirHome}/Conexiones"
+Log=${DirHome}/Log.ObjCreate
+NivelDebug=1
+
+#para colorear
+Black='\033[0;30m'
+Dark_Gray='\033[1;30m'
+Red='\033[0;31m'
+Light_Red='\033[1;31m'
+Green='\033[0;32m'
+Light_Green='\033[1;32m'
+Orange='\033[0;33m'
+Yellow='\033[1;33m'
+Blue='\033[0;34m'
+Light_Blue='\033[1;34m'
+Purple='\033[0;35m'
+Light_Purple='\033[1;35m'
+Cyan='\033[0;36m'
+Light_Cyan='\033[1;36m'
+Light_Gray='\033[0;37m'
+White='\033[1;37m'
+Blinking='\033[5m'
+Normal='\033[0m'
+
+function Ayuda()
+{
+   echo "Uso $(basename $0) Obj
+
+Muesta las variable configuradas
+   $(basename $0) --var  
+Muestra la ayuda
+   $(basename $0) --help|-h  
+Inicializar con un objeto
+   $(basename $0) --init JSON_OBJ
+Traducción entre código y descripcion
+   $(basename $0) (-t | --tra) Objeto [prop [regexp]]
+   Todas las propiedades del objeto
+      ObjCreate -t Item
+   Posibilidades de la propiedad
+      ObjCreate -t Item type
+   Descripción del código 9
+      ObjCreate -t Item type 9
+   Codigo de la propiedad que tiene web en la descripcion ignorando mayúsculas y minúsculas
+      ObjCreate -t Item type '(?i)web'
+
+Ayuda
+     Para armar el archivo de definiciones de objetos
+          Para poner el required en la descripcion
+               LineaDesde,LineaHasta s/ (required)\(\t[^\t]\+\t\)/\1(required) /
+          para sacar los blanco que la tabla de ayuda trae adelante de los tabuladores
+               LineaDesde,LineaHasta s/ *\t/\t/g 
+          para armar el objeto
+               LineaDesde,LineaHasta s/^\(.*\)\t\(.*\)\t\(.*\)/"\1":            {"type":"\2",                 "description":"\3"},
+
+     NOTA
+        La funcion debug puede estar enviando a /dev/null, puede cambiarse a algún arvhivo
+           Niveles de debug
+               0 - todos los mensajes son escritos en el debug
+               1 - algunos mensajes son escritos en el debug
+               2 - pocos mensajes son escritos en el debug ( llamada a la curl )
+               3 - ningún mensaje es escrito en el debug
+"
+}
+
+function debug()
+{  local serveridad
+   severidad=${1}
+   shift
+   [ ${NivelDebug} -le ${severidad} ] && echo "$(date +"%F %T") PID:$$ ###DescCon:${DescConn} Nivel:${severidad} Func:${FUNCNAME[1]}### $*" >> "${Log}"
+}
+
+function ShowVariables()
+{
+   case ${1,,} in
+      def* ) echo "${ArchDefObj}";;
+      dirconn* ) echo "${DirConn}";;
+      loglevel* ) echo "${NivelDebug}";;
+      log ) echo "${Log}";;
+      * ) echo "
+      Definicion de objetos: ${ArchDefObj}
+      Directorio de conecionex: ${DirConn}
+      Archivo de log: ${Log}
+      Nivel de log: ${NivelDebug}
+";;
+   esac
+}
+
+function ShowDef()
+{
+   local que Objeto
+   que=${1##*_}
+   Objeto="${2}"
+   debug 0 "Bandera ${1}', que '${que}'"
+   if [ "${Objeto}" == null -o ! "${Objeto}" ]
+   then
+      case ${que} in
+         nom* ) jqcmd='keys';;
+         '' ) jqcmd=".";;
+      esac
+      debug 0 jq "${jqcmd}" ${ArchDefObj}
+      jq -S "${jqcmd}" ${ArchDefObj}
+   else
+      debug 0 Buscando ${que} en ${Objeto}
+      echo ${Objeto} | jq -r '.properties | .'
+   fi
+}
+
+function ValidarObjeto()
+{ # busca el objeto en las definicione y carga el Objeto, variable global, si lo encuentra
+   local NombreDeObjeto
+   NombreDeObjeto="${1}"
+   debug 0 "Validando el objeto ${NombreDeObjeto}"
+   Objeto=$( jq '.'${NombreDeObjeto} ${ArchDefObj} )
+   if [ "${Objeto}" == null ]
+   then
+      ERRORES="${ERRORES}\nObjeto '${NombreDeObjeto}' no encontrado"
+   else
+      debug 0 Encontramos el objeto ${NombreDeObjeto}
+   fi
+}
+
+function AyudaConParametro()
+{
+   local parametro parValor parName parDataType
+   parametro="${1%%=*}"
+   parValor="${1##*=}"
+   if [ "${parametro}" == "${parValor}" ]
+   then # No se puso un igual, por lo que la división no se puede hacer
+      parValor=''
+   fi
+   debug 0 "
+   Analizando
+      ${parametro}
+      ${parValor}
+      Objeto ${Objeto}
+"
+   par=$(echo ${Objeto} | jq -r '.properties.'${parametro}'?' )
+   debug 0 "Funcion '${Funcion}'
+     Prametro encontrado '${par}'
+"
+   if [ "${parValor}" == "?" ]
+   then
+      echo ${parametro}
+      echo ${par} | jq -S .
+      exit # tal vez sería mejor pensarlo más para no hacer un exit desde una función
+   #elif [[ "${parValor}" =~ ^@ ]]
+   #then
+      #echo vamos a crear el objeto
+      #ObjCreate ${parValor##@}
+   #else
+      #:
+   fi
+}
+
+function MostrarProp()
+{
+   echo -e ${Red}Propiedad: ${Green}$(echo ${Objeto} | jq -r '.properties | keys['${1}'] ')
+   echo ${Objeto} | jq -r '.properties | .[keys['${1}']] '
+}
+
+function BuscarOpciones()
+{  #  busca el primero en el resto de los parametros
+   local ABuscar res
+   ABuscar="$1"
+   res=()
+   shift
+   while [ $# -gt 0 ]
+   do
+      if [[ $1 =~ ^${ABuscar} ]]
+      then
+         res+=( $1 )
+      fi
+      shift
+   done
+   echo "${res[@]}"
+}
+function AyudaOpcion ()
+{
+   echo -e ${Green}Propiedad: ${Red}${1};
+   echo ${Objeto} | jq -r '.properties.'"${1}";
+}
+
+function CrearObjeto()
+{
+   local ObjAux salir opt opcion TipoValor valor ValoresPosibles valorAct
+   if [ "$1" ]
+   then
+      ObjAux="$1"
+   else
+      ObjAux='{}'
+   fi
+   NuevoObj='{}' # lo usamos para la creacion del vector
+   exec 7>&1
+   exec 1>&2
+   while [ -z "${salir}" ]
+   do
+      echo "
+Seleccione el parametro para ingresar el valor
+   H Op -- Despiega informacion sobre el parametro
+   D    -- Despliega los valores ingresados hasta el momento
+   C    -- Borra la pantalla
+"
+      OpSalirAyuda="SALIR"
+
+      select opcion in ${OpSalirAyuda} $( echo ${Objeto} | jq -Sr '.properties | keys[] ') 
+      do
+        if [[ "${REPLY}" =~ [[:lower:]] ]]
+        then
+           # el ingreso de valores de propiedades son en minúscula, la acciones son en mayúscula
+           if [[ "${REPLY}" =~ ^[[:lower:]] ]]
+           then
+              # vamos a ingresar el valor de una propiedad
+              vecopcion=( $( BuscarOpciones ${REPLY} ${OpSalirAyuda} $( echo ${Objeto} | jq -Sr '.properties | keys[] ') ) )
+              [ ${#vecopcion[*]} -eq 0 ] && continue
+              if [ ${#vecopcion[*]} -gt 1 ]
+              then
+                 # hay mas de una opcion que machea
+                 echo -e ${Red}Opciones posibles 
+                 for op in "${vecopcion[@]}"
+                 do
+                    echo -e '\t'${Green}$op
+                 done
+                 echo -e ${Normal}
+                 continue
+              else
+                 opcion=${vecopcion[0]}
+              fi
+           else # es una opcion sobre una propiedad
+              case ${REPLY} in
+                 "H "* ) REPLY=${REPLY##H };
+                     if [[ "${REPLY}" =~ ^[[:lower:]] ]]
+                     then
+                        # vamos a ingresar el valor de una propiedad
+                        vecopcion=( $( BuscarOpciones ${REPLY} ${OpSalirAyuda} $( echo ${Objeto} | jq -Sr '.properties | keys[] ') ) );
+                        [ ${#vecopcion[*]} -eq 0 ] && continue;
+                        if [ ${#vecopcion[*]} -gt 1 ]
+                        then
+                           # hay mas de una opcion que machea
+                           echo -e ${Red}Opciones posibles;
+                           for op in "${vecopcion[@]}"
+                           do
+                              echo -e '\t'${Green}$op;
+                           done
+                           echo -e ${Normal};
+                           continue;
+                        fi
+                        AyudaOpcion ${vecopcion};
+                     fi;
+                     continue;;
+              esac
+           fi
+        else
+           case ${REPLY} in
+              "H "* ) REPLY=${REPLY##H };
+                  vecopcion=( $( echo ${Objeto} | jq -Sr '.properties | keys[] ') );
+                  AyudaOpcion ${vecopcion[$(( ${REPLY} -2))]};;
+              D ) echo -e ${Red}Objeto ${Yellow}${ObjName} ${Red}hasta ahora;
+                  echo ${ObjAux} | jq .;
+                  continue;;
+              C ) clear; continue;;
+              S ) opcion="SALIR";;
+           esac
+        fi
+        [ -z "${opcion}" ] && continue
+        case ${opcion} in
+           SALIR ) salir="S"; break;;
+            * ) AyudaOpcion ${opcion};
+                readonly=$(echo ${Objeto} | jq -r '.properties.'"${opcion}"'.readonly // false');
+                if [ "${readonly}" != "true" ]
+                then # se puede ingresar un valor al objeto
+                   valorAct=$(echo ${ObjAux} | jq -r '.'${opcion} );
+                   TipoValor=$( echo ${Objeto} | jq -r '.properties.'"${opcion}"'.type' )
+                   if [[ ${TipoValor} =~ ^OBJECT ]]
+                   then
+                      echo ;
+                      echo -e "${Red}GENERANDO EL SUBOBJETO ${Yellow}${TipoValor##OBJECT }${Normal}";
+                      echo ;
+                      aux="$( $0 ${TipoValor##OBJECT } --init "${valorAct}" )" ;
+                   else
+                      ValoresPosibles=$(echo ${Objeto} | jq -r 'try(.properties.'"${opcion}".'PossibleValues | keys[] )');
+                      if [ "${ValoresPosibles}" ]
+                      then
+                         echo Seleccione la opción para el valor de la propiedad
+                         select aux in ${ValoresPosibles}
+                         do
+                            [ "$aux" ] && break
+                         done
+                      else
+                         read -p "Ingrese el valor de '${opcion}´ (${valorAct}) " aux;
+                      fi
+                   fi
+                   if [ "${aux}" ]
+                   then
+                      if echo "${aux}" | jq . 2>/dev/null 1>/dev/null
+                      then
+                         if [[ ${TipoValor} =~ ^OBJECT ]]
+                         then
+                            ObjAux=$( echo "${ObjAux}" | jq ' . + { "'"${opcion}"'":'"${aux}"' } ' )
+                         else
+                            ObjAux=$( echo "${ObjAux}" | jq ' . + { "'"${opcion}"'":'"${aux//\"/\\\"}"' } ' )
+                         fi
+                      else
+                         ObjAux=$( echo "${ObjAux}" | jq ' . + { "'"${opcion}"'":"'"${aux}"'" } ' )
+                      fi
+                   fi
+                else
+                   echo
+                   echo -e "${Green} ${Blinking}NOTA: ${Red} La propiedad es READ ONLY${Normal}"
+                   echo 
+                fi;;
+        esac
+        break
+      done
+
+      echo -e ${Red}Objeto ${Yellow}${ObjName} ${Red}hasta ahora
+      echo ${ObjAux} | jq .
+      NuevoObj=${ObjAux}
+   done
+   exec 1>&7
+}
+
+function SetVariables ()
+{
+   local Arch aux
+   Arch="$1"
+
+   debug 2 "Cargando valores desde '${Arch}'"
+   if [ ! -r "${Arch}" ]
+   then
+      debug 0 "No se puede leer el archivo '${Arch}'"
+      debug 0 "Buscando '${DirConn}/${Arch}'"
+      if [ -r "${DirConn}/${Arch}" ]
+      then
+         Arch="${DirConn}/${Arch}"
+      else
+         ERRORES=${ERRORES}"\nNo se puede leer el archivo '${Arch}' ni '${DirConn}/${Arch}'"
+      fi
+   fi
+
+   aux="$(jq -r '.DEF_Object? // empty' "${Arch}")"
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         ArchDefObj="${aux}"
+      else # es un path relativo, cuelga de DirHome
+         APIDefFunc="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.OBJLOG__? // "'"${Log}"'"' "${Arch}")
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         Log="${aux}"
+      else
+         Log="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.DEBUGLEVEL? // empty' "${Arch}" )
+   if [ "${aux}" ]
+   then
+      NivelDebug=${aux}
+   fi
+}
+
+if [ $# -eq 0 ]
+then
+   Ayuda; exit 1
+fi
+primero="true"
+Init='{}'
+while [ $# -gt 0 ]
+do
+   debug 0 "Analizando ${1}"
+   case $1 in
+         -c ) ArchConf="$2"; SetVariables "$2"; shift;;
+         --vec* | -V ) vector="S";;
+         --var* | -v ) if [[ ${1} =~ --variables= ]]
+                       then
+                          ShowVariables ${1##*=}
+                       else
+                          ShowVariables
+                       fi;
+                       exit;; 
+         --help | -h ) Ayuda; exit;;
+         --def*) ShowDef "$1" "$2"; exit;;
+         --init ) Init=$( jq -n "${Init}"' + '"$2" ); shift;;
+         -t | --tra* ) # $0 -t Obj propiedad valor
+                       # Traducir objeto propiedad valor 
+                       # el valor puede ser el código o el texto
+                       if [ $# -lt 2 ]
+                       then
+                          Ayuda;
+                          exit 1;
+                       fi;
+                       ValidarObjeto "$2";
+                       if [ "$3" ]
+                       then
+                          if [ "$4" ]
+                          then
+                             Desc=$(echo "${Objeto}" |  jq -r '.properties["'"$3"'"].PossibleValues?["'"$4"'"].description ' );
+                             if [ "${Desc}" == "null" ]
+                             then
+                                echo "${Objeto}" |  jq -r '[ .properties["'"$3"'"].PossibleValues? | to_entries[] | select( .value.description | test("'"$4"'")) ] | if length > 1 then .[] | [ .key , .value.description ] | join (" - ") else .[] | .key end'
+                             else
+                                echo "${Desc}";
+                             fi;
+                          else
+                             echo "${Objeto}" |  jq -r '.properties["'"$3"'"].PossibleValues? // empty'
+                          fi;
+                       else
+                          echo "${Objeto}" | jq 
+                       fi;
+                       exit;;
+         #-c ) SetVariables "$2"; shift;;
+         *) if [ "${primero}" ]
+            then
+               ObjName="$1"
+               ValidarObjeto "${ObjName}";
+               [ "${Objeto}" == null ] && break;
+            else
+               AyudaConParametro "$1";
+               Init=$( jq -n "${Init}"' + {"'"${1%%=*}"'" : "'"${1##*=}"'" }' )
+            fi;
+            unset primero;;
+   esac
+   shift
+done
+
+echo -e ${Red}Objeto ${Yellow}${ObjName} ${Red}hasta ahora
+echo ${Init} | jq .
+if [ -z "${vector}" ]
+then # no querems crear un vector de objetos
+   CrearObjeto "${Init}"
+else
+   while [ -z "${finarray}" ]
+   do
+      CrearObjeto "${Init}"
+      clear
+      Vec="${Vec}${Vec:+,}${NuevoObj}"
+      echo '[' ${Vec} ']' | jq .
+      read -p "Nuevo Elemento (S/n): " -n 1 sigo
+      clear
+      echo $sigo
+      if [[ "${sigo}" =~ [nN] ]]
+      then
+         echo dijiste que no
+         finarray="S"
+      fi
+   done
+   echo '[' ${Vec} ']' | jq .
+fi

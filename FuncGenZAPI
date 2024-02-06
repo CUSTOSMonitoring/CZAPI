@@ -1,0 +1,88 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3:
+
+URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
+
+function Ayuda()
+{
+   echo "$(basename $0) Genera a stdout la estructura de definción de funcion tomando de la pagina de ayuda de zabbix.
+   AL MENOS LA PRIMER VERSION - puede necesitar alguan edición (agregar los parámetros comunes)
+
+   Uso $(basename $0) [-u URL] -z NombreParaZAPI -f funcion -o objeto -d 'Descripcion' [-h]
+       $(basename $0) [--url_base URL] --zapi-function NomZAPI --function func --objeto obj --description "Des" [--help]
+
+       -u --url--base     -> base de la url de la ayuda por defecto ${URL_base}
+       -f --function      -> funcion a la que acceder (get, create ...)
+       -o --objeto        -> objeto de la funcion (host, item ... )
+       -z --zapi-function -> Nombre para ZAPI, por defecto lo va a crear desde la funcion y el objeto suministrado
+       -d --description   -> Descripción de la función (esta en la pagina pero se complicó para sacarlo)
+       -h --help          -> muestra esta ayuda
+"
+}
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -u | --url-base) URL_base=$2; shift;;
+      -o | --objeto ) objeto=$2; shift;;
+      -f | --function ) funcion=$2; shift;;
+      -z | --zapi-function ) ZAPIFunc="$2"; shift;;
+      -d | --description ) Description=$2; shift;;
+      -h | --help) Ayuda; exit;
+   esac
+   shift
+done
+
+[ -z "${funcion}" ] && ERROR="\nDebe especificar una funcion"
+[ -z "${objeto}" ] && ERROR="\nDebe especificar un objeto"
+[ -z "${URL_base}" ] && ERROR="\nDebe especificar una URL base"
+
+if [ "${ERROR}" ]
+then
+   echo -e "Error${ERROR}"
+   Ayuda
+   exit 1
+fi
+
+URL="${URL_base}/${objeto@L}/${funcion@L}"
+
+if [ -z "${ZAPIFunc}" ]
+then
+   ZAPIFunc=${objeto^}${funcion^}
+fi
+
+{
+echo ' {
+  "'"${ZAPIFunc}"'": {
+      "apiname": "'${objeto}.${funcion}'",
+      "description": "'"${Description}"'",
+      "url":"'${URL}'",
+      "parameters": [
+      ' ;
+
+wget -S -qO- ${URL} 2>/dev/null | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
+BEGIN {
+ Nombre = ""
+ Tipo = ""
+ Descripcion = ""
+ SEP =""
+      }
+($1 == "</tr>") { if ( Nombre != "" && Tipo != "" && Descripcion != "" )
+                  {
+                     printf SEP
+                     print "{\042description\042:\042"Descripcion"\042,\042name\042:\042"Nombre"\042,\042type\042:\042"Tipo"\042}"
+                     SEP = ","
+                  }
+                  Nombre = ""
+                  Tipo = ""
+                  Descripcion = ""
+                  next }
+(Nombre == "") { Nombre=substr( $0, 5, index($0, "</td>") -5 ) ; next  }
+(Tipo == "") { Tipo=substr( $0, 5, index($0, "</td>") -5 ) ; next }
+(Descripcion == "") { gsub( "\"", "\\\"" )
+                      Descripcion=substr( $0, 5, index($0, "</td>") -5)
+                     ; next }
+' ;
+echo '    ]
+  }
+}' ; } | jq .

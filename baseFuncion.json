@@ -1,0 +1,37 @@
+Pasos para usar este archivo
+  1) Acceder a la ayuda de online de Zabbix
+  2) Copiar la tabla de parametros de la funcion
+  3) pegarlos al final del archivo
+  4) Aplicar las tranformaciones para generar el JSON
+  	4.1) --> para sacar los blanco que la tabla de ayuda trae adelante de los tabuladores
+		 LineaDesde,LineaHasta s/ *\t/\t/g
+	4.2) --> para armar el vector de parametros
+	         LineaDesde,LineaHasta s/^\(.*\)\t\(.*\)\t\(.*\)$/{"name":"\1",        "type":"\2",        "description":"\3"}, 
+  5) para chequear que el archivo sea correcto
+  	5.1 ) LineaDesde, LineaHasta ! jq .
+  6) Modificar el archivo 
+  	6.1) sacando "el objeto exterior" para ponerlo en el archivo general (borrar lso {} mas exteriores )
+	6.2) borrar estos comentarios
+{
+  "UserCreate": {
+    "apiname": "user.create",
+    "description": "his method allows to create new users.",
+    "parameters": [
+      {
+        "description": "Sort the result by the given properties.",
+        "name": "sortfield",
+        "required": false,
+        "possibleValues": {
+          "userid": {
+            "default": false,
+            "description": "Identificador interno del usuario"
+          },
+          "username": {
+            "default": false,
+            "description": "Nombre del usuario"
+          }
+        }
+      }
+    ]
+  }
+}

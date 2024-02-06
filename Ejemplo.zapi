@@ -1,0 +1,9 @@
+{
+  "COMENTARIO":"Para tener los parámetros posibles",
+  "URL": "http://67.207.86.91/api_jsonrpc.php",
+  "authtoken":"",
+  "Descripcion":"Ejemplo de archivo de conexion",
+  "USER":"usuario",
+  "CmdPrev": "Comando previo a ejecutar",
+  "PASSWORD":"614V3"
+}

@@ -1,0 +1,72 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3 :
+
+URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
+
+function Ayuda()
+{
+   echo "$(basename $0) Genera un archivo a stdout para definción de objeto
+   AL MENOS LA PRIMER VERSION - puede necesitar alguan edición
+
+   Uso $(basename $0) [-u URL] -o objeto -d 'Descripcion' [-h]
+       $(basename $0) [--url URL] --object obj --description "Des" [--help]
+
+       -U --url-base      -> base de la url de la ayuda por defecto ${URL_base}
+       -u --url           -> final de la url de la ayuda
+       -z --zapi-object   -> Nombre para ZAPI
+       -d --description   -> Descripción del Objeto (esta en la pagina pero se complicó para sacarlo)
+       -h --help          -> muestra esta ayuda
+
+   Ayuda
+   Para poner los possible values, es necesario hacer unos cambios y luego poner por linea los valores
+   s/^[[:space:]]\([^[:space:]]*\)[[:space:]]*\(.*\)$/"\1":{"description": "\2","default":false},
+"
+}
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -u | --url ) url=$2; shift;;
+      -o | --object ) ZAPIObj="$2"; shift;;
+      -d | --description ) Description=$2; shift;;
+      -h | --help) Ayuda; exit;
+   esac
+   shift
+done
+
+[ -z "${url}" ] && ERROR="\nDebe especificar una url"
+[ -z "${ZAPIObj}" ] && ERROR="\nDebe especificar un nombre de objeto"
+
+if [ "${ERROR}" ]
+then
+   echo -e "Error${ERROR}"
+   Ayuda
+   exit 1
+fi
+
+{
+echo ' { "'"${ZAPIObj}"'": { "properties":{ ' ;
+wget -S -qO- ${url} 2>/dev/null | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
+BEGIN {
+ Nombre = ""
+ Tipo = ""
+ Descripcion = ""
+ SEP =""
+      }
+($1 == "</tr>") { if ( Nombre != "" && Tipo != "" && Descripcion != "" )
+                  {
+                     printf SEP
+                     print "\042"Nombre"\042: { \042description\042:\042"Descripcion"\042,\042type\042:\042"Tipo"\042}"
+                     SEP = ","
+                  }
+                  Nombre = ""
+                  Tipo = ""
+                  Descripcion = ""
+                  next }
+(Nombre == "") { Nombre=substr( $0, 5, index($0, "</td>") -5 ) ; next  }
+(Tipo == "") { Tipo=substr( $0, 5, index($0, "</td>") -5 ) ; next }
+(Descripcion == "") { gsub( "\"", "\\\"" )
+                      Descripcion=substr( $0, 5, index($0, "</td>") -5)
+                     ; next }
+' ;
+echo '}}}' ; } # > toma.gus # | tee GUSTI | jq .

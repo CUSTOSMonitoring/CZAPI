@@ -1,0 +1,145 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3 :
+
+URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
+
+function Ayuda()
+{
+   echo "$(basename $0) Genera los archivos para el create objetc
+   AL MENOS LA PRIMER VERSION - puede necesitar alguan edición
+
+   Uso $(basename $0) [-u URL] [-h]
+       $(basename $0) [--url URL]  [--help]
+
+       -u --url   -> base de la url de la ayuda por defecto ${URL_base}
+       -d --dir   -> Directorio de salida de todos los archivos
+       -h --help  -> muestra esta ayuda
+"
+}
+
+#Por defecto generamos los archivos en el directorio donde estamos parados
+DirSalida="." 
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -u | --url ) URL_base=$2; shift;;
+      -d | --dir ) DirSalida="$2"; shift;;
+      -h | --help) Ayuda; exit;
+   esac
+   shift
+done
+
+[ -z "${URL_base}" ] && ERROR="\nDebe especificar una url"
+
+if [ "${ERROR}" ]
+then
+   echo -e "Error${ERROR}"
+   Ayuda
+   exit 1
+fi
+
+Objects=(
+action
+alert
+apiinfo
+auditlog
+authentication
+autoregistration
+configuration
+correlation
+dashboard
+discoveredhost
+discoveredservice
+discoverycheck
+discoveryrule
+event
+graph
+graphitem
+graphprototype
+highavailabilitynode
+history
+host
+hostgroup
+hostinterface
+hostprototype
+housekeeping
+iconmap
+image
+item
+itemprototype
+lldrule
+maintenance
+map
+mediatype
+problem
+proxy
+regularexpression
+report
+role
+script
+service
+settings
+sla
+task
+template
+templatedashboard
+token
+trend
+trigger
+triggerprototype
+user
+usergroup
+usermacro
+valuemap
+webscenario
+)
+
+function GenArch()
+{
+echo ' { "'"${1}"'": { "url" : "'"${url}"'", "properties":{ ' ;
+wget -S -qO- ${url} | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
+BEGIN {
+ Nombre = ""
+ Tipo = ""
+ Descripcion = ""
+ SEP =""
+      }
+($1 == "</tr>") { if ( Nombre != "" && Tipo != "" && Descripcion != "" )
+                  {
+                     gsub("<strong>", "", Nombre)
+                     gsub("</strong>", "", Nombre)
+                     gsub("<br>", "", Nombre)
+                     if ( gsub("[(]required[)]", "", Nombre) == 1 )
+                        { aux = "\042required\042:true," }
+                     else
+                        { aux ="" }
+                     printf SEP
+                     gsub("<em>", "", Descripcion )
+                     gsub("</em>", "", Descripcion )
+                     gsub("<br>", "", Descripcion )
+                     if ( gsub("[(]readonly[)]", "", Descripcion ) == 1 )
+                        { aux = aux"\042readonly\042:true," }
+                     print "\042"Nombre"\042: { "aux"\042description\042:\042"Descripcion"\042,\042type\042:\042"Tipo"\042}"
+                     SEP = ","
+                  }
+                  Nombre = ""
+                  Tipo = ""
+                  Descripcion = ""
+                  next }
+(Nombre == "") { Nombre=substr( $0, 5, index($0, "</td>") -5 ) ; next  }
+(Tipo == "") { Tipo=substr( $0, 5, index($0, "</td>") -5 ) ; next }
+(Descripcion == "") { gsub( "\"", "\\\"" )
+                      Descripcion=substr( $0, 5, index($0, "</td>") -5)
+                     ; next }
+' ;
+echo '}}}' ; 
+}
+
+for i in ${Objects[*]}
+do
+   echo "$(date +"%F %T") Generando para objeto $i"
+  ArchObj="${DirSalida}/${i}.json"
+  url="${URL_base}/${i}/object"
+  GenArch ${i} > "${ArchObj}" 2> "${ArchObj}".err
+done

@@ -1,0 +1,3 @@
+*2023-10-10 15:17:04 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate Hos desde 1 a 0
+*2023-10-10 15:17:04 No tenemos Objeto, van los objetos y opciones generales
+*2023-10-10 15:17:04 ObjCreate  --def_nom | jq -r '.[]'

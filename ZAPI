@@ -1,0 +1,538 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3:
+# Se quiereinterpretar los parametro de comandos a partir de descripciones
+
+DirHome="$(dirname $0)"
+DirConn="${DirHome}/Conexiones"
+APIDefFunc="${DirHome}/APIDefFunc.json"
+Log="${DirHome}/Log.$(basename $0)"
+ArchConf="$(readlink -f ${DirHome}/$(basename $0).zapi)"
+NivelDebug=1
+
+libreria="$(pwd)/lib"
+
+# Header para llamar a las API de Zabbix
+Header="Content-Type: application/json-rpc"
+
+function Ayuda()
+{
+   echo " $(basename $0) Invocacioin de la API de Zabbix
+   Uso
+          $(basename $0) [--help|-h] [--variables|-v]
+   Listados
+          $(basename $0) --list-conexiones   --> lista las conexiones (Archivos de configuracion)
+          $(basename $0) --def      --> Listado de toda la definicion
+          $(basename $0) --def_nom  --> Listado de los nombres de las funciones
+          $(basename $0) Funcion --def[_api[name],ret[urns],des[cription],par[ameters]  --> Listado de los parametros de Funcion
+          $(basename $0) Funcion --def=par[ameters] [cond] --> Listado de los parametros de Funcion filtradas por condicion
+                cond --> name=Data,description=pass --> busca los parametros fitrando por los que tengan Data en nombre o pass en description
+
+   Llamado a una funcion
+          $(basename $0) -c Arch [--no-format] Funcion param=valor ...
+               Arch por defecto es ZAPI.zapi
+               Arch tiene la configuración entre otras, la URL y token para conectarse ( Ver -C )
+                   Si no se especifica esta opción, se cargan valores por defecto desde el archvivo $(dirname $0)/$(basename $0).zapi
+               --no-format No pasa el resultado por la funcion de formateo
+
+          $(basename $0) --show-API-call Funcion param=valor ...
+               No hace la llamada pero muestra cuál tiene que ser
+
+          $(basename $0) -C Arch
+               Genera el archivo de conexión utilizando la funcion login para generar el token.
+               Si el archivo existe, toma los valores por defecto de esa estructura
+               Debe llamarse a la función logout para eliminar la validez del token
+
+          $(basename $0) --show-debug
+               Hace un less del archivo de debug
+
+          $(basename $0) --edit-conf
+               Edita el archivo de configuracion utilizado
+
+          $(basename $0) --edit-funciones
+               Edita el archivo de definicion de funciones utilizado
+
+   Las funciones estan definidas en el archivo '${APIDefFunc}' (se configura en el archivo de conexiones)
+
+   Variables de ambiente para no especificar archivo de conexion
+      export URL=http://67.207.86.91/api_jsonrpc.php (por ejemplo )
+      export authtoken=null  (Inicializar para usar la funcion login, luego cargarla con el token que retorna la funcion)
+                             (en caso de usar API token, se puede inicializar con ese valor)
+      export authtoken='2c4600bdaaf049974ff07102db66d1f9'
+
+  Los parametros tienen tipo
+      Se hace un tratamiento especial para algunos.
+
+  NOTA
+     La funcion debug puede estar enviando a /dev/null, puede cambiarse a algún arvhivo
+     Niveles de debug
+        0 - todos los mensajes son escritos en el debug
+        1 - algunos mensajes son escritos en el debug
+        2 - pocos mensajes son escritos en el debug ( llamada a la curl )
+        3 - ningún mensaje es escrito en el debug
+
+  FALTA
+      considerar los parametros comunes a todos los Get, hoy estan repetidos en todas las funciones, lo que no es muy eficiente
+
+  Ayuda
+      Existen dos archivos base para generar la definición de funciones y la de objetos.
+      Existe ejecutables que traen los datos de la página de ayuda y hacen una primer versión de las funcione y objetos. Probablemente los arhivos generados deban ser editados
+"
+}
+
+function ShowVariables()
+{
+   if [ $# -eq 0 ]
+   then
+      echo "Variables que utiliza $0 desde el archivo '${ArchConf}'
+
+   DirConn '${DirConn}'
+   Descripcion: ${DescConn}
+
+   URL: '${URL}'  -> Si no se setea se solicita
+   Token: '${authtoken}'  -> Se consigue haciendo un login o mediante un API token
+   USER '${user}'
+   PASSWORD '${passwd}'
+   CmdPrev '${CmdPrev}'
+   Format '${ArchFormat}'
+
+   Definicion de funciones '${APIDefFunc}'
+   Archivo de log '${Log}'
+   Log Level: ${NivelDebug}
+   Formateo: ${ArchFormat}
+   Libreria: ${libreria} 
+"
+   else
+      case ${1,,} in
+         des* ) echo ${DescConn};;
+         url  ) echo ${URL};;
+         tok* ) echo ${authtoken};;
+         def  ) echo ${APIDefFunc};;
+         log  ) echo ${Log};;
+         use  ) echo ${user};;
+         pas* ) echo ${passwd};;
+         cmdprev ) echo ${CmdPrev};;
+         for* ) echo ${ArchFormat};;
+         conf* ) echo ${ArchConf};;
+         dirconn* ) echo ${DirConn};;
+      esac
+   fi
+}
+
+function Mensaje()
+{
+   if [ -z "${silent}" ]
+   then
+      echo "$*"
+   fi
+   debug 0 "$*" 
+}
+
+function debug()
+{  local serveridad
+   severidad=${1}
+   shift
+   [ ${NivelDebug} -le ${severidad} ] && echo "$(date +"%F %T") PID:$$ ###DescCon:${DescConn} Nivel:${severidad} Func:${FUNCNAME[1]}### $*" >> "${Log}"
+}
+
+function ValidarParametro()
+{
+   local parametro parValor parName parDataType
+   parametro="${1%%=*}" # nombre del parámetro
+   parValor="${1#*=}"   # valor del parámetro
+   if [ "${parametro}" == "${parValor}" ]
+   then # No se puso un igual, por lo que la división no se puede hacer
+      parValor=''
+   fi
+   debug 0 "
+   Analizando
+      ${parametro}
+      ${parValor}
+   Funcion ${Funcion}
+"
+   par=$(echo "${Funcion}" | jq '.parameters[] | select( .name == "'${parametro}'")' )
+   debug 0 "Funcion '${Funcion}'
+     Prametro encontrado '${par}'
+   " 
+   if [ "${parValor}" == "?" ]
+   then
+      echo ${par} | jq -S '.'
+      ERRORES="Despliegue de ayuda" # para evitar que ejecute la llamada a la funcion
+   else
+      if [ "${par}" ]
+      then
+         parName=$( echo ${par} | jq '.name' )
+         parDataType=$( echo ${par} | jq -r '.type' )
+         case "${parDataType}" in
+            "flag" ) parValor=1;;
+            "string" ) parValor='"'${parValor}'"';;
+            "boolean" ) if [ "${parValor}" == "" -o "${parValor}" == "1" ]
+                        then
+                            parValor='true'
+                        else
+                            parValor='false'
+                        fi;;
+            "object" ) parValor=${parValor};; #TODO hacer algo más inteligente, por ejemplo, si parvalor es un % llamar al constructor de objetos
+            "array of objects" ) parValor=${parValor};; #TODO hacer algo más inteligente, hacer algo parecido a lo que se hace en object
+            "query" ) if [ "${parValor}" == "extend" -o "${parValor}" == "" ]
+                      then
+                         parValor='"extend"'; # no se especifica nada, van todos
+                      elif [ "${parValor}" == "count" ]
+                      then
+                         parValor='"count"' # nos estan pidiendo que contemos
+                      else
+                         parValor='["'$(echo ${parValor} | sed 's/,/","/g' )'"]'; # convertimos el string en un vector
+                      fi;;
+            "string/array" ) # vamos a tener problemas cuando el string tenga comas
+                    parValor='"'$(echo ${parValor} | sed 's/,/","/g' )'"';
+                    Aux=$( echo "{${Parametros}}" | jq '.'$(echo ${parName} | tr -d '"')'[]' 2>/dev/null | tr "\n" ",");
+                    parValor="[${Aux}${parValor}]";;
+         esac
+         Parametros="${Parametros:+${Parametros},}${parName}:${parValor}"
+         debug 0 "Parametros hasta ahora $( echo "{"${Parametros}"}" | jq )"
+      else
+         ERRORES="${ERRORES} \nParametro '${parametro}' no encontrado en la funcion '${NombreDeFuncion}'"
+      fi
+   fi
+}
+
+function ValidarFuncion()
+{
+   #local NombreDeFuncion
+   NombreDeFuncion="${1}"
+   debug 1 "Validando la funcion ${NombreDeFuncion}" 
+   Funcion=$( jq '.'${NombreDeFuncion} "${APIDefFunc}" )
+   if [ "${Funcion}" == null ]
+   then
+      ERRORES="${ERRORES}\nFuncion '${NombreDeFuncion}' no encontrada"
+   else
+      debug 0 Encontramos la funcion ${NombreDeFuncion} ${Funcion} 
+   fi
+}
+
+function GetAPICall()
+{
+   local method Authorization data
+   if [ "${Funcion}" ]
+   then
+      [ "${Parametros}" ] && Parametros="{ ${Parametros} }" || Parametros="[]"
+      method=$(echo ${Funcion} | jq -r '.apiname')
+      if [ "${method}" ]
+      then
+         if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+         then # Hay metodos que no llevan e autorization
+            Authorization=${authtoken:+,'"auth"':\"${authtoken}\"}
+         fi
+         if [[ "${method}" == "user.login" ]]
+         then
+            Parametros='{ "user": "'"${user}"'", "password": "'"${passwd}"'"}'
+         fi
+
+         data='{"jsonrpc":"2.0",
+             "method":"'${method}'",
+             "params":'${Parametros}',
+             "id":1
+             '${Authorization}'}
+             ' 
+      fi
+   else
+      debug 2 "No se especifico funcion"
+   fi
+   echo "${data}"
+}
+
+function callAPI()
+{
+   local APICall_data
+   [ ! "${URL}" ] && read -p 'No se especificó la URL: ' URL
+   APICall_data=$( GetAPICall )
+   if [ "${CmdPrev}" ]
+   then
+      debug 3 "Ejecutando comando previo"
+      debug 3 $( ${CmdPrev} 2>&1 )
+   fi
+   if [ "${APICall_data}" ]
+   then
+      debug 3 "curl --insecure -sS -H '${Header}' -d '${data}' ${URL}" 
+      curl --insecure -sS -H "${Header}" -d "${APICall_data}" ${URL}
+      # --insecure, --show-error
+      #      When used with -s, --silent, it makes curl show an error message if it fails.
+      # -s, --silent
+      #      Silent or quiet mode. Do not show progress meter or error messages. Makes Curl mute. It  will still
+      #      output the data you ask for, potentially even to the terminal/stdout unless you redirect it. 
+      # -S, --show-error
+      #      When used with -s, --silent, it makes curl show an error message if it fails.
+   else
+      debug 3 "Sin datos para hacer la llamada (APICall_data='${APICall_data}')"
+      echo ""
+   fi
+}
+
+function ShowDef()
+{
+   local que jqcmd nompar varpar filtro filpar
+   que=${1##*_}
+   debug 0 "Funcion '${Funcion}', que '${que}'"
+   if [ "${Funcion}" == null -o ! "${Funcion}" ]
+   then # No se especificó funcion
+      case ${que} in
+         nom* ) jqcmd='keys';;
+         * ) jqcmd=".";;
+      esac
+      debug 0 jq "${jqcmd}" ${APIDefFunc} 
+      jq -S "${jqcmd}" "${APIDefFunc}"
+   else
+      [[ "${que}" =~ api ]] && jqcmd="${jqcmd:+${jqcmd},}apiname"
+      [[ "${que}" =~ ret ]] && jqcmd="${jqcmd:+${jqcmd},}returns"
+      [[ "${que}" =~ des ]] && jqcmd="${jqcmd:+${jqcmd},}description"
+      [[ "${que}" =~ par ]] && jqcmd="${jqcmd:+${jqcmd},}parameters"
+      if [ "${jqcmd}" ]
+      then
+         if [ "${jqcmd}" == "parameters" -a "$2" ]
+         then #especificamos condiciones sobre los parametros
+            filpar="${2}"
+            while [ "${filpar}" ]
+            do
+               filtro=${filpar%%,*}
+               nompar=${filtro%%=*}
+               varpar=${filtro##*=}
+               aux='.'${nompar}' | test( "'${varpar}'")'
+               filpar=${filpar##${filtro}}
+               filpar=${filpar##,}
+            done
+            jqcmd='.'${jqcmd}'[] | select ( '${aux}' )'
+         else
+            jqcmd='{'${jqcmd}'}'
+         fi
+         debug 0 "filtro de parametros ${jqcmd}"
+      fi
+      echo ${Funcion} | jq -S "${jqcmd}"
+   fi
+}
+
+function SetVariables()
+{ # lee un archivo JSON con las especificaiones de las variables
+   local Arch aux
+   Arch="$1"
+
+   debug 2 "Cargando valores desde '${Arch}'"
+
+   if [ ! -r "${Arch}" ]
+   then
+      debug 0 "No se puede leer el archivo '${Arch}'"
+      debug 0 "Buscando '${DirConn}/${Arch}'"
+      if [ -r "${DirConn}/${Arch}" ]
+      then
+         Arch="${DirConn}/${Arch}"
+      else
+         ERRORES=${ERRORES}"\nNo se puede leer el archivo '${Arch}' ni '${DirConn}/${Arch}'"
+      fi
+   fi
+   ArchConf="$(readlink -f "${Arch}")"
+
+   DescConn=$( jq -r '.Descripcion? // empty' "${Arch}")
+   URL=$( jq -r '.URL // empty' "${Arch}")
+   authtoken=$( jq -r '.authtoken? // empty' "${Arch}")
+   user=$( jq -r '.USER? // empty' "${Arch}" )
+   passwd=$( jq -r '.PASSWORD? // empty' "${Arch}" )
+   CmdPrev=$( jq -r '.CmdPrev? // empty' "${Arch}")
+   aux="$(jq -r '.DEF_FUNC? // empty' "${Arch}")"
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         APIDefFunc="${aux}"
+      else # es un path relativo, cuelga de DirHome
+         APIDefFunc="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.LOG__? // "'"${Log}"'"' "${Arch}")
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         Log="${aux}"
+      else
+         Log="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.DEBUGLEVEL? // empty' "${Arch}" )
+   if [ "${aux}" ]
+   then
+      NivelDebug=${aux}
+   fi
+   aux=$(jq -r '.format? // "'"${ArchFormat}"'"' "${Arch}")
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         ArchFormat="${aux}"
+      else
+         ArchFormat="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.libreria? // empty' "${Arch}" )
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         libreria="${aux}"
+      else
+         libreria="${DirHome}/${aux}"
+      fi
+   fi
+   aux=$( jq -r '.DirConn? // empty' "${Arch}" )
+   if [ "${aux}" ]
+   then
+      if [ "${aux:0:1}" = "/" ]
+      then # es un path absoluto
+         DirConn="${aux}"
+      else
+         DirConn="${DirHome}/${aux}"
+      fi
+   fi
+}
+
+function CreateArchConect ()
+{
+  local Arch
+  Arch="$1"
+  [ -z "${Arch}" ] && Arch="${ArchConf}"
+  if [ -r "${Arch}" ]
+  then
+     # TODO puede que no sea un archivo json bien hecho
+     aux="$(jq -S '.' "${Arch}")"
+  else
+     Mensaje "No se pudo leer del archivo '${Arch}' para inicializar"
+     aux='{}'
+  fi
+  aux=$( jq --slurpfile ZAPI "${DirHome}/ZAPI.zapi" '$ZAPI[0] + .' "${Arch}" )
+  while [ "${opcion}" != "SALIR" ] 
+  do
+     echo "${aux}" | jq -S '.' 
+     echo
+     select opcion in "SALIR" $( echo "${aux}" | jq -rS '. | keys[] ')
+     do
+        if [ "${opcion}" -a "${opcion}" != "SALIR" ]
+        then
+           val_def=$(echo "${aux}" | jq -r '.'${opcion}'?' )
+           read -p "Ingrese el valor para '${opcion}' (${val_def}): " valor
+           if [ "${valor}" ]
+           then
+              # agregamos alguna particularidad o chequeo de las opciones
+              case "${opcion}" in
+                 "URL" ) if [ "${valor%%/api_jsonrpc.php}" == "${valor}" ]
+                         then # la url no termina en el php
+                            valor="${valor}/api_jsonrpc.php"
+                         fi;;
+              esac
+              aux=$( echo "${aux}" | jq -S ' .  + {"'"${opcion}"'":"'"${valor}"'" }' )
+           fi
+        fi
+        break
+     done
+  done
+  read -p "Salvamos el archivo?: (s/N)" valor
+  if [[ "${valor}" =~ ^[Ss] ]] 
+  then
+     read -p "Ingrese el nombre de archivo: (${Arch})" Aux
+     [ "${Aux}" ] && Arch="${Aux}"
+     if [ "${Arch}" ]
+     then
+        [ "${Arch:0:1}" != "/" ] && Arch="${DirConn}/${Arch}" # si no nos dan un path absoluto lo ponemos en el directprio de conexiones
+        [ "${Arch%%.zapi}" == "${Arch}" ] && Arch="${Arch}.zapi" # si la extensión no es zapi, le ponemos la extension
+        # falta ver que el archivo no exita por si no lo quiere sobreescribir etc etc
+        echo "${aux}" | jq -S '.' > "${Arch}"
+     fi
+  fi
+}
+
+function ShowDebug()
+{
+   less ${Log}
+}
+
+function ListarConexiones()
+{
+   #jq  '{( input_filename ): .Descripcion} ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
+   jq  '{( .Descripcion): input_filename } ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
+}
+
+if [ $# -eq 0 ]
+then
+   Ayuda; exit 1
+fi
+primero="true"
+[ -r "$(dirname $0)/$(basename $0).zapi" ] && SetVariables "${ArchConf}"
+while [ $# -gt 0 ]
+do
+   debug 0 "Analizando ${1}" 
+   case $1 in
+      --var* | -v ) if [[ ${1} =~ --variables= ]]
+                    then
+                       ShowVariables ${1##*=}
+                    else
+                       ShowVariables
+                    fi
+                    exit;;
+      --help | -h ) Ayuda; exit;;
+      --def* ) ShowDef "$1" "$2"; exit;;
+      --edit-conf ) vi "${ArchConf}"; exit;;
+      --list-conexiones ) ListarConexiones; exit;;
+      --edit-funciones ) vi "${APIDefFunc}"; exit;;
+      --show-API-call ) ShowAPICall=1;;
+      --no-format ) raw=si;;
+      -c ) ArchConf="$2"
+           SetVariables "$2"; shift;;
+      -C ) CreateArchConect "$2"; exit;;
+      --show-debug ) ShowDebug; exit;;
+      *) if [ "${primero}" ]
+         then
+             ValidarFuncion "$1";
+             [ "${Funcion}" == null ] && break;
+         else
+             ValidarParametro "$1";
+         fi;
+         unset primero;;
+   esac
+   shift
+done
+
+if [ "${ERRORES}" ]
+then
+   if [ "${ERRORES}" != "Despliegue de ayuda" ]
+   then
+      echo -e ERRORES${ERRORES}
+   fi
+else
+   if [ "${ShowAPICall}" ]
+   then
+      echo "curl --insecure -sS -H \"${Header}\" -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
+   else
+      if [ "$( GetAPICall )" ]
+      then
+         debug 1 "Archivo de traduccion '${ArchFormat}'" 
+         if [ "${ArchFormat}" -a -r "${ArchFormat}" -a "${Funcion}" ]
+         then 
+            fuente=$(jq -r ' .'"${NombreDeFuncion}"'.fuente // empty' "${ArchFormat}" )
+            funcion=$(jq -r ' .'"${NombreDeFuncion}"'.funcion // empty' "${ArchFormat}" )
+         fi
+         if [ "${fuente}" -a "${funcion}" -a -z "${raw}" ]
+         then
+            debug 1 "Formateamos con '${fuente}' y la funcion '${funcion}'"
+            #callAPI | jq 'include "'"${libreria}/${fuente}.jq"'"; if ( type( .result ) == "array" ) then
+            #callAPI | jq 'include "'"${fuente}"'" {"search":"'"${libreria}"'" } ; if ( type( .result ) == "array" ) then
+            callAPI | jq -L${libreria} 'include "'"${fuente}"'"; .result | if ( type == "array" ) then
+                                                                   .[] |= '${funcion}'( . )
+                                                                else 
+                                                                   . |= '${funcion}'( . )
+                                                                end '
+         else
+            debug 1 "Sin formateo"
+            callAPI
+         fi
+      else 
+         debug 1 "Sin datos para la llamada a la API"
+         Ayuda
+      fi
+   fi
+fi

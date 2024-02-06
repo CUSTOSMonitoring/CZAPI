@@ -1,0 +1,209 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3:
+
+URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
+DirOut="$(pwd)"
+ArchOpComunesGet="$(dirname $(readlink -f $0))/ObjParamsComunes.json"
+
+function Ayuda()
+{
+   echo "$(basename $0) Genera archivos con la definicón de funciones en el directorio especificado.
+   AL MENOS LA PRIMER VERSION - puede necesitar alguna edición
+
+   Uso $(basename $0) [-u URL] [-d dirout] [-g ArchOpComunesGet] [-h]
+       $(basename $0) [--url_base URL] [--dir-out dirout] [--opciones-comunes-get ArchOpComunesGet] [--help]
+   
+       -u | --url_base             -> direccion base donde vamos a buscar info ('${URL_base}')
+       -g | --opciones-comunes-get -> Archivo JSON con las opciones comunes a la funcion get ('${ArchOpComunesGet}')
+       -d | --dir-out              -> donde se generan los archivos ('${DirOut}')
+       -h --help                   -> muestra esta ayuda
+"
+}
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -h | --help ) Ayuda; exit;;
+      -d | --dir-out ) DirOut="$( readlink -f "$2" )"; DirOutDef=No; shift;;
+      -g | --opciones-comunes-get ) ArchOpComunesGet="$2"; shift;;
+      -u | --url-base ) URL_base="$2"; shift;;
+   esac
+   shift
+done
+
+if [ -z "${DirOutDef}" ]
+then
+   read -p "Generar la salida al directorio '${DirOut}'? (sN)" a
+   if ! [[ "${a}" =~ s|S ]]
+   then
+      echo "
+Especifique un directorio de salida
+      "
+      Ayuda
+      exit
+   fi
+fi
+
+Functions=(
+   get
+   create
+   delete
+   update 
+)
+
+Objects=(
+ "action"
+ "alert"
+ "apiinfo"
+ "auditlog"
+ "authentication"
+ "autoregistration"
+ # "configuration" este objeto tiene otros métodos configuration.export configuration.import configuration.importcompare 
+ "connector"
+ "correlation"
+ "dashboard"
+ "dhost"
+ "dservice"
+ "dcheck"
+ "drule"
+ "event"
+ "graph"
+ "graphitem"
+ "graphprototype"
+ "hanode"
+ "history"
+ "host"
+ "hostgroup"
+ "hostinterface"
+ "hostprototype"
+ "housekeeping"
+ "iconmap"
+ "image"
+ "item"
+ "itemprototype"
+ "discoveryrule" # "lld rule"
+ "maintenance"
+ "map"
+ "mediatype"
+ "module"
+ "problem"
+ "proxy"
+ "regexp"
+ "report"
+ "role"
+ "script"
+ "service"
+ "settings"
+ "sla"
+ "task"
+ "template"
+ "templatedashboard"
+ "templategroup"
+ "token"
+ "trend"
+ "trigger"
+ "triggerprototype"
+ "user"
+ "userdirectory"
+ "usergroup"
+ "usermacro"
+ "valuemap"
+ "httptest" # "Web scenario"
+)
+
+function GenerarObjFunc()
+{
+echo ' {
+  "'"${ZAPIFunc}"'": {
+      "apiname": "'${object}.${funcion}'",
+      "description": "'"${Description}"'",
+      "url":"'${URL_base}/${object@L}/${funcion@L}'",
+      "parameters": [
+      ' ;
+
+if [ "${funcion}" == "delete" ]
+then
+    echo '"Array of ID to delete"'
+else
+   wget -qO- "${URL_base}/${object@L}/${funcion@L}" 2>/dev/null | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
+   BEGIN {
+    Nombre = ""
+    Tipo = ""
+    Descripcion = ""
+    SEP =""
+         }
+   ($1 == "</tr>") { if ( Nombre != "" && Tipo != "" && Descripcion != "" )
+                     {
+                        printf SEP
+                        print "{\042description\042:\042"Descripcion"\042,\042name\042:\042"Nombre"\042,\042type\042:\042"Tipo"\042}"
+                        SEP = ","
+                     }
+                     Nombre = ""
+                     Tipo = ""
+                     Descripcion = ""
+                     next }
+   (Nombre == "") { Nombre=substr( $0, 5, index($0, "</td>") -5 ) ; next  }
+   (Tipo == "") { Tipo=substr( $0, 5, index($0, "</td>") -5 ) ; next }
+   (Descripcion == "") { gsub( "\"", "\\\"" )
+                         Descripcion=substr( $0, 5, index($0, "</td>") -5)
+                        ; next }
+   ' ;
+   if [ "${funcion}" == "get" -a "${object}" != "apiinfo" ] 
+   then # es una funcion get, ponemos los parámetros comunes
+      echo "," ;
+      cat "${ArchOpComunesGet}" ;
+   fi;
+fi;
+echo '] } }'
+} 
+
+
+for object in "${Objects[@]}"
+do
+   echo Generando para el Objeto ${object}
+
+   if [ ${object} == "apiinfo" ]
+   then
+      echo "   Generando funcion de Api Info en el archivo '${DirOut}/${object@L}.json'"
+      echo '"Apiinfo": {
+          "apiname": "apiinfo.version",
+          "description": "This method allows to retrieve the version of the Zabbix API.",
+          "parameters": [],
+          "returns": "(string) Returns the version of the Zabbix API."
+          }' | jq . > "${DirOut}/${object@L}.json"
+   elif [ ${object} == "configuration" ]
+   then
+      for funcion in "export" "import" "importcompare"
+      do
+         echo "   Generando funcion ${funcion} en el archivo '${DirOut}/${object@L}_${funcion@L}.json'"
+         ZAPIFunc=${object^}${funcion^}
+         GenerarObjFunc | jq . > "${DirOut}/${object@L}_${funcion@L}.json"
+      done
+   else
+      for funcion in "${Functions[@]}"
+      do
+         echo "   Generando funcion ${funcion} en el archivo '${DirOut}/${object@L}_${funcion@L}.json'"
+         ZAPIFunc=${object^}${funcion^}
+         GenerarObjFunc | jq . > "${DirOut}/${object@L}_${funcion@L}.json"
+      done
+   fi
+done
+
+read -p "Unimos todos los archivos en '${DirOut}'? (sN)" a
+if [[ "${a}" =~ s|S ]]
+then
+   read -p "Nombre de archivo donde unir " ArchSalida
+   if [ "${ArchSalida}" ]
+   then
+      [ "${ArchSalida:0:1}" != "/" ] && ArchSalida="${DirOut}/${ArchSalida}"
+      if [ -f "${ArchSalida}" ]
+      then
+         read -p "Sobreescribir "${DirOut}/${ArchSalida}" (sN)" a
+         if ! [[ "${a}" =~ s|S ]]
+         then
+            echo "Abortando concatenacion" >&2
+         fi
+      fi
+      jq --slurp 'add' "${DirOut}/"* > "${ArchSalida}"
+   fi
+fi

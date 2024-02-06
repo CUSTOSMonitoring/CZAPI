@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","result":{"periods":[{"period_from":1694322000,"period_to":1694926800},{"period_from":1694926800,"period_to":1695531600}],"serviceids":[1],"sli":[[{"uptime":604800,"downtime":0,"sli":100,"error_budget":0,"excluded_downtimes":[]}],[{"uptime":391833,"downtime":0,"sli":100,"error_budget":392,"excluded_downtimes":[]}]]},"id":1}

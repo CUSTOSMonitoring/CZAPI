@@ -1,0 +1,35 @@
+     Para armar el archivo de definiciones de funciones
+          para sacar los blanco que la tabla de ayuda trae adelante de los tabuladores
+               LineaDesde,LineaHasta s/ *\t/\t/g
+          Para poner el required en la descripcion
+               LineaDesde,LineaHasta s/ (required)\(\t[^\t]\+\t\)/\1(required) /
+          para armar el objeto
+               LineaDesde,LineaHasta s/^\(.*\)\t\(.*\)\t\(.*\)/"\1":            {"type":"\2",                 "description":"\3"},
+          para convertir los possible values
+		Escribir los possible values en una linea y aplicarles
+                LineaDesde,LineaHasta s/^[[:space:]]*\([^[:space:]]\+\) - \(.*\)$/"\1": { "description":"\2","default":false },/
+                Corregir al menos la útlima coma que queda en el ultio elemento (Es posible que también tengas una doble comilla en la descripción, dependiendo de desde donde partas)
+
+  "OBJECT": {    "properties": {
+      "available": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "unknown"
+          },
+          "1": {
+            "default": false,
+            "description": "available"
+          },
+          "2": {
+            "default": false,
+            "description": "unavailable"
+          }
+        },
+        "description": "Availability of host interface.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      }
+     }
+   }

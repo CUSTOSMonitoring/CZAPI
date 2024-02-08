@@ -1,0 +1,6 @@
+lista de hosts en csv
+        Solo nombres y estado
+                ZAPI --no-format -c CustosDigitalOcean60.zapi HostGet | jq -r ' .result[] | [ .name, .status ] | @csv'
+        Todos los datos del output
+                ZAPI --no-format -c CustosDigitalOcean60.zapi HostGet  | jq -r ' .result[] | [ values[] ] | @csv'
+                ZAPI -c CustosDigitalOcean60.zapi HostGet output=name,maintenance_status,maintenance_type | jq -r ' ([ .[1] | keys_unsorted[] ] ), .[] | [ values[] ] | @csv' | ArrangeCols -m -t "Lo jó" > toma.html

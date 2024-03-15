@@ -1,0 +1,25 @@
+#!/bin/bash
+# vim: set ts=3 expandtab shiftwidth=3:
+
+function help()
+{
+   echo " $(basename) - Configura el ambiente para facilitar el uso de ZAPI
+   -- puede que se necesiten hacer otros cambios que no fueron contemplados, charlalo con Gustavo
+Forma de uso
+   $(basename) [${dir}]
+      ${dir}   directorio a configurar, por defecto el directorio actual
+   "
+}
+
+dir=$(pwd)
+while [ $# -gt 0 ]
+do
+   dir="$1"
+   shift
+done
+
+echo "Preparando para el directorio '${dir}'"
+
+PATH=$PATH:${dir}
+. ${dir}/CompletarZAPI.sh
+. ${dir}/CompletarObjCreate.sh

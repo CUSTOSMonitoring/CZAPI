@@ -3,8 +3,8 @@
 # Se quiereinterpretar los parametro de comandos a partir de descripciones
 
 DirHome="$(dirname $0)"
-DirConn="${DirHome}/Conexiones"
 APIDefFunc="${DirHome}/APIDefFunc.json"
+DirConn="${DirHome}/Conexiones"
 Log="${DirHome}/Log.$(basename $0)"
 ArchConf="$(readlink -f ${DirHome}/$(basename $0).zapi)"
 NivelDebug=1
@@ -455,6 +455,40 @@ function ListarConexiones()
 {
    #jq  '{( input_filename ): .Descripcion} ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
    jq  '{( .Descripcion): input_filename } ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
+}
+
+function Controles()
+{
+   # Controlar que existan los directorios y archivos necesarios
+   # tal vez definir una función con parametros para controlar cada cosa
+   :
+#if ! [ -r "${APIDefFunc}" ]
+#else
+#   read -p "No existe el directorio '${APIDefFunc}', lo creamos (s/N)?" a
+#   if [[ $a =~ Ss ]]
+#   then
+#      mkdir -p "${APIDefFunc}"
+#   fi
+#fi
+#
+#if ! [ -d "${DirConn}" ]
+#else
+#   read -p "No existe el directorio '${DirConn}', lo creamos (s/N)?" a
+#   if [[ $a =~ Ss ]]
+#   then
+#      mkdir -p "${DirConn}"
+#   fi
+#fi
+#if ! [ -r "${DirConn}" ]
+#then
+#   echo "No podemos leer el directorio '${DirConn}' de conexiones"
+#   Ayuda
+#   exit 1
+#fi
+#Log="${DirHome}/Log.$(basename $0)"
+#ArchConf="$(readlink -f ${DirHome}/$(basename $0).zapi)"
+#NivelDebug=1
+#
 }
 
 if [ $# -eq 0 ]

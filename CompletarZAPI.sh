@@ -54,7 +54,7 @@ function Gus_Complete_ZAPI ()
    if [ "${prev}" == "-c" ] || [ "${prev}" == "-C" ]
    then
       dirConfCompletion=$( ZAPI --variables=DirConn)
-      a=$( find ${dirConfCompletion} -maxdepth 1 -name '*.zapi' -type f ; find . -maxdepth 1 -name '*.zapi' -type f )
+      a=$( [ -d "${dirConfCompletion}" ] && find ${dirConfCompletion} -maxdepth 1 -name '*.zapi' -type f ; find . -maxdepth 1 -name '*.zapi' -type f )
       COMPREPLY=( $(compgen -W "$a" -- ${cur}) )
       if [ ${#COMPREPLY} -eq 0 ]
       then

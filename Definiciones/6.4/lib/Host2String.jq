@@ -1,5 +1,7 @@
 #vim: set ts=3 expandtab:
 include "Gral2String";
+include "Tag2String";
+include "Trigger2String";
 
 def HostStatusToString( status ):
    if status=="0" then "monitored host"
@@ -71,6 +73,10 @@ def HostToString( host ):
                            .value = Hosttls_connectToString( .value )
                         elif .key == "flags" then
                            .value = HostFlagsToString( .value )
+                        elif .key == "tags" then
+                           .value[] |= TagToString( . )
+                        elif .key == "triggers" then
+                           .value[] |= TriggerToString( . )
                         else
                            .
                         end) | from_entries ;

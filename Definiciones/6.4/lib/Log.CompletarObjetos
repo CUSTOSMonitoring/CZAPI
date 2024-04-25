@@ -1,0 +1,45 @@
+*2024-04-05 12:51:21 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate  desde 1 a 0
+*2024-04-05 12:51:21 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:51:21 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:51:21 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate  desde 1 a 0
+*2024-04-05 12:51:21 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:51:21 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:52:26 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate  desde 1 a 0
+*2024-04-05 12:52:26 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:52:26 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:52:26 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate  desde 1 a 0
+*2024-04-05 12:52:26 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:52:26 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:52:29 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate --var desde 1 a 0
+*2024-04-05 12:52:29 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:52:29 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:52:56 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate - desde 1 a 0
+*2024-04-05 12:52:56 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:52:56 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:52:57 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate -c desde 1 a 0
+*2024-04-05 12:52:57 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:52:57 ObjCreate  --def_nom | jq -r '.[]'
+*2024-04-05 12:53:04 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi --var desde 1 a 2
+*2024-04-05 12:53:04 Recorriendo, actual -c
+*2024-04-05 12:53:04 Seteamos BanderaConf='-c /home/gguido/ZAPI/Conexiones/Scottish.zapi'
+*2024-04-05 12:53:04 Recorriendo, actual /home/gguido/ZAPI/Conexiones/Scottish.zapi
+*2024-04-05 12:53:04 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:53:04 ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi --def_nom | jq -r '.[]'
+*2024-04-05 12:53:14 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi  desde 1 a 2
+*2024-04-05 12:53:14 Recorriendo, actual -c
+*2024-04-05 12:53:14 Seteamos BanderaConf='-c /home/gguido/ZAPI/Conexiones/Scottish.zapi'
+*2024-04-05 12:53:14 Recorriendo, actual /home/gguido/ZAPI/Conexiones/Scottish.zapi
+*2024-04-05 12:53:14 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:53:14 ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi --def_nom | jq -r '.[]'
+*2024-04-05 12:53:14 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi  desde 1 a 2
+*2024-04-05 12:53:14 Recorriendo, actual -c
+*2024-04-05 12:53:14 Seteamos BanderaConf='-c /home/gguido/ZAPI/Conexiones/Scottish.zapi'
+*2024-04-05 12:53:14 Recorriendo, actual /home/gguido/ZAPI/Conexiones/Scottish.zapi
+*2024-04-05 12:53:14 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:53:14 ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi --def_nom | jq -r '.[]'
+*2024-04-05 12:53:46 No tenemos Objeto, van los objetos y opciones generales recorremos las banderas en ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi Hos desde 1 a 2
+*2024-04-05 12:53:46 Recorriendo, actual -c
+*2024-04-05 12:53:46 Seteamos BanderaConf='-c /home/gguido/ZAPI/Conexiones/Scottish.zapi'
+*2024-04-05 12:53:46 Recorriendo, actual /home/gguido/ZAPI/Conexiones/Scottish.zapi
+*2024-04-05 12:53:46 No tenemos Objeto, van los objetos y opciones generales
+*2024-04-05 12:53:46 ObjCreate -c /home/gguido/ZAPI/Conexiones/Scottish.zapi --def_nom | jq -r '.[]'

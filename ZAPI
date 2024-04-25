@@ -90,6 +90,7 @@ function ShowVariables()
 
    URL: '${URL}'  -> Si no se setea se solicita
    Token: '${authtoken}'  -> Se consigue haciendo un login o mediante un API token
+   AuthInHeader: '${AuthInHeader}'
    USER '${user}'
    PASSWORD '${passwd}'
    CmdPrev '${CmdPrev}'
@@ -106,6 +107,7 @@ function ShowVariables()
          des* ) echo ${DescConn};;
          url  ) echo ${URL};;
          tok* ) echo ${authtoken};;
+         auth* ) echo ${AuthInHeader};;
          def  ) echo ${APIDefFunc};;
          log  ) echo ${Log};;
          use  ) echo ${user};;
@@ -218,9 +220,12 @@ function GetAPICall()
       method=$(echo ${Funcion} | jq -r '.apiname')
       if [ "${method}" ]
       then
-         if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
-         then # Hay metodos que no llevan e autorization
-            Authorization=${authtoken:+,'"auth"':\"${authtoken}\"}
+         if ! [ ${AuthInHeader} ]
+         then # en la versión 7 el auth se pasa al header
+            if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+            then # Hay metodos que no llevan e autorization
+               Authorization=${authtoken:+,'"auth"':\"${authtoken}\"}
+            fi
          fi
          if [[ "${method}" == "user.login" ]]
          then
@@ -252,8 +257,8 @@ function callAPI()
    fi
    if [ "${APICall_data}" ]
    then
-      debug 3 "curl --insecure -sS -H '${Header}' -d '${data}' ${URL}" 
-      curl --insecure -sS -H "${Header}" -d "${APICall_data}" ${URL}
+      debug 3 "curl --insecure -sS -H '${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}" 
+      curl --insecure -sS -H "${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}" -d "${APICall_data}" ${URL}
       # --insecure, --show-error
       #      When used with -s, --silent, it makes curl show an error message if it fails.
       # -s, --silent
@@ -332,6 +337,7 @@ function SetVariables()
    DescConn=$( jq -r '.Descripcion? // empty' "${Arch}")
    URL=$( jq -r '.URL // empty' "${Arch}")
    authtoken=$( jq -r '.authtoken? // empty' "${Arch}")
+   AuthInHeader=$( jq -r '.authinheader? // empty' "${Arch}")
    user=$( jq -r '.USER? // empty' "${Arch}" )
    passwd=$( jq -r '.PASSWORD? // empty' "${Arch}" )
    CmdPrev=$( jq -r '.CmdPrev? // empty' "${Arch}")
@@ -510,9 +516,9 @@ do
                     exit;;
       --help | -h ) Ayuda; exit;;
       --def* ) ShowDef "$1" "$2"; exit;;
-      --edit-conf ) vi "${ArchConf}"; exit;;
+      --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --list-conexiones ) ListarConexiones; exit;;
-      --edit-funciones ) vi "${APIDefFunc}"; exit;;
+      --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
       --show-API-call ) ShowAPICall=1;;
       --no-format ) raw=si;;
       -c ) ArchConf="$2"
@@ -540,7 +546,7 @@ then
 else
    if [ "${ShowAPICall}" ]
    then
-      echo "curl --insecure -sS -H \"${Header}\" -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
+      echo "curl --insecure -sS -H \"${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}\"  -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
    else
       if [ "$( GetAPICall )" ]
       then

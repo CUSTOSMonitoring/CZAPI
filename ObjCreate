@@ -2,7 +2,7 @@
 # vim: set ts=3 expandtab shiftwidth=3:
 
 DirHome="$(dirname $0)"
-ArchDefObj=${DirHome}/ObjDef.json
+ArchDefObj="${DirHome}/ObjDef.json"
 DirConn="${DirHome}/Conexiones"
 Log=${DirHome}/Log.ObjCreate
 NivelDebug=1
@@ -29,41 +29,41 @@ Normal='\033[0m'
 
 function Ayuda()
 {
-   echo "Uso $(basename $0) Obj
-
-Muesta las variable configuradas
-   $(basename $0) --var  
-Muestra la ayuda
-   $(basename $0) --help|-h  
-Inicializar con un objeto
-   $(basename $0) --init JSON_OBJ
-Traducción entre código y descripcion
-   $(basename $0) (-t | --tra) Objeto [prop [regexp]]
-   Todas las propiedades del objeto
-      ObjCreate -t Item
-   Posibilidades de la propiedad
-      ObjCreate -t Item type
-   Descripción del código 9
-      ObjCreate -t Item type 9
-   Codigo de la propiedad que tiene web en la descripcion ignorando mayúsculas y minúsculas
-      ObjCreate -t Item type '(?i)web'
-
-Ayuda
-     Para armar el archivo de definiciones de objetos
-          Para poner el required en la descripcion
-               LineaDesde,LineaHasta s/ (required)\(\t[^\t]\+\t\)/\1(required) /
-          para sacar los blanco que la tabla de ayuda trae adelante de los tabuladores
-               LineaDesde,LineaHasta s/ *\t/\t/g 
-          para armar el objeto
-               LineaDesde,LineaHasta s/^\(.*\)\t\(.*\)\t\(.*\)/"\1":            {"type":"\2",                 "description":"\3"},
-
-     NOTA
-        La funcion debug puede estar enviando a /dev/null, puede cambiarse a algún arvhivo
+   echo "Uso $(basename $0) [opciones] [Obj]
+   Opciones
+      -c ! --configuration Arch     Especifica el arhivo de configuracion
+      --edit-objetos                Edita el archivo de definicion de objetos
+         Ayuda para armar el archivo de definiciones de objetos
+                Para poner el required en la descripcion
+                     LineaDesde,LineaHasta s/ (required)\(\t[^\t]\+\t\)/\1(required) /
+                para sacar los blanco que la tabla de ayuda trae adelante de los tabuladores
+                     LineaDesde,LineaHasta s/ *\t/\t/g 
+                para armar el objeto
+                     LineaDesde,LineaHasta s/^\(.*\)\t\(.*\)\t\(.*\)/"\1":            {"type":"\2",                 "description":"\3"},
+      --variables                   Muesta las variable configuradas
+      --help|-h                     Muestra la ayuda
+      --init JSON_OBJ               Inicializar con un objeto
+      (-t | --traduccion) Objeto [prop [regexp]]      Traducción entre código y descripcion
+         Ej 
+            $(basename $0) -t Item                    Todas las propiedades del objeto
+            $(basename $0) -t Item type               Posibilidades de la propiedad
+            $(basename $0) -t Item type 9             Descripción del código 9
+            $(basename $0) -t Item type '(?i)web'     Codigo de la propiedad que tiene web en la descripcion ignorando mayúsculas y minúsculas
+   Listas
+         $(basename $0) --lista-objetos               Todos los objetos
+         $(basename $0) --lista-objetos RegExp        Todos los objetos que macheen una regular expresion
+         $(basename $0) --lista-objetos '^(?i)tem'    Todos los objetos que comiencen con 'tem' ignorando mayúsculas y minúsculas
+         $(basename $0) --lista-objetos '(?i)tem'     Todos los objetos que contengan 'tem' ignorando mayúsculas y minúsculas
+         $(basename $0) --lista-propiedades Objeto regexp   Las propiedades del objeto
+   Debug
+      NOTA
+        La funcion debug puede estar enviando a /dev/null, puede cambiarse a algún archivo
            Niveles de debug
                0 - todos los mensajes son escritos en el debug
                1 - algunos mensajes son escritos en el debug
                2 - pocos mensajes son escritos en el debug ( llamada a la curl )
                3 - ningún mensaje es escrito en el debug
+      $(basename $0) --debug-level 2                Cambiar opciones desde la línea de comandos
 "
 }
 
@@ -83,7 +83,7 @@ function ShowVariables()
       log ) echo "${Log}";;
       * ) echo "
       Definicion de objetos: ${ArchDefObj}
-      Directorio de conecionex: ${DirConn}
+      Directorio de coneciones: ${DirConn}
       Archivo de log: ${Log}
       Nivel de log: ${NivelDebug}
 ";;
@@ -102,12 +102,28 @@ function ShowDef()
          nom* ) jqcmd='keys';;
          '' ) jqcmd=".";;
       esac
-      debug 0 jq "${jqcmd}" ${ArchDefObj}
-      jq -S "${jqcmd}" ${ArchDefObj}
+      debug 0 jq "${jqcmd}" "${ArchDefObj}"
+      jq -S "${jqcmd}" "${ArchDefObj}"
    else
       debug 0 Buscando ${que} en ${Objeto}
       echo ${Objeto} | jq -r '.properties | .'
    fi
+}
+
+function ListaObjetos()
+{
+   debug 0 "Lista de objetos (\"$1.*\") en '${ArchDefObj}'"
+   jq -r ' . | keys | map(select( . | test( "'"$1"'" ) )) | .[]' "${ArchDefObj}"
+}
+
+function ListaPropiedades()
+{
+   { [ "${Objeto}" ] && echo ${Objeto} || GetObjeto $1 "${ArchDefObj}" ; } | jq -Sr '.properties | keys[] '
+}
+
+function GetObjeto()
+{
+   jq '.'${1} "${2}"
 }
 
 function ValidarObjeto()
@@ -115,7 +131,7 @@ function ValidarObjeto()
    local NombreDeObjeto
    NombreDeObjeto="${1}"
    debug 0 "Validando el objeto ${NombreDeObjeto}"
-   Objeto=$( jq '.'${NombreDeObjeto} ${ArchDefObj} )
+   Objeto=$( GetObjeto ${NombreDeObjeto} "${ArchDefObj}" )
    if [ "${Objeto}" == null ]
    then
       ERRORES="${ERRORES}\nObjeto '${NombreDeObjeto}' no encontrado"
@@ -207,7 +223,8 @@ Seleccione el parametro para ingresar el valor
 "
       OpSalirAyuda="SALIR"
 
-      select opcion in ${OpSalirAyuda} $( echo ${Objeto} | jq -Sr '.properties | keys[] ') 
+      #select opcion in ${OpSalirAyuda} $( echo ${Objeto} | jq -Sr '.properties | keys[] ') 
+      select opcion in ${OpSalirAyuda} $( ListaPropiedades )
       do
         if [[ "${REPLY}" =~ [[:lower:]] ]]
         then
@@ -220,13 +237,12 @@ Seleccione el parametro para ingresar el valor
               if [ ${#vecopcion[*]} -gt 1 ]
               then
                  # hay mas de una opcion que machea
-                 echo -e ${Red}Opciones posibles 
-                 for op in "${vecopcion[@]}"
-                 do
-                    echo -e '\t'${Green}$op
-                 done
+                 echo -e "${Red}Opciones posibles (solo por numero)"
                  echo -e ${Normal}
-                 continue
+                 select opcion in "${vecopcion[@]}"
+                 do
+                    break
+                 done
               else
                  opcion=${vecopcion[0]}
               fi
@@ -379,7 +395,9 @@ while [ $# -gt 0 ]
 do
    debug 0 "Analizando ${1}"
    case $1 in
-         -c ) ArchConf="$2"; SetVariables "$2"; shift;;
+         -c | --configuration ) ArchConf="$2"; SetVariables "$2"; shift;;
+         --debug-level ) NivelDebug=$2; shift;;
+         --edit-objetos ) ${EDITOR:-vi} "${ArchDefObj}"; exit;;
          --vec* | -V ) vector="S";;
          --var* | -v ) if [[ ${1} =~ --variables= ]]
                        then
@@ -391,6 +409,8 @@ do
          --help | -h ) Ayuda; exit;;
          --def*) ShowDef "$1" "$2"; exit;;
          --init ) Init=$( jq -n "${Init}"' + '"$2" ); shift;;
+         --lista-objetos ) ListaObjetos "$2"; exit;;
+         --lista-propiedades ) ListaPropiedades "${2}" "$3" ; exit;;
          -t | --tra* ) # $0 -t Obj propiedad valor
                        # Traducir objeto propiedad valor 
                        # el valor puede ser el código o el texto
@@ -418,7 +438,6 @@ do
                           echo "${Objeto}" | jq 
                        fi;
                        exit;;
-         #-c ) SetVariables "$2"; shift;;
          *) if [ "${primero}" ]
             then
                ObjName="$1"

@@ -1,0 +1,2441 @@
+{
+  "Alert": {
+    "description": "Alerts are created by Zabbix server and cannot be modified via the API.  The alert object contains information about whether certain action operations have been executed successfully",
+    "properties": {
+      "actionid": {
+        "description": "ID of the action that generated the alert.",
+        "type": "string"
+      },
+      "alertid": {
+        "description": "ID of the alert.",
+        "type": "string"
+      },
+      "alerttype": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "message"
+          },
+          "1": {
+            "default": false,
+            "description": " remote command."
+          }
+        },
+        "description": "Alert type.",
+        "type": "integer"
+      },
+      "clock": {
+        "description": "Time when the alert was generated.",
+        "type": "timestamp"
+      },
+      "error": {
+        "description": "Error text if there are problems sending a message or running a command.",
+        "type": "string"
+      },
+      "esc_step": {
+        "description": "Action escalation step during which the alert was generated.",
+        "type": "integer"
+      },
+      "eventid": {
+        "description": "ID of the event that triggered the action.",
+        "type": "string"
+      },
+      "mediatypeid": {
+        "description": "ID of the media type that was used to send the message.",
+        "type": "string"
+      },
+      "message": {
+        "description": "Message text. Used for message alerts.",
+        "type": "text"
+      },
+      "retries": {
+        "description": "Number of times Zabbix tried to send the message.",
+        "type": "integer"
+      },
+      "sendto": {
+        "description": "Address, user name or other identifier of the recipient. Used for message alerts.",
+        "type": "string"
+      },
+      "status": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "message not sent./command not run"
+          },
+          "1": {
+            "default": false,
+            "description": "message sent/command run"
+          },
+          "2": {
+            "default": false,
+            "description": "failed after a number of retriesC/ tried to run the command on the Zabbix agent but it was unavailable"
+          },
+          "3": {
+            "default": false,
+            "description": "new alert is not yet processed by alert manager"
+          }
+        },
+        "acknowledgeid": {
+          "description": "ID of acknowledgment, which generated the alert.",
+          "type": "string"
+        },
+        "description": "Status indicating whether the action operation has been executed successfully.",
+        "p_eventid": {
+          "description": "ID of problem event, which generated the alert.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Message subject. Used for message alerts.",
+          "type": "string"
+        },
+        "type": "integer",
+        "userid": {
+          "description": "ID of the user that the message was sent to.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Event": {
+    "properties": {
+      "acknowledged": {
+        "description": "Whether the event has been acknowledged.",
+        "type": "integer"
+      },
+      "c_eventid": {
+        "description": "ID of the event that was used to override (close) current event under global correlation rule. See <code>correlationid</code> to identify exact correlation rule.This parameter is only defined when the event is closed by global correlation rule.",
+        "type": "string"
+      },
+      "cause_eventid": {
+        "description": "Cause event ID.",
+        "type": "string"
+      },
+      "clock": {
+        "description": "Time when the event was created.",
+        "type": "timestamp"
+      },
+      "correlationid": {
+        "description": "ID of the correlation rule that generated closing of the problem.This parameter is only defined when the event is closed by global correlation rule.",
+        "type": "string"
+      },
+      "eventid": {
+        "description": "ID of the event.",
+        "type": "string"
+      },
+      "name": {
+        "description": "Resolved event name.",
+        "type": "string"
+      },
+      "ns": {
+        "description": "Nanoseconds when the event was created.",
+        "type": "integer"
+      },
+      "object": {
+        "PossibleValues": {
+          "0": {
+            "description": "trigger."
+          },
+          "1": {
+            "description": "discovered host;"
+          },
+          "2": {
+            "description": "discovered service."
+          },
+          "3": {
+            "description": "auto-registered host."
+          },
+          "4": {
+            "description": "item;"
+          },
+          "5": {
+            "description": "LLD rule."
+          },
+          "6": {
+            "description": "service."
+          }
+        },
+        "description": "Type of object that is related to the event.",
+        "type": "integer"
+      },
+      "objectid": {
+        "description": "ID of the related object.",
+        "type": "string"
+      },
+      "opdata": {
+        "description": "Operational data with expanded macros.",
+        "type": "string"
+      },
+      "r_eventid": {
+        "description": "Recovery event ID.",
+        "type": "string"
+      },
+      "severity": {
+        "PossibleValues": {
+          "0": {
+            "description": "not classified"
+          },
+          "1": {
+            "description": "information"
+          },
+          "2": {
+            "description": "warning"
+          },
+          "3": {
+            "description": "average"
+          },
+          "4": {
+            "description": "high"
+          },
+          "5": {
+            "description": "disaster."
+          }
+        },
+        "description": "Event current severity.",
+        "type": "integer"
+      },
+      "source": {
+        "PossibleValues": {
+          "0": {
+            "description": "event created by a trigger"
+          },
+          "1": {
+            "description": "event created by a discovery rule"
+          },
+          "2": {
+            "description": "event created by active agent autoregistration"
+          },
+          "3": {
+            "description": "internal event"
+          },
+          "4": {
+            "description": "event created on service status update."
+          }
+        },
+        "description": "Type of the event.",
+        "type": "integer"
+      },
+      "suppressed": {
+        "PossibleValues": {
+          "0": {
+            "description": "event is in normal state"
+          },
+          "1": {
+            "description": "event is suppressed."
+          }
+        },
+        "description": "Whether the event is suppressed.",
+        "type": "integer"
+      },
+      "urls": {
+        "description": "Active <a href=\"/documentation/current/en/manual/api/reference/problem/object#media-type-urls\">media type URLs</a>.",
+        "type": "array"
+      },
+      "userid": {
+        "description": "User ID if the event was manually closed.",
+        "type": "string"
+      },
+      "value": {
+        "PossibleValues": {
+          "0": {
+            "description": "OK if created by a trigger, host or service up if created by discovery rule, normal state if createde by internal event"
+          },
+          "1": {
+            "description": "problem. if created by a trigger, host or service down if created by discovery rule, unknown or not supported state if createde by internal event"
+          },
+          "2": {
+            "description": "host or service discovered if created by a discovery rule"
+          },
+          "3": {
+            "description": "host or service lost if created by a discovery rule"
+          }
+        },
+        "description": "State of the related object.  - supported if source is set to 'event created by a trigger', 'event created by a discovery rule', 'internal event', or 'event created on service status update' ",
+        "type": "string"
+      }
+    }
+  },
+  "HistoryFloat": {
+    "description": "History objects differ depending on the item's type of information. They are created by the Zabbix server and cannot be modified via the API.",
+    "properties": {
+      "clock": {
+        "description": "Time when that value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "itemid": {
+        "description": "ID of the related item.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "ns": {
+        "description": "Nanoseconds when the value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "value": {
+        "description": "Received value.",
+        "readonly": true,
+        "required": true,
+        "type": "float"
+      }
+    }
+  },
+  "HistoryInteger": {
+    "description": "History objects differ depending on the item's type of information. They are created by the Zabbix server and cannot be modified via the API.",
+    "properties": {
+      "clock": {
+        "description": "Time when that value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "itemid": {
+        "description": "ID of the related item.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "ns": {
+        "description": "Nanoseconds when the value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "value": {
+        "description": "Received value.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      }
+    }
+  },
+  "HistoryLog": {
+    "description": "History objects differ depending on the item's type of information. They are created by the Zabbix server and cannot be modified via the API.",
+    "properties": {
+      "clock": {
+        "description": "Time when that value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "id": {
+        "description": "ID of the history entry.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "itemid": {
+        "description": "ID of the related item.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "logeventid": {
+        "description": "Windows event log entry ID.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "ns": {
+        "description": "Nanoseconds when the value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "severity": {
+        "description": "Windows event log entry level.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "source": {
+        "description": "Windows event log entry source.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "timestamp": {
+        "description": "Windows event log entry time.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "value": {
+        "description": "Received value.",
+        "readonly": true,
+        "required": true,
+        "type": "text"
+      }
+    }
+  },
+  "HistoryString": {
+    "description": "History objects differ depending on the item's type of information. They are created by the Zabbix server and cannot be modified via the API.",
+    "properties": {
+      "clock": {
+        "description": "Time when that value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "itemid": {
+        "description": "ID of the related item.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "ns": {
+        "description": "Nanoseconds when the value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "value": {
+        "description": "Received value.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      }
+    }
+  },
+  "HistoryText": {
+    "description": "History objects differ depending on the item's type of information. They are created by the Zabbix server and cannot be modified via the API.",
+    "properties": {
+      "clock": {
+        "description": "Time when that value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "timestamp"
+      },
+      "id": {
+        "description": "ID of the history entry.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "itemid": {
+        "description": "ID of the related item.",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "ns": {
+        "description": "Nanoseconds when the value was received.",
+        "readonly": true,
+        "required": true,
+        "type": "integer"
+      },
+      "value": {
+        "description": "Received value.",
+        "readonly": true,
+        "required": true,
+        "type": "text"
+      }
+    }
+  },
+  "Host": {
+    "description": "Dispositivos a monitorear por Zabbix",
+    "properties": {
+      "description": {
+        "description": "Description of the host",
+        "type": "text"
+      },
+      "flags": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "a plain host"
+          },
+          "4": {
+            "default": false,
+            "description": "a discovered host."
+          }
+        },
+        "description": "Origin of the host.",
+        "readonly": true,
+        "type": "integer"
+      },
+      "host": {
+        "description": "Technical name of the host.",
+        "required": true,
+        "type": "string"
+      },
+      "hostid": {
+        "description": "ID of the host.",
+        "readonly": true,
+        "type": "string"
+      },
+      "inventory_mode": {
+        "PossibleValues": {
+          "-1": {
+            "default": true,
+            "description": "disabled"
+          },
+          "0": {
+            "default": false,
+            "description": "manual"
+          },
+          "1": {
+            "default": false,
+            "description": "automatic."
+          }
+        },
+        "description": "Host inventory population mode.",
+        "type": "integer"
+      },
+      "ipmi_authtype": {
+        "PossibleValues": {
+          "-1": {
+            "default": true,
+            "description": "default"
+          },
+          "0": {
+            "default": false,
+            "description": "none"
+          },
+          "1": {
+            "default": false,
+            "description": "MD2"
+          },
+          "2": {
+            "default": false,
+            "description": "MD5 4 - straight"
+          },
+          "5": {
+            "default": false,
+            "description": "OEM"
+          },
+          "6": {
+            "default": false,
+            "description": "RMCP+."
+          }
+        },
+        "description": "IPMI authentication algorithm.",
+        "type": "integer"
+      },
+      "ipmi_password": {
+        "description": "IPMI password.",
+        "type": "string"
+      },
+      "ipmi_privilege": {
+        "PossibleValues": {
+          "1": {
+            "default": false,
+            "description": "callback"
+          },
+          "2": {
+            "default": true,
+            "description": "user"
+          },
+          "3": {
+            "default": false,
+            "description": "operator"
+          },
+          "4": {
+            "default": false,
+            "description": "admin"
+          },
+          "5": {
+            "default": false,
+            "description": "OEM."
+          }
+        },
+        "description": "IPMI privilege level.",
+        "type": "integer"
+      },
+      "ipmi_username": {
+        "description": "IPMI username.",
+        "type": "string"
+      },
+      "maintenance_from": {
+        "description": "Starting time of the effective maintenance.",
+        "readonly": true,
+        "type": "timestamp"
+      },
+      "maintenance_status": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "no maintenance"
+          },
+          "1": {
+            "default": false,
+            "description": "maintenance in effect."
+          }
+        },
+        "description": "Effective maintenance status.",
+        "readonly": true,
+        "type": "integer"
+      },
+      "maintenance_type": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "maintenance with data collection"
+          },
+          "1": {
+            "default": false,
+            "description": "maintenance without data collection."
+          }
+        },
+        "description": "Effective maintenance type.",
+        "readonly": true,
+        "type": "integer"
+      },
+      "maintenanceid": {
+        "description": "ID of the maintenance that is currently in effect on the host.",
+        "readonly": true,
+        "type": "string"
+      },
+      "name": {
+        "description": "Visible name of the host.  Default: host property value.",
+        "type": "string"
+      },
+      "proxy_hostid": {
+        "description": "ID of the proxy that is used to monitor the host.",
+        "type": "string"
+      },
+      "status": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "monitored host"
+          },
+          "1": {
+            "default": false,
+            "description": "unmonitored host."
+          }
+        },
+        "description": "Status and function of the host.",
+        "type": "integer"
+      },
+      "tls_accept": {
+        "PossibleValues": {
+          "1": {
+            "default": true,
+            "description": "No encryption"
+          },
+          "2": {
+            "default": false,
+            "description": "PSK"
+          },
+          "4": {
+            "default": false,
+            "description": "certificate."
+          }
+        },
+        "description": "Connections from host.",
+        "type": "integer"
+      },
+      "tls_connect": {
+        "PossibleValues": {
+          "1": {
+            "default": true,
+            "description": "No encryption"
+          },
+          "2": {
+            "default": false,
+            "description": "PSK"
+          },
+          "4": {
+            "default": false,
+            "description": "certificate."
+          }
+        },
+        "description": "Connections to host.",
+        "type": "integer"
+      },
+      "tls_issuer": {
+        "description": "Certificate issuer.",
+        "type": "string"
+      },
+      "tls_psk": {
+        "description": "(write-only) The preshared key, at least 32 hex digits. Required if either tls_connect or tls_accept has PSK enabled.",
+        "type": "string"
+      },
+      "tls_psk_identity": {
+        "description": "(write-only) PSK identity. Required if either tls_connect or tls_accept has PSK enabled.  Do not put sensitive information in the PSK identity, it is transmitted unencrypted over the network to inform a receiver which PSK to use.",
+        "type": "string"
+      },
+      "tls_subject": {
+        "description": "Certificate subject.",
+        "type": "string"
+      }
+    }
+  },
+  "HostGroup": {
+    "properties": {
+      "flags": {
+        "PossibleValues": {
+          "0": {
+            "description": "a plain host group"
+          },
+          "4": {
+            "description": "a discovered host group."
+          }
+        },
+        "description": "Origin of the host group.",
+        "readonly": true,
+        "type": "integer"
+      },
+      "groupid": {
+        "description": "ID of the host group.",
+        "readonly": true,
+        "type": "string"
+      },
+      "internal": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "not internal"
+          },
+          "1": {
+            "description": "internal."
+          }
+        },
+        "description": "Whether the group is used internally by the system. An internal group cannot be deleted.",
+        "readonly": true,
+        "type": "integer"
+      },
+      "name": {
+        "description": "Name of the host group.",
+        "required": true,
+        "type": "string"
+      }
+    }
+  },
+  "HostInterface": {
+    "properties": {
+      "available": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "unknown"
+          },
+          "1": {
+            "default": false,
+            "description": "available"
+          },
+          "2": {
+            "default": false,
+            "description": "unavailable"
+          }
+        },
+        "description": "Availability of host interface.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      },
+      "details": {
+        "description": "Additional object for interface. Required if interface 'type' is SNMP.",
+        "readonly": false,
+        "required": false,
+        "type": "OBJECT HostInterfaceDetails"
+      },
+      "disable_until": {
+        "description": "The next polling time of an unavailable host interface.",
+        "readonly": true,
+        "required": false,
+        "type": "timestamp"
+      },
+      "dns": {
+        "description": "DNS name used by the interface. Can be empty if the connection is made via IP.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "error": {
+        "description": " Error text if host interface is unavailable.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "errors_from": {
+        "description": "Time when host interface became unavailable.",
+        "readonly": true,
+        "required": false,
+        "type": "timestamp"
+      },
+      "hostid": {
+        "description": "ID of the host the interface belongs to.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "interfaceid": {
+        "description": "ID of the interface.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "ip": {
+        "description": "IP address used by the interface.  Can be empty if the connection is made via DNS.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "main": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "not default"
+          },
+          "1": {
+            "default": false,
+            "description": "default"
+          }
+        },
+        "description": "Whether the interface is used as default on the host. Only one interface of some type can be set as default on a host.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "port": {
+        "description": "Port number used by the interface. Can contain user macros.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "readonly": true,
+      "required": false,
+      "type": {
+        "PossibleValues": {
+          "1": {
+            "default": false,
+            "description": "agent"
+          },
+          "2": {
+            "default": false,
+            "description": "SNMP"
+          },
+          "3": {
+            "default": false,
+            "description": "IPMI"
+          },
+          "4": {
+            "default": false,
+            "description": "JMX"
+          }
+        },
+        "description": "Interface type",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "useip": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "connect using host DNS name"
+          },
+          "1": {
+            "default": false,
+            "description": "connect using host IP address."
+          }
+        },
+        "description": "Whether the connection should be made via IP",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      }
+    }
+  },
+  "HostInterfaceDetails": {
+    "description": "Note that both ip and dns properties are required for create operations. If you do not want to use DNS, set it to an empty string.",
+    "properties": {
+      "authpassphrase": {
+        "description": "SNMPv3 authentication passphrase. Used only by SNMPv3 interfaces.",
+        "type": "string"
+      },
+      "authprotocol": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "MD5"
+          },
+          "1": {
+            "default": false,
+            "description": "SHA1"
+          },
+          "2": {
+            "default": false,
+            "description": "SHA224"
+          },
+          "3": {
+            "default": false,
+            "description": "SHA256"
+          },
+          "4": {
+            "default": false,
+            "description": "SHA384"
+          },
+          "5": {
+            "default": false,
+            "description": "SHA512"
+          }
+        },
+        "description": "SNMPv3 authentication protocol. Used only by SNMPv3 interfaces.",
+        "type": "integer"
+      },
+      "bulk": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "don't use bulk requestsC"
+          },
+          "1": {
+            "default": true,
+            "description": "use bulk requests."
+          }
+        },
+        "description": "Whether to use bulk SNMP requests",
+        "type": "integer"
+      },
+      "community": {
+        "description": "SNMP community. Used only by SNMPv1 and SNMPv2 interfaces.- required if version is set to SNMPv1 or SNMPv2c",
+        "type": "string"
+      },
+      "contextname": {
+        "description": "SNMPv3 context name. Used only by SNMPv3 interfaces",
+        "type": "string"
+      },
+      "privpassphrase": {
+        "description": "SNMPv3 privacy passphrase. Used only by SNMPv3 interfaces.",
+        "type": "string"
+      },
+      "privprotocol": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "DES"
+          },
+          "1": {
+            "default": false,
+            "description": "AES128"
+          },
+          "2": {
+            "default": false,
+            "description": "AES192"
+          },
+          "3": {
+            "default": false,
+            "description": "AES256"
+          },
+          "4": {
+            "default": false,
+            "description": "AES192C"
+          },
+          "5": {
+            "default": false,
+            "description": "AES256C"
+          }
+        },
+        "description": "SNMPv3 privacy protocol. Used only by SNMPv3 interfaces.",
+        "type": "integercw"
+      },
+      "securitylevel": {
+        "PossiblecValues": {
+          "0": {
+            "default": true,
+            "description": "noAuthNoPriv"
+          },
+          "1": {
+            "default": false,
+            "description": "authNoPriv"
+          },
+          "2": {
+            "default": false,
+            "description": "authPriv"
+          }
+        },
+        "description": "SNMPv3 security level. Used only by SNMPv3 interfaces.",
+        "type": "integer"
+      },
+      "securityname": {
+        "description": "SNMPv3 security name. Used only by SNMPv3 interfaces.",
+        "type": "string"
+      },
+      "version": {
+        "PossibleValues": {
+          "1": {
+            "default": false,
+            "description": "SNMPv1"
+          },
+          "2": {
+            "default": false,
+            "description": " SNMPv2c"
+          },
+          "3": {
+            "default": false,
+            "description": " SNMPv3"
+          }
+        },
+        "description": "SNMP interface version. ",
+        "required": true,
+        "type": "integer"
+      }
+    }
+  },
+  "Item": {
+    "properties": {
+      "allow_traps": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Do not allow to accept incoming data."
+          },
+          "1": {
+            "default": false,
+            "description": "Allow to accept incoming data."
+          }
+        },
+        "description": "HTTP agent item field. Allow to populate value as in trapper item type also.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "authtype": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "HTTP agent authentication method none"
+          },
+          "1": {
+            "default": false,
+            "description": "HTTP agent authentication method basic"
+          },
+          "2": {
+            "default": false,
+            "description": "HTTP agent authentication method NTLM"
+          },
+          "3": {
+            "default": false,
+            "description": "HTTP agent authentication method Kerberos"
+          }
+        },
+        "description": "Used only by SSH agent items or HTTP agent items. ",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "delay": {
+        "description": "Update interval of the item. Accepts seconds or a time unit with suffix (30s,1m,2h,1d).  Optionally one or more custom intervals can be specified either as flexible intervals or scheduling.  Multiple intervals are separated by a semicolon.  User macros may be used. A single macro has to fill the whole field. Multiple macros in a field or macros mixed with text are not supported.  Flexible intervals may be written as two macros separated by a forward slash (e.g. {$FLEX_INTERVAL}/{$FLEX_PERIOD}).  Optional for Zabbix trapper, dependent items and for Zabbix agent (active) with mqtt.get key.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "description": {
+        "description": "Description of the item.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "error": {
+        "description": "Error text if there are problems updating the item.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "flags": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "a plain item"
+          },
+          "4": {
+            "default": false,
+            "description": "a discovered item."
+          }
+        },
+        "description": "Origin of the item.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      },
+      "follow_redirects": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "Do not follow redirects."
+          },
+          "1": {
+            "default": true,
+            "description": "Follow redirects."
+          }
+        },
+        "description": "HTTP agent item field. Follow response redirects while pooling data.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "headers": {
+        "description": "HTTP agent item field. Object with HTTP(S) request headers, where header name is used as key and header value as value.  Example: { \"User-Agent\": \"Zabbix\" } ",
+        "readonly": false,
+        "required": false,
+        "type": "object"
+      },
+      "history": {
+        "description": "A time unit of how long the history data should be stored. Also accepts user macro.  Default: 90d.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "hostid": {
+        "description": "ID of the host or template that the item belongs to.  For update operations this field is readonly.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "http_proxy": {
+        "description": "HTTP agent item field. HTTP(S) proxy connection string.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "interfaceid": {
+        "description": "ID of the item's host interface.  Used only for host items. Not required for Zabbix agent (active), Zabbix internal, Zabbix trapper, calculated, dependent, database monitor and script items. Optional for HTTP agent items.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "inventory_link": {
+        "description": "ID of the host inventory field that is populated by the item.  Refer to the host inventory page for a list of supported host inventory fields and their IDs.  Default: 0.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "ipmi_sensor": {
+        "description": "IPMI sensor. Used only by IPMI items.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "itemid": {
+        "description": "ID of the item.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "jmx_endpoint": {
+        "description": "JMX agent custom connection string.  Default value: service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "key_ ": {
+        "description": "Item key.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "lastclock": {
+        "description": "Time when the item was last updated.  By default, only values that fall within the last 24 hours are displayed. You can extend this time period by changing the value of Max history display period parameter in the Administration → General menu section.",
+        "readonly": true,
+        "required": false,
+        "type": "timestamp"
+      },
+      "lastns": {
+        "description": "Nanoseconds when the item was last updated.  By default, only values that fall within the last 24 hours are displayed. You can extend this time period by changing the value of Max history display period parameter in the Administration → General menu section.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      },
+      "lastvalue": {
+        "description": "Last value of the item.  By default, only values that fall within the last 24 hours are displayed. You can extend this time period by changing the value of Max history display period parameter in the Administration → General menu section.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "logtimefmt": {
+        "description": "Format of the time in log entries. Used only by log items.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "master_itemid": {
+        "description": "Master item ID.  Recursion up to 3 dependent items and maximum count of dependent items equal to 29999 are allowed.  Required by dependent items.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "name": {
+        "description": "Name of the item.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "output_format": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Store raw."
+          },
+          "1": {
+            "default": false,
+            "description": "Convert to JSON."
+          }
+        },
+        "description": "HTTP agent item field. Should response be converted to JSON.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "parameters": {
+        "description": "Additional parameters for script items. Array of objects with 'name' and 'value' properties, where name must be unique.",
+        "readonly": false,
+        "required": false,
+        "type": "array"
+      },
+      "params": {
+        "description": "Additional parameters depending on the type of the item: - executed script for SSH and Telnet items; - SQL query for database monitor items; - formula for calculated items; - the script for script item.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "password": {
+        "description": "Password for authentication. Used by simple check, SSH, Telnet, database monitor, JMX and HTTP agent items.  When used by JMX, username should also be specified together with password or both properties should be left blank.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "post_type": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Raw data."
+          },
+          "2": {
+            "default": false,
+            "description": "JSON data."
+          },
+          "3": {
+            "default": false,
+            "description": "XML data."
+          }
+        },
+        "description": "HTTP agent item field. Type of post data body stored in posts property.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "posts": {
+        "description": "HTTP agent item field. HTTP(S) request body data. Used with post_type.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "prevvalue": {
+        "description": "Previous value of the item.  By default, only values that fall within the last 24 hours are displayed. You can extend this time period by changing the value of Max history display period parameter in the Administration → General menu section.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "privatekey": {
+        "description": "Name of the private key file.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "publickey": {
+        "description": "Name of the public key file.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "query_fields": {
+        "description": "HTTP agent item field. Query parameters. Array of objects with 'key':'value' pairs, where value can be empty string.",
+        "readonly": false,
+        "required": false,
+        "type": "array"
+      },
+      "request_method": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "GET"
+          },
+          "1": {
+            "default": false,
+            "description": "POST"
+          },
+          "2": {
+            "default": false,
+            "description": "PUT"
+          },
+          "3": {
+            "default": false,
+            "description": "HEAD"
+          }
+        },
+        "description": "HTTP agent item field. Type of request method.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "retrieve_mode": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Body."
+          },
+          "1": {
+            "default": false,
+            "description": "Headers."
+          },
+          "2": {
+            "default": false,
+            "description": "Both body and headers will be stored.  For request_method HEAD only 1 is allowed value."
+          }
+        },
+        "description": "HTTP agent item field. What part of response should be stored.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "snmp_oid": {
+        "description": "SNMP OID.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "ssl_cert_file": {
+        "description": "HTTP agent item field. Public SSL Key file path.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "ssl_key_file": {
+        "description": "HTTP agent item field. Private SSL Key file path.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "ssl_key_password": {
+        "description": "HTTP agent item field. Password for SSL Key file.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "state": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "normal"
+          },
+          "1": {
+            "default": false,
+            "description": "not supported."
+          }
+        },
+        "description": "State of the item.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      },
+      "status": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "enabled item"
+          },
+          "1": {
+            "default": false,
+            "description": "disabled item."
+          }
+        },
+        "description": "Status of the item.",
+        "type": "integer"
+      },
+      "status_codes": {
+        "description": "HTTP agent item field. Ranges of required HTTP status codes separated by commas. Also supports user macros as part of comma separated list.  Example: 200,200-{$M},{$M},200-400",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "templateid": {
+        "description": "ID of the parent template item.  Hint: Use the hostid property to specify the template that the item belongs to.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "timeout": {
+        "description": "Item data polling request timeout. Used for HTTP agent and script items. Supports user macros.  default: 3s maximum value: 60s",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "trapper_hosts": {
+        "description": "Allowed hosts. Used by trapper items or HTTP agent items.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "trends": {
+        "description": "A time unit of how long the trends data should be stored. Also accepts user macro.  Default: 365d.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "type": {
+        "PossibleValues": {
+          "1": {
+            "default": false,
+            "description": "Zabbix agent"
+          },
+          "10": {
+            "default": false,
+            "description": "External check"
+          },
+          "11": {
+            "default": false,
+            "description": "Database monitor"
+          },
+          "12": {
+            "default": false,
+            "description": "IPMI agent"
+          },
+          "13": {
+            "default": false,
+            "description": "SSH agent"
+          },
+          "14": {
+            "default": false,
+            "description": "Telnet agent"
+          },
+          "15": {
+            "default": false,
+            "description": "Calculatedx"
+          },
+          "16": {
+            "default": false,
+            "description": "JMX agent"
+          },
+          "17": {
+            "default": false,
+            "description": "SNMP trap"
+          },
+          "18": {
+            "default": false,
+            "description": "Dependent item"
+          },
+          "19": {
+            "default": false,
+            "description": "HTTP agent"
+          },
+          "2": {
+            "default": false,
+            "description": "Zabbix trapper"
+          },
+          "20": {
+            "default": false,
+            "description": "SNMP agent"
+          },
+          "21": {
+            "default": false,
+            "description": "Script"
+          },
+          "3": {
+            "default": false,
+            "description": "Simple check"
+          },
+          "5": {
+            "default": false,
+            "description": "Zabbix internal"
+          },
+          "7": {
+            "default": false,
+            "description": "Zabbix agent (active)"
+          },
+          "9": {
+            "default": false,
+            "description": "Web itemx"
+          }
+        },
+        "description": "Type of the item.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "units": {
+        "description": "Value units.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "url": {
+        "description": "URL string, required only for HTTP agent item type. Supports user macros, {HOST.IP}, {HOST.CONN}, {HOST.DNS}, {HOST.HOST}, {HOST.NAME}, {ITEM.ID}, {ITEM.KEY}.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "username": {
+        "description": "Username for authentication. Used by simple check, SSH, Telnet, database monitor, JMX and HTTP agent items.  Required by SSH and Telnet items.  When used by JMX, password should also be specified together with username or both properties should be left blank.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "uuid": {
+        "description": "Universal unique identifier, used for linking imported item to already existing ones. Used only for items on templates. Auto-generated, if not given.  For update operations this field is readonly.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "value_type": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "numeric float"
+          },
+          "1": {
+            "default": false,
+            "description": "character"
+          },
+          "2": {
+            "default": false,
+            "description": "log"
+          },
+          "3": {
+            "default": false,
+            "description": "numeric unsigned"
+          },
+          "4": {
+            "default": false,
+            "description": " text."
+          }
+        },
+        "description": "Type of information of the item.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "valuemapid": {
+        "description": "ID of the associated value map.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "verify_host": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "Do not validate."
+          },
+          "1": {
+            "default": false,
+            "description": "Validate."
+          }
+        },
+        "description": "HTTP agent item field. Validate host name in URL is in Common Name field or a Subject Alternate Name field of host certificate.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "verify_peer": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Do not validate."
+          },
+          "1": {
+            "default": false,
+            "description": "Validate."
+          }
+        },
+        "description": "HTTP agent item field. Validate is host certificate authentic.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      }
+    }
+  },
+  "ItemPreprocessing": {
+    "properties": {
+      "error_handler": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "Error message is set by Zabbix server"
+          },
+          "1": {
+            "default": false,
+            "description": "Discard value"
+          },
+          "2": {
+            "default": false,
+            "description": "Set custom value"
+          },
+          "3": {
+            "default": false,
+            "description": "Set custom error message."
+          }
+        },
+        "description": "Action type used in case of preprocessing step failure",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      },
+      "error_handler_params": {
+        "description": "Error handler parameters. Used with error_handler.  Must be empty, if error_handler is 0 or 1.  Can be empty if, error_handler is 2.  Cannot be empty, if error_handler is 3.  The following parameters and error handlers are supported for each preprocessing type.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "params": {
+        "description": "Additional parameters used by preprocessing option. Multiple parameters are separated by LF (\n) character.",
+        "required": true,
+        "type": "string"
+      },
+      "type": {
+        "PossibleValues": {
+          "1": {
+            "default": false,
+            "description": "Custom multiplier"
+          },
+          "10": {
+            "default": false,
+            "description": "Change per second"
+          },
+          "11": {
+            "default": false,
+            "description": "XML XPath"
+          },
+          "12": {
+            "default": false,
+            "description": "JSONPath"
+          },
+          "13": {
+            "default": false,
+            "description": "In range"
+          },
+          "14": {
+            "default": false,
+            "description": "Matches regular expression"
+          },
+          "15": {
+            "default": false,
+            "description": "Does not match regular expression"
+          },
+          "16": {
+            "default": false,
+            "description": "Check for error in JSON"
+          },
+          "17": {
+            "default": false,
+            "description": "Check for error in XML"
+          },
+          "18": {
+            "default": false,
+            "description": "Check for error using regular expression"
+          },
+          "19": {
+            "default": false,
+            "description": "Discard unchanged"
+          },
+          "2": {
+            "default": false,
+            "description": "Right trim"
+          },
+          "20": {
+            "default": false,
+            "description": "Discard unchanged with heartbeat"
+          },
+          "21": {
+            "default": false,
+            "description": "JavaScript"
+          },
+          "22": {
+            "default": false,
+            "description": "Prometheus pattern"
+          },
+          "23": {
+            "default": false,
+            "description": "Prometheus to JSON"
+          },
+          "24": {
+            "default": false,
+            "description": "CSV to JSON"
+          },
+          "25": {
+            "default": false,
+            "description": "Replace"
+          },
+          "26": {
+            "default": false,
+            "description": "Check unsupported"
+          },
+          "27": {
+            "default": false,
+            "description": "XML to JSON."
+          },
+          "3": {
+            "default": false,
+            "description": "Left trim"
+          },
+          "4": {
+            "default": false,
+            "description": "Trim"
+          },
+          "5": {
+            "default": false,
+            "description": "Regular expression matching"
+          },
+          "6": {
+            "default": false,
+            "description": "Boolean to decimal"
+          },
+          "7": {
+            "default": false,
+            "description": "Octal to decimal"
+          },
+          "8": {
+            "default": false,
+            "description": "Hexadecimal to decimal"
+          },
+          "9": {
+            "default": false,
+            "description": "Simple change"
+          }
+        },
+        "description": "The preprocessing option type.",
+        "readonly": false,
+        "required": true,
+        "type": "integer"
+      }
+    }
+  },
+  "ItemTag": {
+    "properties": {
+      "tag": {
+        "description": "Item tag name.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "value": {
+        "description": "Item tag value.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      }
+    }
+  },
+  "LLD": {
+    "properties": {
+      "allow_traps": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Do not allow to accept incoming data."
+          },
+          "1": {
+            "default": false,
+            "description": "Allow to accept incoming data."
+          }
+        },
+        "description": "HTTP agent LLD rule field. Allow to populate value as in trapper item type also.",
+        "type": "integer"
+      },
+      "authtype": {
+        "description": "Used only by SSH agent or HTTP agent LLD rules.  SSH agent authentication method possible values: 0 - (default) password; 1 - public key.  HTTP agent authentication method possible values: 0 - (default) none 1 - basic 2 - NTLM",
+        "type": "integer"
+      },
+      "delay": {
+        "description": "(required) Update interval of the LLD rule. Accepts seconds or time unit with suffix and with or without one or more custom intervals that consist of either flexible intervals and scheduling intervals as serialized strings. Also accepts user macros. Flexible intervals could be written as two macros separated by a forward slash. Intervals are separated by a semicolon.  Optional for Zabbix trapper, dependent items and for Zabbix agent (active) with mqtt.get key.",
+        "type": "string"
+      },
+      "description": {
+        "description": "Description of the LLD rule.",
+        "type": "string"
+      },
+      "error": {
+        "description": "(readonly) Error text if there are problems updating the LLD rule.",
+        "type": "string"
+      },
+      "follow_redirects": {
+        "description": "HTTP agent LLD rule field. Follow response redirects while pooling data.  0 - Do not follow redirects.  1 - (default) Follow redirects.",
+        "type": "integer"
+      },
+      "headers": {
+        "description": "HTTP agent LLD rule field. Object with HTTP(S) request headers, where header name is used as key and header value as value.  Example: { \"User-Agent\": \"Zabbix\" }",
+        "type": "object"
+      },
+      "hostid": {
+        "description": "(required) ID of the host that the LLD rule belongs to.",
+        "type": "string"
+      },
+      "http_proxy": {
+        "description": "HTTP agent LLD rule field. HTTP(S) proxy connection string.",
+        "type": "string"
+      },
+      "interfaceid": {
+        "description": "(required) ID of the LLD rule's host interface. Used only for host LLD rules.  Not required for Zabbix agent (active), Zabbix internal, Zabbix trapper, dependent, database monitor and script LLD rules. Optional for HTTP agent LLD rules.",
+        "type": "string"
+      },
+      "ipmi_sensor": {
+        "description": "IPMI sensor. Used only by IPMI LLD rules.",
+        "type": "string"
+      },
+      "itemid": {
+        "description": "(readonly) ID of the LLD rule.",
+        "type": "string"
+      },
+      "jmx_endpoint": {
+        "description": "JMX agent custom connection string.  Default value: service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi",
+        "type": "string"
+      },
+      "key_": {
+        "description": "(required) LLD rule key.",
+        "type": "string"
+      },
+      "lifetime": {
+        "description": "Time period after which items that are no longer discovered will be deleted. Accepts seconds, time unit with suffix and user macro.  Default: 30d.",
+        "type": "string"
+      },
+      "master_itemid": {
+        "description": "Master item ID.  Recursion up to 3 dependent items and maximum count of dependent items equal to 999 are allowed.  Discovery rule cannot be master item for another discovery rule.  Required for Dependent item.",
+        "type": "integer"
+      },
+      "name": {
+        "description": "(required) Name of the LLD rule.",
+        "type": "string"
+      },
+      "output_format": {
+        "description": "HTTP agent LLD rule field. Should response be converted to JSON.  0 - (default) Store raw.  1 - Convert to JSON.",
+        "type": "integer"
+      },
+      "parameters": {
+        "description": "Additional parameters for script type LLD rule. Array of objects with 'name' and 'value' properties, where name must be unique.",
+        "type": "array"
+      },
+      "params": {
+        "description": "Additional parameters depending on the type of the LLD rule: - executed script for SSH and Telnet LLD rules; - SQL query for database monitor LLD rules; - formula for calculated LLD rules.",
+        "type": "string"
+      },
+      "password": {
+        "description": "Password for authentication. Used by simple check, SSH, Telnet, database monitor, JMX and HTTP agent LLD rules.",
+        "type": "string"
+      },
+      "post_type": {
+        "description": "HTTP agent LLD rule field. Type of post data body stored in posts property.  0 - (default) Raw data.  2 - JSON data.  3 - XML data.",
+        "type": "integer"
+      },
+      "posts": {
+        "description": "HTTP agent LLD rule field. HTTP(S) request body data. Used with post_type.",
+        "type": "string"
+      },
+      "privatekey": {
+        "description": "Name of the private key file.",
+        "type": "string"
+      },
+      "publickey": {
+        "description": "Name of the public key file.",
+        "type": "string"
+      },
+      "query_fields": {
+        "description": "HTTP agent LLD rule field. Query parameters. Array of objects with 'key':'value' pairs, where value can be empty string.",
+        "type": "array"
+      },
+      "request_method": {
+        "description": "HTTP agent LLD rule field. Type of request method.  0 - (default) GET 1 - POST 2 - PUT 3 - HEAD",
+        "type": "integer"
+      },
+      "retrieve_mode": {
+        "description": "HTTP agent LLD rule field. What part of response should be stored.  0 - (default) Body.  1 - Headers.  2 - Both body and headers will be stored.  For request_method HEAD only 1 is allowed value.",
+        "type": "integer"
+      },
+      "snmp_oid": {
+        "description": "SNMP OID.",
+        "type": "string"
+      },
+      "ssl_cert_file": {
+        "description": "HTTP agent LLD rule field. Public SSL Key file path.",
+        "type": "string"
+      },
+      "ssl_key_file": {
+        "description": "HTTP agent LLD rule field. Private SSL Key file path.",
+        "type": "string"
+      },
+      "ssl_key_password": {
+        "description": "HTTP agent LLD rule field. Password for SSL Key file.",
+        "type": "string"
+      },
+      "state": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "normal;"
+          },
+          "1": {
+            "default": false,
+            "description": "not supported."
+          }
+        },
+        "description": "(readonly) State of the LLD rule.",
+        "type": "integer"
+      },
+      "status": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "(default) enabled LLD rule"
+          },
+          "1": {
+            "default": false,
+            "description": "disabled LLD rule."
+          }
+        },
+        "description": "Status of the LLD rule.",
+        "type": "integer"
+      },
+      "status_codes": {
+        "description": "HTTP agent LLD rule field. Ranges of required HTTP status codes separated by commas. Also supports user macros as part of comma separated list.  Example: 200,200-{$M},{$M},200-400",
+        "type": "string"
+      },
+      "templateid": {
+        "description": "(readonly) ID of the parent template LLD rule.",
+        "type": "string"
+      },
+      "timeout": {
+        "description": "Item data polling request timeout. Used for HTTP agent and script LLD rules. Supports user macros.  default: 3s maximum value: 60s",
+        "type": "string"
+      },
+      "trapper_hosts": {
+        "description": "Allowed hosts. Used by trapper LLD rules or HTTP agent LLD rules.",
+        "type": "string"
+      },
+      "type": {
+        "PossibleValues": {
+          "0": {
+            "default": false,
+            "description": "Zabbix agent"
+          },
+          "10": {
+            "default": false,
+            "description": "external check"
+          },
+          "11": {
+            "default": false,
+            "description": "database monitor"
+          },
+          "12": {
+            "default": false,
+            "description": "IPMI agent"
+          },
+          "13": {
+            "default": false,
+            "description": "SSH agent"
+          },
+          "14": {
+            "default": false,
+            "description": "TELNET agent"
+          },
+          "16": {
+            "default": false,
+            "description": "JMX agent"
+          },
+          "18": {
+            "default": false,
+            "description": "Dependent item"
+          },
+          "19": {
+            "default": false,
+            "description": "HTTP agent"
+          },
+          "2": {
+            "default": false,
+            "description": "Zabbix trapper"
+          },
+          "20": {
+            "default": false,
+            "description": "SNMP agent"
+          },
+          "21": {
+            "default": false,
+            "description": "Script."
+          },
+          "3": {
+            "default": false,
+            "description": "simple check"
+          },
+          "5": {
+            "default": false,
+            "description": "Zabbix internal"
+          },
+          "7": {
+            "default": false,
+            "description": "Zabbix agent (active)"
+          }
+        },
+        "description": "(required) Type of the LLD rule.",
+        "type": "integer"
+      },
+      "url": {
+        "description": "(required) URL string, required for HTTP agent LLD rule. Supports user macros, {HOST.IP}, {HOST.CONN}, {HOST.DNS}, {HOST.HOST}, {HOST.NAME}, {ITEM.ID}, {ITEM.KEY}.",
+        "type": "string"
+      },
+      "username": {
+        "description": "Username for authentication. Used by simple check, SSH, Telnet, database monitor, JMX and HTTP agent LLD rules.  Required by SSH and Telnet LLD rules.",
+        "type": "string"
+      },
+      "uuid": {
+        "description": "Universal unique identifier, used for linking imported LLD rules to already existing ones. Used only for LLD rules on templates. Auto-generated, if not given.  For update operations this field is readonly.",
+        "type": "string"
+      },
+      "verify_host": {
+        "description": "HTTP agent LLD rule field. Validate host name in URL is in Common Name field or a Subject Alternate Name field of host certificate.  0 - (default) Do not validate.  1 - Validate.",
+        "type": "integer"
+      },
+      "verify_peer": {
+        "description": "HTTP agent LLD rule field. Validate is host certificate authentic.  0 - (default) Do not validate.  1 - Validate.   ",
+        "type": "integer"
+      }
+    }
+  },
+  "TagFilter": {
+    "properties": {
+      "operator": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "Like"
+          },
+          "1": {
+            "default": false,
+            "description": "Equal"
+          },
+          "2": {
+            "default": false,
+            "description": "Not like"
+          },
+          "3": {
+            "default": false,
+            "description": "Not equal"
+          },
+          "4": {
+            "default": false,
+            "description": " Exists"
+          },
+          "5": {
+            "default": false,
+            "description": "Not exists."
+          },
+          "description": "Operador de búsqueda",
+          "readonly": false,
+          "required": true,
+          "type": "integer"
+        }
+      },
+      "tag": {
+        "description": "Nomber de la tag, CaseSensitive",
+        "readonly": false,
+        "type": "string"
+      },
+      "value": {
+        "description": "Valor de la tag, CaseInsensitive",
+        "readonly": false,
+        "type": "string"
+      }
+    }
+  },
+  "Template": {
+    "description": "Alerts are created by Zabbix server and cannot be modified via the API.  The alert object contains information about whether certain action operations have been executed successfully",
+    "properties": {
+      "description": {
+        "description": "Description of the template.",
+        "type": "text"
+      },
+      "host": {
+        "description": "Technical name of the template",
+        "required": true,
+        "type": "string"
+      },
+      "name": {
+        "description": "Visible name of the template.",
+        "type": "string"
+      },
+      "templateid": {
+        "description": "ID of the template",
+        "readonly": true,
+        "required": true,
+        "type": "string"
+      },
+      "uuid": {
+        "description": "Universal unique identifier, used for linking imported templates to already existing ones. Auto-generated, if not given.",
+        "type": "string"
+      },
+      "vendor_name": {
+        "description": "Template vendor name. For create operations, both vendor_name and vendor_version should be either set or left empty. For update operations, vendor_name can be left empty if it has a value in the database.",
+        "type": "string"
+      },
+      "vendor_version": {
+        "description": "Template vendor version. For create operations, both vendor_name and vendor_version should be either set or left empty. For update operations, vendor_name can be left empty if it has a value in the database.",
+        "type": "string"
+      }
+    }
+  },
+  "Trigger": {
+    "correlation_mode": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "All problems"
+        },
+        "1": {
+          "description": "All problems if tag values match."
+        }
+      },
+      "description": "OK event closes.",
+      "type": "integer"
+    },
+    "correlation_tag": {
+      "description": "Tag for matching.",
+      "type": "string"
+    },
+    "manual_close": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "No"
+        },
+        "1": {
+          "description": "Yes."
+        }
+      },
+      "description": "Allow manual close.",
+      "type": "integer"
+    },
+    "properties": {
+      "comments": {
+        "description": "Additional description of the trigger.",
+        "type": "string"
+      },
+      "description": {
+        "description": "Name of the trigger.Required for create operations",
+        "type": "string"
+      },
+      "error": {
+        "description": "Error text if there have been any problems when updating the state of the trigger.",
+        "readonly": true,
+        "type": "string"
+      },
+      "event_name": {
+        "description": "Event name generated by the trigger.",
+        "type": "string"
+      },
+      "expression": {
+        "description": "Reduced trigger expression. Required for create operations",
+        "type": "string"
+      },
+      "flags": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "a plain trigger"
+          },
+          "4": {
+            "description": "a discovered triggeri",
+            "read-only": true
+          }
+        },
+        "description": "Origin of the trigger.",
+        "type": "integer"
+      },
+      "lastchange": {
+        "description": "Time when the trigger last changed its state.",
+        "readonly": true,
+        "type": "timestamp"
+      },
+      "opdata": {
+        "description": "Operational data.",
+        "type": "string"
+      },
+      "priority": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "not classified"
+          },
+          "1": {
+            "description": "information"
+          },
+          "2": {
+            "description": "warning"
+          },
+          "3": {
+            "description": "average"
+          },
+          "4": {
+            "description": "high"
+          },
+          "5": {
+            "description": "disaster."
+          }
+        },
+        "description": "Severity of the trigger.",
+        "type": "integer"
+      },
+      "state": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "trigger state is up to date"
+          },
+          "1": {
+            "description": "current trigger state is unknown."
+          }
+        },
+        "description": "State of the trigger.",
+        "readonly": true
+      },
+      "triggerid": {
+        "description": "ID of the trigger. Required for update operations",
+        "readonly": true,
+        "type": "string"
+      },
+      "type": "integer"
+    },
+    "recovery_expression": {
+      "description": "Reduced trigger recovery expression.",
+      "type": "string"
+    },
+    "recovery_mode": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "Expression"
+        },
+        "1": {
+          "description": "Recovery expression"
+        },
+        "2": {
+          "description": "None."
+        }
+      },
+      "description": "OK event generation mode.",
+      "type": "integer"
+    },
+    "status": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "enabled"
+        },
+        "1": {
+          "description": "disabled."
+        }
+      },
+      "description": "Whether the trigger is enabled or disabled.",
+      "type": "integer"
+    },
+    "templateid": {
+      "description": "ID of the parent template trigger.<a href=\"/documentation/current/en/manual/api/reference_commentary#property-behavior\">Property behavior</a>:- read-only",
+      "type": "string"
+    },
+    "type": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "do not generate multiple events"
+        },
+        "1": {
+          "description": "generate multiple events."
+        }
+      },
+      "description": "Whether the trigger can generate multiple problem events.",
+      "type": "integer"
+    },
+    "url": {
+      "description": "URL associated with the trigger.",
+      "type": "string"
+    },
+    "url_name": {
+      "description": "Label for the URL associated with the trigger.",
+      "type": "string"
+    },
+    "uuid": {
+      "description": "Universal unique identifier, used for linking imported triggers to already existing ones. Auto-generated, if not given.Property behavior: supported if the trigger belongs to a template",
+      "type": "string"
+    },
+    "value": {
+      "PossibleValues": {
+        "0": {
+          "default": true,
+          "description": "OK"
+        },
+        "1": {
+          "description": "problem."
+        }
+      },
+      "description": "Whether the trigger is in OK or problem state.",
+      "readonly": true,
+      "type": "string"
+    }
+  },
+  "User": {
+    "properties": {
+      "attempt_clock": {
+        "description": " Time of the last unsuccessful login attempt.",
+        "readonly": true,
+        "required": false,
+        "type": "timestamp"
+      },
+      "attempt_failed": {
+        "description": "Recent failed login attempt count.",
+        "readonly": true,
+        "required": false,
+        "type": "integer"
+      },
+      "attempt_ip": {
+        "description": "IP address from where the last unsuccessful login attempt came from.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "autologin": {
+        "PossibleValues": {
+          "0": {
+            "default": true,
+            "description": "auto-login disabled"
+          },
+          "1": {
+            "default": false,
+            "description": "auto-login enabled."
+          }
+        },
+        "description": "Whether to enable auto-login.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "autologout": {
+        "description": "User session life time. Accepts seconds and time unit with suffix. If set to 0s, the session will never expire.  Default: 15m.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "lang": {
+        "description": "Language code of the user's language, for example, en_GB.  Default: default - system default.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "name": {
+        "description": "Name of the user.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "refresh": {
+        "description": "Automatic refresh period. Accepts seconds and time unit with suffix.  Default: 30s.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "roleid": {
+        "description": "Role ID of the user.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      },
+      "rows_per_page": {
+        "description": "Amount of object rows to show per page.  Default: 50.",
+        "readonly": false,
+        "required": false,
+        "type": "integer"
+      },
+      "surname": {
+        "description": "Surname of the user.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "theme": {
+        "PossibleValues": {
+          "blue-theme": {
+            "default": false,
+            "description": "Blue"
+          },
+          "dark-theme": {
+            "default": false,
+            "description": "Dark."
+          },
+          "default": {
+            "default": true,
+            "description": "system default"
+          }
+        },
+        "description": "User's theme",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "timezone": {
+        "description": "User's time zone, for example, Europe/London, UTC.  Default: default - system default.  For the full list of supported time zones please refer to PHP documentation.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "url": {
+        "description": "URL of the page to redirect the user to after logging in.",
+        "readonly": false,
+        "required": false,
+        "type": "string"
+      },
+      "userid": {
+        "description": "ID of the user.",
+        "readonly": true,
+        "required": false,
+        "type": "string"
+      },
+      "username": {
+        "description": "User name.",
+        "readonly": false,
+        "required": true,
+        "type": "string"
+      }
+    }
+  },
+  "template": {
+    "properties": {
+      "description": {
+        "description": "Description of the template.",
+        "type": "text"
+      },
+      "host": {
+        "description": "Technical name of the template.<a href=\"/documentation/current/en/manual/api/reference_commentary#property-behavior\">Property behavior</a>:- required for create operations",
+        "type": "string"
+      },
+      "name": {
+        "description": "Visible name of the template.Default: <code>host</code> property value.",
+        "type": "string"
+      },
+      "tag": {
+        "description": "Template tag name.<a href=\"/documentation/current/en/manual/api/reference_commentary#property-behavior\">Property behavior</a>:- required",
+        "type": "string"
+      },
+      "templateid": {
+        "description": "ID of the template.<a href=\"/documentation/current/en/manual/api/reference_commentary#property-behavior\">Property behavior</a>:- read-only- required for update operations",
+        "type": "string"
+      },
+      "uuid": {
+        "description": "Universal unique identifier, used for linking imported templates to already existing ones. Auto-generated, if not given.",
+        "type": "string"
+      },
+      "value": {
+        "description": "Template tag value.",
+        "type": "string"
+      },
+      "vendor_name": {
+        "description": "Template vendor name.For create operations, both <code>vendor_name</code> and <code>vendor_version</code> should be either set or left empty. For update operations, <code>vendor_version</code> can be left empty if it has a value in the database.",
+        "type": "string"
+      },
+      "vendor_version": {
+        "description": "Template vendor version.For create operations, both <code>vendor_name</code> and <code>vendor_version</code> should be either set or left empty. For update operations, <code>vendor_name</code> can be left empty if it has a value in the database.",
+        "type": "string"
+      }
+    },
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/template/object"
+  }
+}

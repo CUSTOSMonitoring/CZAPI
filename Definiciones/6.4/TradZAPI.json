@@ -63,13 +63,25 @@
     "fuente": "",
     "funcion": ""
   },
+  "DserviceGet": {
+    "fuente": "Dservice2String",
+    "funcion": "DserviceToString"
+  },
+  "DcheckGet": {
+    "fuente": "DCheck2String",
+    "funcion": "DcheckToString"
+  },
   "TemplateGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Template2String",
+    "funcion": "TemplateToString"
+  },
+  "ProxyGet": {
+    "fuente": "Proxy2String",
+    "funcion": "ProxyToString"
   },
   "TriggerGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Trigger2String",
+    "funcion": "TriggerToString"
   },
   "UserCheckAuth": {
     "fuente": "",

@@ -2,11 +2,36 @@
 # vim: set ts=3 expandtab shiftwidth=3:
 # Se quiereinterpretar los parametro de comandos a partir de descripciones
 
+#para colorear
+Black='\033[0;30m'
+Dark_Gray='\033[1;30m'
+Red='\033[0;31m'
+Light_Red='\033[1;31m'
+Green='\033[0;32m'
+Light_Green='\033[1;32m'
+Orange='\033[0;33m'
+Yellow='\033[1;33m'
+Blue='\033[0;34m'
+Light_Blue='\033[1;34m'
+Purple='\033[0;35m'
+Light_Purple='\033[1;35m'
+Cyan='\033[0;36m'
+Light_Cyan='\033[1;36m'
+Light_Gray='\033[0;37m'
+White='\033[1;37m'
+Blinking='\033[5m'
+Normal='\033[0m'
+
 DirHome="$(dirname $0)"
 APIDefFunc="${DirHome}/APIDefFunc.json"
 DirConn="${DirHome}/Conexiones"
 Log="${DirHome}/Log.$(basename $0)"
-ArchConf="$(readlink -f ${DirHome}/$(basename $0).zapi)"
+if [ "${ZAPI_Conf}" ]
+then
+   ArchConf="${ZAPI_Conf}"
+else
+   ArchConf="$(readlink -f ${DirHome}/$(basename $0).zapi)"
+fi
 NivelDebug=1
 
 libreria="$(pwd)/lib"
@@ -51,13 +76,18 @@ function Ayuda()
           $(basename $0) --edit-funciones
                Edita el archivo de definicion de funciones utilizado
 
+          $(basename $0) --edit-traduccion 
+               Edita el archivo de traducciones de funciones utilizado
+
    Las funciones estan definidas en el archivo '${APIDefFunc}' (se configura en el archivo de conexiones)
 
    Variables de ambiente para no especificar archivo de conexion
-      export URL=http://67.207.86.91/api_jsonrpc.php (por ejemplo )
+      export ZAPI_Conf=/home/gguido/ZAPI/Conexiones/Scottish.zapi           Para que cambie el archivo por defecto que usa
+      export URL=http://67.207.86.91/api_jsonrpc.php                        Toma precedencia sobre la especificada en el archivo de conf
+
+      Para agregar a futuro, todas las que pueden ser especificadas en el arch de conf
       export authtoken=null  (Inicializar para usar la funcion login, luego cargarla con el token que retorna la funcion)
                              (en caso de usar API token, se puede inicializar con ese valor)
-      export authtoken='2c4600bdaaf049974ff07102db66d1f9'
 
   Los parametros tienen tipo
       Se hace un tratamiento especial para algunos.
@@ -202,7 +232,7 @@ function ValidarFuncion()
    #local NombreDeFuncion
    NombreDeFuncion="${1}"
    debug 1 "Validando la funcion ${NombreDeFuncion}" 
-   Funcion=$( jq '.'${NombreDeFuncion} "${APIDefFunc}" )
+   Funcion=$( jq '.["'${NombreDeFuncion}'"]' "${APIDefFunc}" )
    if [ "${Funcion}" == null ]
    then
       ERRORES="${ERRORES}\nFuncion '${NombreDeFuncion}' no encontrada"
@@ -335,7 +365,7 @@ function SetVariables()
    ArchConf="$(readlink -f "${Arch}")"
 
    DescConn=$( jq -r '.Descripcion? // empty' "${Arch}")
-   URL=$( jq -r '.URL // empty' "${Arch}")
+   [ "${ZAPI_Url}" ] && { URL=${ZAPI_Url}; debug 1 "Url desde la variable de ambiente ZAPI_Url" ; } || URL=$( jq -r '.URL // empty' "${Arch}")
    authtoken=$( jq -r '.authtoken? // empty' "${Arch}")
    AuthInHeader=$( jq -r '.authinheader? // empty' "${Arch}")
    user=$( jq -r '.USER? // empty' "${Arch}" )
@@ -398,6 +428,23 @@ function SetVariables()
    fi
 }
 
+function BuscarOpciones()
+{  #  busca el primero en el resto de los parametros
+   local ABuscar res
+   ABuscar="$1"
+   res=()
+   shift
+   while [ $# -gt 0 ]
+   do
+      if [[ $1 =~ ^${ABuscar} ]]
+      then
+         res+=( $1 )
+      fi
+      shift
+   done
+   echo "${res[@]}"
+}
+
 function CreateArchConect ()
 {
   local Arch
@@ -418,9 +465,27 @@ function CreateArchConect ()
      echo
      select opcion in "SALIR" $( echo "${aux}" | jq -rS '. | keys[] ')
      do
+        if ! [[ "${REPLY}" =~ [[:digit:]] ]]
+        then # se ingresaron letras
+           vecopcion=( $( BuscarOpciones ${REPLY} $( echo "${aux}" | jq -rS '. | keys[] ') ) )
+           [ ${#vecopcion[*]} -eq 0 ] && continue
+           if [ ${#vecopcion[*]} -gt 1 ]
+           then
+              # hay mas de una opcion que machea
+              echo
+              echo -e "${Red}Opciones posibles (solo por numero)"
+              echo -e ${Normal}
+              select opcion in "${vecopcion[@]}"
+              do
+                 break
+              done
+           else
+              opcion=${vecopcion[0]}
+           fi 
+        fi 
         if [ "${opcion}" -a "${opcion}" != "SALIR" ]
         then
-           val_def=$(echo "${aux}" | jq -r '.'${opcion}'?' )
+           val_def=$(echo "${aux}" | jq -r '.["'${opcion}'"]?' )
            read -p "Ingrese el valor para '${opcion}' (${val_def}): " valor
            if [ "${valor}" ]
            then
@@ -437,7 +502,7 @@ function CreateArchConect ()
         break
      done
   done
-  read -p "Salvamos el archivo?: (s/N)" valor
+  read -p "Salvamos el archivo?: (s/N) " valor
   if [[ "${valor}" =~ ^[Ss] ]] 
   then
      read -p "Ingrese el nombre de archivo: (${Arch})" Aux
@@ -479,7 +544,7 @@ function Controles()
 #
 #if ! [ -d "${DirConn}" ]
 #else
-#   read -p "No existe el directorio '${DirConn}', lo creamos (s/N)?" a
+#   read -p "No existe el directorio '${DirConn}', lo creamo:xs (s/N)?" a
 #   if [[ $a =~ Ss ]]
 #   then
 #      mkdir -p "${DirConn}"
@@ -502,7 +567,8 @@ then
    Ayuda; exit 1
 fi
 primero="true"
-[ -r "$(dirname $0)/$(basename $0).zapi" ] && SetVariables "${ArchConf}"
+#[ -r "$(dirname $0)/$(basename $0).zapi" ] && SetVariables "${ArchConf}"
+SetVariables "${ArchConf}"
 while [ $# -gt 0 ]
 do
    debug 0 "Analizando ${1}" 
@@ -516,9 +582,10 @@ do
                     exit;;
       --help | -h ) Ayuda; exit;;
       --def* ) ShowDef "$1" "$2"; exit;;
-      --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --list-conexiones ) ListarConexiones; exit;;
+      --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
+      --edit-traduccion ) ${EDITOR:-vi} "${ArchFormat}"; exit;; # agregar la posibilidad de leer del archivo para editar el archivo jq específico de la funcion
       --show-API-call ) ShowAPICall=1;;
       --no-format ) raw=si;;
       -c ) ArchConf="$2"

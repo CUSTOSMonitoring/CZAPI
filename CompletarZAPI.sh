@@ -10,12 +10,14 @@ function Gus_GetListaFunctions()
 function Gus_GetListaParametros()
 {
 # el segundo parametro opcional es el archivo de conf en la forma "-c Arch"
-   ZAPI $2 $1 --def_para | jq -r '.parameters[] | .name'
+   GusDebug En Gus_GetListaParametros 
+   ZAPI $2 "$1" --def_para | jq -r '.parameters[] | .name'
+   GusDebug Saliendo Gus_GetListaParametros 
 }
 
 function GusDebug()
 {
-   #echo $(date +"*%F %T") $* >> aux.log
+   echo $(date +"*%F %T") $* >> aux.log
    #echo $(date +"*%F %T") $* >&2
    #echo $(date +"*%F %T") $* > /dev/null
    :
@@ -29,7 +31,7 @@ function Gus_Complete_ZAPI ()
    cur="${COMP_WORDS[COMP_CWORD]}"
    prev="${COMP_WORDS[COMP_CWORD-1]}"
    for i in $(seq 1 $(( ${#COMP_WORDS[@]} -2 )) )
-   do
+   do # recorremos los parametros
      GusDebug Analizando "'${COMP_WORDS[$i]}'" en el lugar $i
      if [[ "${COMP_WORDS[$i]}" =~ -.* ]]
      then 
@@ -37,23 +39,23 @@ function Gus_Complete_ZAPI ()
         band=${COMP_WORDS[$i]}
      else
         if [[ "${band}" == "-c" ]]
-        then # es una bandera que tiene parametro
+        then # es una bandera que tiene parametro, tal vez se necesiten agregar más a futuro
            GusDebug salteamos el parametro de la bandera "'$band'" "'${COMP_WORDS[$i]}'"
         else
            GusDebug encontramos la funcion "'${COMP_WORDS[$i]}'"
-           Func=${COMP_WORDS[$i]}
+           Func="${COMP_WORDS[$i]}"
            break
         fi
         band=""
      fi
    done
-   OptsGral="--def --def_nom --help --variables -c --show-debug --show-API-call --edit-conf --edit-funciones --no-format  --list-conexiones"
+   OptsGral="--def --def_nom --help --variables -c --show-debug --show-API-call --edit-conf --edit-funciones --edit-traduccion --no-format  --list-conexiones"
    OptsFunc="--def --def_apiname --def_returns --def_description --def_parameters"
    OptsParams="description= name= type="
 
    if [ "${prev}" == "-c" ] || [ "${prev}" == "-C" ]
-   then
-      dirConfCompletion=$( ZAPI --variables=DirConn)
+   then # completamos con los archivos de Conexion
+      dirConfCompletion=$( ZAPI --variables=DirConn )
       a=$( [ -d "${dirConfCompletion}" ] && find ${dirConfCompletion} -maxdepth 1 -name '*.zapi' -type f ; find . -maxdepth 1 -name '*.zapi' -type f )
       COMPREPLY=( $(compgen -W "$a" -- ${cur}) )
       if [ ${#COMPREPLY} -eq 0 ]
@@ -61,20 +63,20 @@ function Gus_Complete_ZAPI ()
          COMPREPLY=( $(compgen -W "$a" -- ${dirConfCompletion}/${cur} ) )
       fi
    else
-         for i in $(seq 1 $(( ${COMP_CWORD} -1 )) )
-         do
-           if [[ "${COMP_WORDS[$i]}" == "-c" ]]
-           then # el siguiente tiene que se el archivo de conf sino, no estariamos aca
-              BanderaConf="-c ${COMP_WORDS[$i+1]}"
-              break
-           fi
+      for i in $(seq 1 $(( ${COMP_CWORD} -1 )) )
+      do
+        if [[ "${COMP_WORDS[$i]}" == "-c" ]]
+        then # el siguiente tiene que se el archivo de conf sino, no estariamos aca
+           BanderaConf="-c ${COMP_WORDS[$i+1]}"
            i+=1
-         done
+           break
+        fi
+        i+=1
+      done
 
       if [ ! "${Func}" ]
-      then # Completamos con las funciones
+      then # No hay una función en la línea de comandos, completamos con las funciones
          GusDebug No tenemos funcion, van las funciones y op grales
-         # Nos fijamos si tenemos una archivo de configuracion en la linea de comandos previo a este lugar
          COMPREPLY=( $(compgen -W "$(Gus_GetListaFunctions "${BanderaConf}") ${OptsGral}" -- ${cur}) )
       else
          # hay problemas con el = porque separa palabras

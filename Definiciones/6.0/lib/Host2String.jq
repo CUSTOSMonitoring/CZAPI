@@ -1,6 +1,7 @@
 #vim: set ts=3 expandtab:
-
 include "Gral2String";
+include "Tag2String";
+include "Trigger2String";
 
 def HostStatusToString( status ):
    if status=="0" then "monitored host"
@@ -25,14 +26,32 @@ def HostIpmi_privilegeToString( value ):
    elif value == "5" then "OEM"
    else "desconocido" end;
 
-def HostMaintenance_typeToString( value ):
-   if value == "0" then "maintenance with data collection"
-   elif value == "1" then "maintenance without data collection"
-   else "desconocido" end;
-
 def HostMaintenance_statusToString( value ):
    if value == "0" then "no maintenance"
    elif value == "1" then "maintenance in effect"
+   else "desconocido" end;
+
+def Hosttls_connectToString( value ):
+   if value == "1" then "No encryption"
+   elif value == "2" then "PSK"
+   elif value == "4" then "certificate"
+   else "desconocido" end;
+
+def Hosttls_acceptToString( value ):
+   if value == "1" then "No encryption"
+   elif value == "2" then "PSK"
+   elif value == "4" then "certificate"
+   else "desconocido" end;
+
+def HostInventory_modeToString( value ):
+   if value == "-1" then "disabled"
+   elif value == "0" then "manual"
+   elif value == "1" then "automatic"
+   else "desconocido" end;
+
+def HostFlagsToString( value ):
+   if value == "0" then "plain host"
+   elif value == "1" then "Discovered host"
    else "desconocido" end;
 
 def HostToString( host ):
@@ -44,10 +63,28 @@ def HostToString( host ):
                            .value = HostIpmi_privilegeToString( .value )
                         elif .key == "maintenance_status" then
                            .value = HostMaintenance_statusToString( .value )
-                        elif .key == "maintenance_type" then
-                           .value = HostMaintenance_typeToString( .value )
+                        elif .key == "inventory_mode" then
+                           .value = HostInventory_modeToString( .value )
                         elif .key == "maintenance_from" then
                            .value = DateToString( .value )
+                        elif .key == "tls_accept" then
+                           .value = Hosttls_acceptToString( .value )
+                        elif .key == "tls_connect" then
+                           .value = Hosttls_connectToString( .value )
+                        elif .key == "flags" then
+                           .value = HostFlagsToString( .value )
+                        elif .key == "tags" then
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TagToString( . )
+                           else
+                              .
+                           end
+                        elif .key == "triggers" then
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TriggerToString( . )
+                           else
+                              .
+                           end
                         else
                            .
                         end) | from_entries ;

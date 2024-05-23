@@ -68,8 +68,8 @@
     "funcion": ""
   },
   "TemplateGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Template2String",
+    "funcion": "TemplateToString"
   },
   "TriggerGet": {
     "fuente": "",

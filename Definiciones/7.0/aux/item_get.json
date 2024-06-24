@@ -1,0 +1,234 @@
+{
+  "ItemGet": {
+    "apiname": "item.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/item/get",
+    "parameters": [
+      {
+        "description": "Return only items with the given IDs.",
+        "name": "itemids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that belong to the hosts from the given groups.",
+        "name": "groupids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that belong to the given templates.",
+        "name": "templateids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that belong to the given hosts.",
+        "name": "hostids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that are monitored by the given proxies.",
+        "name": "proxyids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that use the given host interfaces.",
+        "name": "interfaceids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that are used in the given graphs.",
+        "name": "graphids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only items that are used in the given triggers.",
+        "name": "triggerids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Include web items in the result.",
+        "name": "webitems",
+        "type": "flag"
+      },
+      {
+        "description": "If set to <code>true</code> return only items inherited from a template.",
+        "name": "inherited",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to <code>true</code> return only items that belong to templates.",
+        "name": "templated",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to <code>true</code> return only enabled items that belong to monitored hosts.",
+        "name": "monitored",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only items that belong to a group with the given name.",
+        "name": "group",
+        "type": "string"
+      },
+      {
+        "description": "Return only items that belong to a host with the given name.",
+        "name": "host",
+        "type": "string"
+      },
+      {
+        "description": "Rules for tag searching.<br><br>Possible values:<br>0 - (default) And/Or;<br>2 - Or.",
+        "name": "evaltype",
+        "type": "integer"
+      },
+      {
+        "description": "Return only items with given tags. Exact match by tag and case-sensitive or case-insensitive search by tag value depending on operator value.<br>Format: <code>[{\"tag\": \"&lt;tag&gt;\", \"value\": \"&lt;value&gt;\", \"operator\": \"&lt;operator&gt;\"}, ...]</code>.<br>An empty array returns all items.<br><br>Possible operator types:<br>0 - (default) Like;<br>1 - Equal;<br>2 - Not like;<br>3 - Not equal;<br>4 - Exists;<br>5 - Not exists.",
+        "name": "tags",
+        "type": "array"
+      },
+      {
+        "description": "If set to <code>true</code> return only items that are used in triggers.",
+        "name": "with_triggers",
+        "type": "boolean"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/host/object\"><code>hosts</code></a> property with an array of hosts that the item belongs to.",
+        "name": "selectHosts",
+        "type": "query"
+      },
+      {
+        "description": "Return an <a href=\"/documentation/current/en/manual/api/reference/hostinterface/object\"><code>interfaces</code></a> property with an array of host interfaces used by the item.",
+        "name": "selectInterfaces",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/trigger/object\"><code>triggers</code></a> property with the triggers that the item is used in.<br><br>Supports <code>count</code>.",
+        "name": "selectTriggers",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/graph/object\"><code>graphs</code></a> property with the graphs that contain the item.<br><br>Supports <code>count</code>.",
+        "name": "selectGraphs",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/discoveryrule/object\"><code>discoveryRule</code></a> property with the LLD rule that created the item.",
+        "name": "selectDiscoveryRule",
+        "type": "query"
+      },
+      {
+        "description": "Return an <code>itemDiscovery</code> property with the item discovery object. The item discovery object links the item to an item prototype from which it was created.<br><br>It has the following properties:<br><code>itemdiscoveryid</code> - <code>(string)</code> ID of the item discovery;<br><code>itemid</code> - <code>(string)</code> ID of the discovered item;<br><code>parent_itemid</code> - <code>(string)</code> ID of the item prototype from which the item has been created;<br><code>key_</code> - <code>(string)</code> key of the item prototype;<br><code>lastcheck</code> - <code>(timestamp)</code> time when the item was last discovered;<br><code>status</code> - <code>(int)</code> item discovery status:<br>0 - <em>(default)</em> item is discovered,<br>1 - item is not discovered anymore;<br><code>ts_delete</code> - <code>(timestamp)</code> time when an item that is no longer discovered will be deleted;<br><code>ts_disable</code> - <code>(timestamp)</code> time when an item that is no longer discovered will be disabled;<br><code>disable_source</code> - <code>(int)</code> indicator of whether item was disabled by an LLD rule or manually:<br>0 - <em>(default)</em> disabled automatically,<br>1 - disabled by an LLD rule.",
+        "name": "selectItemDiscovery",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/item/object#item-preprocessing\"><code>preprocessing</code></a> property with item preprocessing options.",
+        "name": "selectPreprocessing",
+        "type": "query"
+      },
+      {
+        "description": "Return the item tags in <a href=\"/documentation/current/en/manual/api/reference/item/object#Item-tag\"><code>tags</code></a> property.",
+        "name": "selectTags",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/valuemap/object\"><code>valuemap</code></a> property with item value map.",
+        "name": "selectValueMap",
+        "type": "query"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter.<br><br>Accepts an object, where the keys are property names, and the values are either a single value or an array of values to match against.<br><br>Does not support properties of <code>text</code> <a href=\"/documentation/current/en/manual/api/reference_commentary#data-types\">data type</a>.<br><br>Supports additional properties:<br><code>host</code> - technical name of the host that the item belongs to.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limits the number of records returned by subselects.<br><br>Applies to the following subselects:<br><code>selectGraphs</code> - results will be sorted by <code>name</code>;<br><code>selectTriggers</code> - results will be sorted by <code>description</code>.",
+        "name": "limitSelects",
+        "type": "integer"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>itemid</code>, <code>name</code>, <code>key_</code>, <code>delay</code>, <code>history</code>, <code>trends</code>, <code>type</code>, <code>status</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

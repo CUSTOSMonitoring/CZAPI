@@ -1,10 +1,4 @@
 {
-  "Apiinfo": {
-    "apiname": "apiinfo.version",
-    "description": "This method allows to retrieve the version of the Zabbix API.",
-    "parameters": [],
-    "returns": "(string) Returns the version of the Zabbix API."
-  },
   "AlertGet": {
     "apiname": "alert.get",
     "description": "The method allows to retrieve alerts according to the given parameters.",
@@ -166,6 +160,12 @@
         "type": "string/array"
       }
     ]
+  },
+  "Apiinfo": {
+    "apiname": "apiinfo.version",
+    "description": "This method allows to retrieve the version of the Zabbix API.",
+    "parameters": [],
+    "returns": "(string) Returns the version of the Zabbix API."
   },
   "AuditLogGet": {
     "apiname": "auditlog.get",
@@ -3364,11 +3364,6 @@
         "description": "Return results that do not match the criteria given in the search parameter.",
         "name": "excludeSearch",
         "type": "boolean"
-      },
-      {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
       },
       {
         "description": "Limit the number of records returned.",

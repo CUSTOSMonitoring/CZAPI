@@ -20,7 +20,7 @@ function GusDebug()
    echo $(date +"*%F %T") $* >> aux.log
    #echo $(date +"*%F %T") $* >&2
    #echo $(date +"*%F %T") $* > /dev/null
-   :
+   #:
 }
 
 function Gus_Complete_ZAPI ()

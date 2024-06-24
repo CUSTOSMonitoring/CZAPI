@@ -124,7 +124,6 @@ function ShowVariables()
    USER '${user}'
    PASSWORD '${passwd}'
    CmdPrev '${CmdPrev}'
-   Format '${ArchFormat}'
 
    Definicion de funciones '${APIDefFunc}'
    Archivo de log '${Log}'
@@ -195,7 +194,7 @@ function ValidarParametro()
          parName=$( echo ${par} | jq '.name' )
          parDataType=$( echo ${par} | jq -r '.type' )
          case "${parDataType}" in
-            "flag" ) parValor=1;;
+            "flag" ) parValor="true";;
             "string" ) parValor='"'${parValor}'"';;
             "boolean" ) if [ "${parValor}" == "" -o "${parValor}" == "1" ]
                         then
@@ -436,7 +435,7 @@ function BuscarOpciones()
    shift
    while [ $# -gt 0 ]
    do
-      if [[ $1 =~ ^${ABuscar} ]]
+      if [[ ${1,,} =~ ^${ABuscar,,} ]]
       then
          res+=( $1 )
       fi
@@ -452,16 +451,21 @@ function CreateArchConect ()
   [ -z "${Arch}" ] && Arch="${ArchConf}"
   if [ -r "${Arch}" ]
   then
-     # TODO puede que no sea un archivo json bien hecho
      aux="$(jq -S '.' "${Arch}")"
+     if [ $? -gt 0 ]
+     then
+        Mensaje "El archivo '${Arch}' no tiene un formato JSON correcto"
+        aux='{}'
+     fi
   else
      Mensaje "No se pudo leer del archivo '${Arch}' para inicializar"
      aux='{}'
   fi
+  # cargamos los campos "faltantes" desde el archivo por defecto ${DirHome}/ZAPI.zapi
   aux=$( jq --slurpfile ZAPI "${DirHome}/ZAPI.zapi" '$ZAPI[0] + .' "${Arch}" )
   while [ "${opcion}" != "SALIR" ] 
   do
-     echo "${aux}" | jq -S '.' 
+     echo "${aux}" | jq -S '.' # mostramos el archivo generado hasta ahora
      echo
      select opcion in "SALIR" $( echo "${aux}" | jq -rS '. | keys[] ')
      do
@@ -469,19 +473,25 @@ function CreateArchConect ()
         then # se ingresaron letras
            vecopcion=( $( BuscarOpciones ${REPLY} $( echo "${aux}" | jq -rS '. | keys[] ') ) )
            [ ${#vecopcion[*]} -eq 0 ] && continue
-           if [ ${#vecopcion[*]} -gt 1 ]
-           then
+           while [ ${#vecopcion[*]} -gt 1 ]
+           do
               # hay mas de una opcion que machea
               echo
-              echo -e "${Red}Opciones posibles (solo por numero)"
-              echo -e ${Normal}
+              echo -e "${Red}Opciones posibles"
+              echo -e ${Yellow}
               select opcion in "${vecopcion[@]}"
               do
+                 if ! [[ "${REPLY}" =~ [[:digit:]] ]]
+                 then
+                    vecopcion=( $( BuscarOpciones ${REPLY} "${vecopcion[@]}" ) )
+                 else
+                    vecopcion=( "${opcion}" )
+                 fi
                  break
               done
-           else
-              opcion=${vecopcion[0]}
-           fi 
+           done
+           echo -e ${Normal}
+           opcion=${vecopcion[0]}
         fi 
         if [ "${opcion}" -a "${opcion}" != "SALIR" ]
         then
@@ -585,7 +595,24 @@ do
       --list-conexiones ) ListarConexiones; exit;;
       --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
-      --edit-traduccion ) ${EDITOR:-vi} "${ArchFormat}"; exit;; # agregar la posibilidad de leer del archivo para editar el archivo jq específico de la funcion
+      --edit-traduccion ) # $2 debe traer el nombre de la funcion a editar o lo descartamos
+                          if [ "$2" ]
+                          then
+                             fuente=$(jq -r ' .["'"$2"'"].fuente' "${ArchFormat}")
+                             formatfunc=$(jq -r ' .["'"$2"'"].funcion ' "${ArchFormat}")
+                             if [[ "${fuente}" && "${fuente}" != "null" ]]
+                             then
+                                ${EDITOR:-vi} -c "set cmdheight=3" "${libreria}/${fuente}.jq"  +"/${formatfunc}"  -c "set cmdheight=1"
+                             else
+                                ${EDITOR:-vi} "${ArchFormat}"
+                             fi
+                          else
+                             ${EDITOR:-vi} "${ArchFormat}"
+                          fi
+                          exit;; 
+                          # en caso de que no esté configurada, debemos editar el archivo de traducciones
+                          # el comando para editar el fuente especificado
+         
       --show-API-call ) ShowAPICall=1;;
       --no-format ) raw=si;;
       -c ) ArchConf="$2"
@@ -636,6 +663,7 @@ else
          else
             debug 1 "Sin formateo"
             callAPI
+            echo
          fi
       else 
          debug 1 "Sin datos para la llamada a la API"

@@ -139,7 +139,31 @@ echo '}}}' ;
 for i in ${Objects[*]}
 do
    echo "$(date +"%F %T") Generando para objeto $i"
-  ArchObj="${DirSalida}/${i}.json"
-  url="${URL_base}/${i}/object"
-  GenArch ${i} > "${ArchObj}" 2> "${ArchObj}".err
+   ArchObj="${DirSalida}/${i}.json"
+   url="${URL_base}/${i}/object"
+   GenArch ${i} > "${ArchObj}" 2> "${ArchObj}".err
 done
+read -p "Juntamos todo en un archivo? (s/N)" a
+if [[ "$a" =~ [sS] ]]
+then
+   ArchSalida=$( readlink -f "${DirSalida}/../DefObj.json" )
+   read -p "Nombre de archivo (${ArchSalida})" a
+   for i in ${DirSalida}/*.json 
+   do
+      if head -1 "${i}.err" | grep '200 OK$' >/dev/null 2>&1
+      then
+         if cat $i | jq 1>/dev/null 2>&1
+         then
+            cat $i
+         fi
+      else
+         ERROR="${ERROR}\n${i}"
+      fi
+   done | { if [ ! "${a}" ]
+   then
+      jq --slurp 'add' "${DirSalida}/"* > "${ArchSalida}"
+   else
+      jq --slurp 'add' "${DirSalida}/"* > "${a}"
+   fi }
+   echo -n "Encontramos estos archivos con errores\n${ERROR}"
+fi

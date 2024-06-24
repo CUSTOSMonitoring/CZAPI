@@ -1,0 +1,254 @@
+{
+  "EventGet": {
+    "apiname": "event.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/event/get",
+    "parameters": [
+      {
+        "description": "Return only events with the given IDs.",
+        "name": "eventids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only events created by objects that belong to the given host groups.",
+        "name": "groupids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only events created by objects that belong to the given hosts.",
+        "name": "hostids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only events created by the given objects.",
+        "name": "objectids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only events with the given type.<br><br>Refer to the <a href=\"object#event\">event object page</a> for a list of supported event types.<br><br>Default: 0 - trigger events.",
+        "name": "source",
+        "type": "integer"
+      },
+      {
+        "description": "Return only events created by objects of the given type.<br><br>Refer to the <a href=\"object#event\">event object page</a> for a list of supported object types.<br><br>Default: 0 - trigger.",
+        "name": "object",
+        "type": "integer"
+      },
+      {
+        "description": "If set to <code>true</code> return only acknowledged events.",
+        "name": "acknowledged",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only events for which the given <a href=\"/documentation/current/en/manual/api/reference/event/acknowledge#parameters\">event update actions</a> have been performed. For multiple actions, use a combination of any acceptable bitmap values as bitmask.",
+        "name": "action",
+        "type": "integer"
+      },
+      {
+        "description": "Return only events with the given IDs of users who performed the event update actions.",
+        "name": "action_userids",
+        "type": "ID/array"
+      },
+      {
+        "description": "<code>true</code> - return only suppressed events;<br><code>false</code> - return events in the normal state.",
+        "name": "suppressed",
+        "type": "boolean"
+      },
+      {
+        "description": "<code>true</code> - return only symptom events;<br><code>false</code> - return only cause events.",
+        "name": "symptom",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only events with the given event severities. Applies only if object is trigger.",
+        "name": "severities",
+        "type": "integer/array"
+      },
+      {
+        "description": "Return only events with the given trigger severities. Applies only if object is trigger.",
+        "name": "trigger_severities",
+        "type": "integer/array"
+      },
+      {
+        "description": "Rules for tag searching.<br><br>Possible values:<br>0 - (default) And/Or;<br>2 - Or.",
+        "name": "evaltype",
+        "type": "integer"
+      },
+      {
+        "description": "Return only events with the given tags. Exact match by tag and case-insensitive search by value and operator.<br>Format: <code>[{\"tag\": \"&lt;tag&gt;\", \"value\": \"&lt;value&gt;\", \"operator\": \"&lt;operator&gt;\"}, ...]</code>.<br>An empty array returns all events.<br><br>Possible operator types:<br>0 - (default) Like;<br>1 - Equal;<br>2 - Not like;<br>3 - Not equal<br>4 - Exists;<br>5 - Not exists.",
+        "name": "tags",
+        "type": "array"
+      },
+      {
+        "description": "Return only events with IDs greater or equal to the given ID.",
+        "name": "eventid_from",
+        "type": "string"
+      },
+      {
+        "description": "Return only events with IDs less or equal to the given ID.",
+        "name": "eventid_till",
+        "type": "string"
+      },
+      {
+        "description": "Return only events that have been created after or at the given time.",
+        "name": "time_from",
+        "type": "timestamp"
+      },
+      {
+        "description": "Return only events that have been created before or at the given time.",
+        "name": "time_till",
+        "type": "timestamp"
+      },
+      {
+        "description": "Returns only events that were in the problem state starting with <code>problem_time_from</code>. Applies only if the source is trigger event and object is trigger. Mandatory if <code>problem_time_till</code> is specified.",
+        "name": "problem_time_from",
+        "type": "timestamp"
+      },
+      {
+        "description": "Returns only events that were in the problem state until <code>problem_time_till</code>. Applies only if the source is trigger event and object is trigger. Mandatory if <code>problem_time_from</code> is specified.",
+        "name": "problem_time_till",
+        "type": "timestamp"
+      },
+      {
+        "description": "Return only events with the given values.",
+        "name": "value",
+        "type": "integer/array"
+      },
+      {
+        "description": "Return an <code>acknowledges</code> property with event updates. Event updates are sorted in reverse chronological order.<br><br>The event update object has the following properties:<br><code>acknowledgeid</code> - <code>(ID)</code> acknowledgment's ID;<br><code>userid</code> - <code>(ID)</code> ID of the user that updated the event;<br><code>clock</code> - <code>(timestamp)</code> time when the event was updated;<br><code>message</code> - <code>(string)</code> text of the message;<br><code>action</code> - <code>(integer)</code> update action that was performed, see <a href=\"/documentation/current/en/manual/api/reference/event/acknowledge\"><code>event.acknowledge</code></a>;<br><code>old_severity</code> - <code>(integer)</code> event severity before this update action;<br><code>new_severity</code> - <code>(integer)</code> event severity after this update action;<br><code>suppress_until</code> - <code>(timestamp)</code> time till event will be suppressed;<br><code>taskid</code> - <code>(ID)</code> ID of task if current event is undergoing a rank change;<br><code>username</code> - <code>(string)</code> username of the user that updated the event;<br><code>name</code> - <code>(string)</code> name of the user that updated the event;<br><code>surname</code> - <code>(string)</code> surname of the user that updated the event.<br><br>Supports <code>count</code>.",
+        "name": "selectAcknowledges",
+        "type": "query"
+      },
+      {
+        "description": "Return an <a href=\"/documentation/current/en/manual/api/reference/alert/object\"><code>alerts</code></a> property with alerts generated by the event. Alerts are sorted in reverse chronological order.",
+        "name": "selectAlerts",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/host/object\"><code>hosts</code></a> property with hosts containing the object that created the event. Supported only for events generated by triggers, items or LLD rules.",
+        "name": "selectHosts",
+        "type": "query"
+      },
+      {
+        "description": "Return a <code>relatedObject</code> property with the object that created the event. The type of object returned depends on the event type.",
+        "name": "selectRelatedObject",
+        "type": "query"
+      },
+      {
+        "description": "Return a <code>suppression_data</code> property with the list of active maintenances and manual suppressions:<br><code>maintenanceid</code> - <code>(ID)</code> ID of the maintenance;<br><code>userid</code> - <code>(ID)</code> ID of user who suppressed the event;<br><code>suppress_until</code> - <code>(integer)</code> time until the event is suppressed.",
+        "name": "selectSuppressionData",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/event/object#event-tag\"><code>tags</code></a> property with event tags.",
+        "name": "selectTags",
+        "type": "query"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter.<br><br>Accepts an object, where the keys are property names, and the values are either a single value or an array of values to match against.<br><br>Does not support properties of <code>text</code> <a href=\"/documentation/current/en/manual/api/reference_commentary#data-types\">data type</a>.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>eventid</code>, <code>objectid</code>, <code>clock</code>.<br><br>Possible values when used together with <code>groupBy</code>: <code>objectid</code>.<br><br>Possible values when used together with <code>countOutput</code> and <code>groupBy</code>: <code>objectid</code>, <code>rowscount</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Group the results by the given properties. The specified properties will be returned in the results.<br><br>Possible values: <code>objectid</code>.",
+        "name": "groupBy",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "This parameter is deprecated, please use <code>selectAcknowledges</code> instead.<br>Return an <code>acknowledges</code> property with event updates.<br>Event updates are sorted in reverse chronological order.<br><br>The event update object has the following properties:<br><code>acknowledgeid</code> - <code>(ID)</code> acknowledgment's ID;<br><code>userid</code> - <code>(ID)</code> ID of the user that updated the event;<br><code>clock</code> - <code>(timestamp)</code> time when the event was updated;<br><code>message</code> - <code>(string)</code> text of the message;<br><code>action</code> - <code>(integer)</code> update action that was performed, see <a href=\"/documentation/current/en/manual/api/reference/event/acknowledge\"><code>event.acknowledge</code></a>;<br><code>old_severity</code> - <code>(integer)</code> event severity before this update action;<br><code>new_severity</code> - <code>(integer)</code> event severity after this update action;<br><code>suppress_until</code> - <code>(timestamp)</code> time till event will be suppressed;<br><code>taskid</code> - <code>(ID)</code> ID of task if current event is undergoing a rank change;<br><code>username</code> - <code>(string)</code> username of the user that updated the event;<br><code>name</code> - <code>(string)</code> name of the user that updated the event;<br><code>surname</code> - <code>(string)</code> surname of the user that updated the event.<br><br>Supports <code>count</code>.",
+        "name": "select_acknowledges<br>(deprecated)",
+        "type": "query"
+      },
+      {
+        "description": "This parameter is deprecated, please use <code>selectAlerts</code> instead.<br>Return an <a href=\"/documentation/current/en/manual/api/reference/alert/object\"><code>alerts</code></a> property with alerts generated by the event.<br>Alerts are sorted in reverse chronological order.",
+        "name": "select_alerts<br>(deprecated)",
+        "type": "query"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

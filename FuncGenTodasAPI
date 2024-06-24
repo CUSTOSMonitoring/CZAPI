@@ -46,69 +46,71 @@ fi
 
 Functions=(
    get
-   create
-   delete
-   update 
+   #create
+   #delete
+   #update 
 )
 
 Objects=(
- "action"
- "alert"
- "apiinfo"
- "auditlog"
- "authentication"
- "autoregistration"
- # "configuration" este objeto tiene otros métodos configuration.export configuration.import configuration.importcompare 
- "connector"
- "correlation"
- "dashboard"
- "dhost"
- "dservice"
- "dcheck"
- "drule"
- "event"
- "graph"
- "graphitem"
- "graphprototype"
- "hanode"
- "history"
- "host"
- "hostgroup"
- "hostinterface"
- "hostprototype"
- "housekeeping"
- "iconmap"
- "image"
- "item"
- "itemprototype"
- "discoveryrule" # "lld rule"
- "maintenance"
- "map"
- "mediatype"
- "module"
- "problem"
- "proxy"
- "regexp"
- "report"
- "role"
- "script"
- "service"
- "settings"
- "sla"
- "task"
- "template"
- "templatedashboard"
- "templategroup"
- "token"
- "trend"
- "trigger"
- "triggerprototype"
- "user"
- "userdirectory"
- "usergroup"
- "usermacro"
- "valuemap"
- "httptest" # "Web scenario"
+   "action"
+   "alert"
+   "apiinfo"
+   "auditlog"
+   "authentication"
+   "autoregistration"
+   "configuration"
+   "connector"
+   "correlation"
+   "dashboard"
+   "dhost" # "discoveredhost"
+   "dservice" # "discoveredservice"
+   "dcheck" # "discoverycheck"
+   "drule" # "discoveryrule"
+   "event"
+   "graph"
+   "graphitem"
+   "graphprototype"
+   "hanode" # "highavailabilitynode"
+   "history"
+   "host"
+   "hostgroup"
+   "hostinterface"
+   "hostprototype"
+   "housekeeping"
+   "iconmap"
+   "image"
+   "item"
+   "itemprototype"
+   "discoveryrule" # "lldrule"
+   "maintenance"
+   "map"
+   "mediatype"
+   "mfa"
+   "module"
+   "problem"
+   "proxy"
+   "proxygroup"
+   "regexp" # "regularexpression"
+   "report"
+   "role"
+   "script"
+   "service"
+   "settings"
+   "sla"
+   "task"
+   "template"
+   "templatedashboard"
+   "templategroup"
+   "token"
+   "trend"
+   "trigger"
+   "triggerprototype"
+   "user"
+   "userdirectory"
+   "usergroup"
+   "usermacro"
+   "valuemap"
+   "httptest" # "webscenario"
 )
 
 function GenerarObjFunc()
@@ -157,22 +159,21 @@ fi;
 echo '] } }'
 } 
 
-
 for object in "${Objects[@]}"
 do
    echo Generando para el Objeto ${object}
 
    if [ ${object} == "apiinfo" ]
-   then
+   then # apiinfo no tiene parametros
       echo "   Generando funcion de Api Info en el archivo '${DirOut}/${object@L}.json'"
-      echo '"Apiinfo": {
+      echo '{ "'${object}'": {
           "apiname": "apiinfo.version",
           "description": "This method allows to retrieve the version of the Zabbix API.",
           "parameters": [],
           "returns": "(string) Returns the version of the Zabbix API."
-          }' | jq . > "${DirOut}/${object@L}.json"
+          }}' | jq . > "${DirOut}/${object@L}.json"
    elif [ ${object} == "configuration" ]
-   then
+   then # los méteodos no son los "standard"
       for funcion in "export" "import" "importcompare"
       do
          echo "   Generando funcion ${funcion} en el archivo '${DirOut}/${object@L}_${funcion@L}.json'"

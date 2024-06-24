@@ -1,0 +1,50 @@
+{
+  "AYUDA": {
+    "CmdPrev": "comandos previos a ejecutar antes de conectar",
+    "DEBUGLEVEL": {
+      "desc": "Nivel de debug, cuanta info se guarda en el debug",
+      "possibleValues": [
+        "0 - todos los mensajes son escritos en el debug",
+        "1 - algunos mensajes son escritos en el debug ( Validando la funcion )",
+        "2 - pocos mensajes son escritos en el debug (Configuración desde)",
+        "3 - ningún mensaje es escrito en el debug ( llamada a la curl )"
+      ]
+    },
+    "DEF_FUNC": "las definiciones de las funciones",
+    "DEF_Object": "las definiciones de los objetos",
+    "Descripcion": [
+      "Descripcion de esta configuración",
+      "toda especificación de archivo, si no comienza con / se considera reltiva al directorio de ZAPI"
+    ],
+    "FALTA": "cosas que nos gustaría hacer",
+    "LOG__": "Archivo de log para las llamadas de ZAPI",
+    "OBJLOG__": "Archivo de log para la creación de objetos",
+    "PASSWORD": "clave del usuario, se usa como valor por defecto para generar el archivo de conexion",
+    "URL": "A donde nos conectamos",
+    "USER": "usuario para acceder, se usa como valor por defecto para generar el archivo de conexion",
+    "authinheader": "Si el token de actualización va en el header, a partir de la 7.0. Si tiene un valor el token va en el header",
+    "authtoken": "Token de autorizacion",
+    "format": [
+      "correspondencia de las funciones y los archivos de humanización (funciones que pasan de codigos a textos entendibles)",
+      " si está en blanco no traduce"
+    ],
+    "libreria": [
+      "directorio donde estan los fuentes de la traduccón y otros móculos para el jq"
+    ]
+  },
+  "CmdPrev": "",
+  "DEBUGLEVEL": 2,
+  "DEF_FUNC": "Definiciones/7.0/APIDefFunc.json",
+  "DEF_Object": "ObjDef.json",
+  "Descripcion": "Conexion a maquina virtual 7.0",
+  "DirConn": "Conexiones",
+  "LOG__": "API7.0.log",
+  "OBJLOG__": "Log.Obj",
+  "PASSWORD": "",
+  "URL": "http://192.168.1.17/api_jsonrpc.php",
+  "USER": "",
+  "authinheader": "",
+  "authtoken": "ced58a27fa290542df3f98961e1b984fbce1285e503b794d3c8b4fafe44a44e5",
+  "format": "Definiciones/7.0/TradZAPI.json",
+  "libreria": "Definiciones/7.0/lib"
+}

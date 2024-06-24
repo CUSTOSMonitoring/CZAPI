@@ -1,0 +1,224 @@
+{
+  "TriggerprototypeGet": {
+    "apiname": "triggerprototype.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/triggerprototype/get",
+    "parameters": [
+      {
+        "description": "Return only enabled trigger prototypes that belong to monitored hosts.",
+        "name": "active",
+        "type": "flag"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to the given LLD rules.",
+        "name": "discoveryids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only triggers that use the given functions.<br><br>Refer to the <a href=\"/documentation/current/en/manual/appendix/functions\">Supported functions</a> page for a list of supported functions.",
+        "name": "functions",
+        "type": "string/array"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to hosts or templates from the host groups or template groups with the given name.",
+        "name": "group",
+        "type": "string"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to hosts or templates from the given host groups or template groups.",
+        "name": "groupids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to hosts with the given name.",
+        "name": "host",
+        "type": "string"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to the given hosts.",
+        "name": "hostids",
+        "type": "ID/array"
+      },
+      {
+        "description": "If set to <code>true</code> return only trigger prototypes inherited from a template.",
+        "name": "inherited",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to <code>true</code> return only enabled trigger prototypes that belong to hosts in maintenance.",
+        "name": "maintenance",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only trigger prototypes with severity greater or equal than the given severity.",
+        "name": "min_severity",
+        "type": "integer"
+      },
+      {
+        "description": "Return only enabled trigger prototypes that belong to monitored hosts and contain only enabled items.",
+        "name": "monitored",
+        "type": "flag"
+      },
+      {
+        "description": "If set to <code>true</code> return only trigger prototypes that belong to templates.",
+        "name": "templated",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only trigger prototypes that belong to the given templates.",
+        "name": "templateids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only trigger prototypes with the given IDs.",
+        "name": "triggerids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Expand functions and macros in the trigger expression.",
+        "name": "expandExpression",
+        "type": "flag"
+      },
+      {
+        "description": "Return trigger prototypes and triggers that the trigger prototype depends on in the <code>dependencies</code> property.",
+        "name": "selectDependencies",
+        "type": "query"
+      },
+      {
+        "description": "Return the <a href=\"/documentation/current/en/manual/api/reference/discoveryrule/object\">LLD rule</a> that the trigger prototype belongs to in the <code>discoveryRule</code> property.",
+        "name": "selectDiscoveryRule",
+        "type": "query"
+      },
+      {
+        "description": "Return functions used in the trigger prototype in the <code>functions</code> property.<br><br>The function objects represent the functions used in the trigger expression and has the following properties:<br><code>functionid</code> - <code>(ID)</code> ID of the function;<br><code>itemid</code> - <code>(ID)</code> ID of the item used in the function;<br><code>function</code> - <code>(string)</code> name of the function;<br><code>parameter</code> - <code>(string)</code> parameter passed to the function. Query parameter is replaced by <code>$</code> symbol in returned string.",
+        "name": "selectFunctions",
+        "type": "query"
+      },
+      {
+        "description": "Return the host groups that the trigger prototype belongs to in the <a href=\"/documentation/current/en/manual/api/reference/hostgroup/object\"><code>hostgroups</code></a> property.",
+        "name": "selectHostGroups",
+        "type": "query"
+      },
+      {
+        "description": "Return the hosts that the trigger prototype belongs to in the <a href=\"/documentation/current/en/manual/api/reference/host/object\"><code>hosts</code></a> property.",
+        "name": "selectHosts",
+        "type": "query"
+      },
+      {
+        "description": "Return items and item prototypes used the trigger prototype in the <a href=\"/documentation/current/en/manual/api/reference/item/object\"><code>items</code></a> property.",
+        "name": "selectItems",
+        "type": "query"
+      },
+      {
+        "description": "Return the trigger prototype tags in <a href=\"/documentation/current/en/manual/api/reference/triggerprototype/object#Trigger-prototype-tag\"><code>tags</code></a> property.",
+        "name": "selectTags",
+        "type": "query"
+      },
+      {
+        "description": "Return the template groups that the trigger prototype belongs to in the <a href=\"/documentation/current/en/manual/api/reference/templategroup/object\"><code>templategroups</code></a> property.",
+        "name": "selectTemplateGroups",
+        "type": "query"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter.<br><br>Accepts an object, where the keys are property names, and the values are either a single value or an array of values to match against.<br><br>Does not support properties of <code>text</code> <a href=\"/documentation/current/en/manual/api/reference_commentary#data-types\">data type</a>.<br><br>Supports additional properties:<br><code>host</code> - technical name of the host that the trigger prototype belongs to;<br><code>hostid</code> - ID of the host that the trigger prototype belongs to.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limits the number of records returned by subselects.<br><br>Applies to the following subselects:<br><code>selectHosts</code> - results will be sorted by <code>host</code>.",
+        "name": "limitSelects",
+        "type": "integer"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>triggerid</code>, <code>description</code>, <code>status</code>, <code>priority</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "This parameter is deprecated, please use <code>selectHostGroups</code> or <code>selectTemplateGroups</code> instead.<br>Return the host groups and template groups that the trigger prototype belongs to in the <code>groups</code> property.",
+        "name": "selectGroups<br>(deprecated)",
+        "type": "query"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "UsermacroGet": {
+    "apiname": "usermacro.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/usermacro/get",
+    "parameters": [
+      {
+        "description": "Return global macros instead of host macros.",
+        "name": "globalmacro",
+        "type": "flag"
+      },
+      {
+        "description": "Return only global macros with the given IDs.",
+        "name": "globalmacroids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only host macros that belong to hosts or templates from the given host groups or template groups.",
+        "name": "groupids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only macros that belong to the given hosts or templates.",
+        "name": "hostids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only host macros with the given IDs.",
+        "name": "hostmacroids",
+        "type": "ID/array"
+      },
+      {
+        "description": "If set to <code>true</code> return only host prototype user macros inherited from a template.",
+        "name": "inherited",
+        "type": "boolean"
+      },
+      {
+        "description": "Return host groups that the host macro belongs to in the <a href=\"/documentation/current/en/manual/api/reference/hostgroup/object\"><code>hostgroups</code></a> property.<br><br>Used only when retrieving host macros.",
+        "name": "selectHostGroups",
+        "type": "query"
+      },
+      {
+        "description": "Return hosts that the host macro belongs to in the <a href=\"/documentation/current/en/manual/api/reference/host/object\"><code>hosts</code></a> property.<br><br>Used only when retrieving host macros.",
+        "name": "selectHosts",
+        "type": "query"
+      },
+      {
+        "description": "Return template groups that the template macro belongs to in the <a href=\"/documentation/current/en/manual/api/reference/templategroup/object\"><code>templategroups</code></a> property.<br><br>Used only when retrieving template macros.",
+        "name": "selectTemplateGroups",
+        "type": "query"
+      },
+      {
+        "description": "Return templates that the host macro belongs to in the <a href=\"/documentation/current/en/manual/api/reference/template/object\"><code>templates</code></a> property.<br><br>Used only when retrieving host macros.",
+        "name": "selectTemplates",
+        "type": "query"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>macro</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "This parameter is deprecated, please use <code>selectHostGroups</code> or <code>selectTemplateGroups</code> instead.<br>Return host groups and template groups that the host macro belongs to in the <code>groups</code> property.<br><br>Used only when retrieving host macros.",
+        "name": "selectGroups<br>(deprecated)",
+        "type": "query"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

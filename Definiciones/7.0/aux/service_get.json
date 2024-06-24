@@ -1,0 +1,174 @@
+{
+  "ServiceGet": {
+    "apiname": "service.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/service/get",
+    "parameters": [
+      {
+        "description": "Return only services with the given IDs.",
+        "name": "serviceids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only services that are linked to the given parent services.",
+        "name": "parentids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return all direct and indirect child services. Used together with <code>parentids</code>.",
+        "name": "deep_parentids",
+        "type": "flag"
+      },
+      {
+        "description": "Return only services that are linked to the given child services.",
+        "name": "childids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Rules for tag searching.<br><br>Possible values:<br>0 - <em>(default)</em> And/Or;<br>2 - Or.",
+        "name": "evaltype",
+        "type": "integer"
+      },
+      {
+        "description": "Return only services with given tags. Exact match by tag and case-sensitive or case-insensitive search by tag value depending on operator value.<br>Format: <code>[{\"tag\": \"&lt;tag&gt;\", \"value\": \"&lt;value&gt;\", \"operator\": \"&lt;operator&gt;\"}, ...]</code>.<br>An empty array returns all services.<br><br>Possible operator values:<br>0 - <em>(default)</em> Contains;<br>1 - Equals;<br>2 - Does not contain;<br>3 - Does not equal;<br>4 - Exists;<br>5 - Does not exist.",
+        "name": "tags",
+        "type": "object/array"
+      },
+      {
+        "description": "Return only services with given problem tags. Exact match by tag and case-sensitive or case-insensitive search by tag value depending on operator value.<br>Format: <code>[{\"tag\": \"&lt;tag&gt;\", \"value\": \"&lt;value&gt;\", \"operator\": \"&lt;operator&gt;\"}, ...]</code>.<br>An empty array returns all services.<br><br>Possible operator values:<br>0 - <em>(default)</em> Contains;<br>1 - Equals;<br>2 - Does not contain;<br>3 - Does not equal;<br>4 - Exists;<br>5 - Does not exist.",
+        "name": "problem_tags",
+        "type": "object/array"
+      },
+      {
+        "description": "Return only services without problem tags.",
+        "name": "without_problem_tags",
+        "type": "flag"
+      },
+      {
+        "description": "Return only services that are linked to the specific SLA(s).",
+        "name": "slaids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return a <code>children</code> property with the child services.<br><br>Supports <code>count</code>.",
+        "name": "selectChildren",
+        "type": "query"
+      },
+      {
+        "description": "Return a <code>parents</code> property with the parent services.<br><br>Supports <code>count</code>.",
+        "name": "selectParents",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/service/object#service-tag\"><code>tags</code></a> property with service tags.<br><br>Supports <code>count</code>.",
+        "name": "selectTags",
+        "type": "query"
+      },
+      {
+        "description": "Return a <code>problem_events</code> property with an array of problem event objects.<br><br>The problem event object has the following properties:<br><code>eventid</code> - <code>(ID)</code> Event ID;<br><code>severity</code> - <code>(string)</code> Current event severity;<br><code>name</code> - <code>(string)</code> Resolved event name.<br><br>Supports <code>count</code>.",
+        "name": "selectProblemEvents",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/service/object#problem-tag\"><code>problem_tags</code></a> property with problem tags.<br><br>Supports <code>count</code>.",
+        "name": "selectProblemTags",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/service/object#status-rule\"><code>status_rules</code></a> property with status rules.<br><br>Supports <code>count</code>.",
+        "name": "selectStatusRules",
+        "type": "query"
+      },
+      {
+        "description": "Return a <code>status_timeline</code> property containing service state changes for given periods.<br><br>Format <code>[{\"period_from\": \"&lt;period_from&gt;\", \"period_to\": \"&lt;period_to&gt;\"}, ...]</code> - <code>period_from</code> being a starting date (inclusive; integer timestamp) and <code>period_to</code> being an ending date (exclusive; integer timestamp) for the period you're interested in.<br><br>Returns an array of entries containing a <code>start_value</code> property and an <a href=\"/documentation/current/en/manual/api/reference/service/object#service-alarm\"><code>alarms</code></a> array for the state changes within specified periods.",
+        "name": "selectStatusTimeline",
+        "type": "object/array"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>serviceid</code>, <code>name</code>, <code>status</code>, <code>sortorder</code>, <code>created_at</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

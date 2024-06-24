@@ -1,0 +1,102 @@
+{
+  "1 DESCRIPCION": {
+    "Nombre de funcion en ZAPI": {
+      "fuente": "Nombre del fuente en el dir de librerías",
+      "funcion": "Nombre de la función a llamar en el fuente, se le va a pasar como paráemtro el objeto que retorna la función"
+    }
+  },
+  "MaintenanceGet": {
+    "fuente": "Maintenance2String",
+    "funcion": "MaintenanceToString"
+  },
+  "AlertGet": {
+    "fuente": "Alert2String",
+    "funcion": "AlertToString"
+  },
+  "AuditLogGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "DiscoveryRuleGet": {
+    "fuente": "LLD2String",
+    "funcion": "LLDToString"
+  },
+  "EventGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "HistoryGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "HostGet": {
+    "fuente": "Host2String",
+    "funcion": "HostToString"
+  },
+  "HostGroupGet": {
+    "fuente": "HostGroup2String",
+    "funcion": "HostGroupToString"
+  },
+  "HostInterfaceGet": {
+    "fuente": "HostInterface2String",
+    "funcion": "InterfaceToString"
+  },
+  "ItemGet": {
+    "fuente": "Item2String",
+    "funcion": "ItemToString"
+  },
+  "ItemPrototypeGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "Novan": {
+    "APIInfo": {
+      "fuente": "",
+      "funcion": ""
+    }
+  },
+  "ProblemGet": {
+    "fuente": "Problem2String",
+    "funcion": "ProblemToString"
+  },
+  "RoleGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "SlaGetSLI": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "TemplateGet": {
+    "fuente": "Template2String",
+    "funcion": "TemplateToString"
+  },
+  "TriggerGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "UserCheckAuth": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "UserCreate": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "UserGet": {
+    "fuente": "User2String",
+    "funcion": "UserToString"
+  },
+  "UserGroupGet": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "UserLogin": {
+    "fuente": "",
+    "funcion": ""
+  },
+  "UserLogout": {
+    "fuente": "",
+    "funcion": ""
+  }
+}

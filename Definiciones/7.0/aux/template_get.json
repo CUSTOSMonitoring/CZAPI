@@ -1,0 +1,234 @@
+{
+  "TemplateGet": {
+    "apiname": "template.get",
+    "description": "",
+    "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/template/get",
+    "parameters": [
+      {
+        "description": "Return only templates with the given template IDs.",
+        "name": "templateids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that belong to the given template groups.",
+        "name": "groupids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that the given template is linked to.",
+        "name": "parentTemplateids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that are linked to the given hosts/templates.",
+        "name": "hostids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that contain the given graphs.",
+        "name": "graphids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that contain the given items.",
+        "name": "itemids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that contain the given triggers.",
+        "name": "triggerids",
+        "type": "ID/array"
+      },
+      {
+        "description": "Return only templates that have items.",
+        "name": "with_items",
+        "type": "flag"
+      },
+      {
+        "description": "Return only templates that have triggers.",
+        "name": "with_triggers",
+        "type": "flag"
+      },
+      {
+        "description": "Return only templates that have graphs.",
+        "name": "with_graphs",
+        "type": "flag"
+      },
+      {
+        "description": "Return only templates that have web scenarios.",
+        "name": "with_httptests",
+        "type": "flag"
+      },
+      {
+        "description": "Rules for tag searching.<br><br>Possible values:<br>0 - (default) And/Or;<br>2 - Or.",
+        "name": "evaltype",
+        "type": "integer"
+      },
+      {
+        "description": "Return only templates with given tags. Exact match by tag and case-sensitive or case-insensitive search by tag value depending on operator value.<br>Format: <code>[{\"tag\": \"&lt;tag&gt;\", \"value\": \"&lt;value&gt;\", \"operator\": \"&lt;operator&gt;\"}, ...]</code>.<br>An empty array returns all templates.<br><br>Possible operator values:<br>0 - (default) Contains;<br>1 - Equals;<br>2 - Not like;<br>3 - Not equal;<br>4 - Exists;<br>5 - Not exists.",
+        "name": "tags",
+        "type": "object/array"
+      },
+      {
+        "description": "Return template tags in the <a href=\"/documentation/current/en/manual/api/reference/template/object#template-tag\"><code>tags</code></a> property.",
+        "name": "selectTags",
+        "type": "query"
+      },
+      {
+        "description": "Return the hosts that are linked to the template in the <a href=\"/documentation/current/en/manual/api/reference/host/object\"><code>hosts</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectHosts",
+        "type": "query"
+      },
+      {
+        "description": "Return the template groups that the template belongs to in the <a href=\"/documentation/current/en/manual/api/reference/templategroup/object\"><code>templategroups</code></a> property.",
+        "name": "selectTemplateGroups",
+        "type": "query"
+      },
+      {
+        "description": "Return templates to which the given template is linked in the <a href=\"/documentation/current/en/manual/api/reference/template/object\"><code>templates</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectTemplates",
+        "type": "query"
+      },
+      {
+        "description": "Return templates that are linked to the given template in the <code>parentTemplates</code> property.<br><br>Supports <code>count</code>.",
+        "name": "selectParentTemplates",
+        "type": "query"
+      },
+      {
+        "description": "Return the web scenarios from the template in the <a href=\"/documentation/current/en/manual/api/reference/httptest/object\"><code>httpTests</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectHttpTests",
+        "type": "query"
+      },
+      {
+        "description": "Return items from the template in the <a href=\"/documentation/current/en/manual/api/reference/item/object\"><code>items</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectItems",
+        "type": "query"
+      },
+      {
+        "description": "Return low-level discoveries from the template in the <code>discoveries</code> property.<br><br>Supports <code>count</code>.",
+        "name": "selectDiscoveries",
+        "type": "query"
+      },
+      {
+        "description": "Return triggers from the template in the <a href=\"/documentation/current/en/manual/api/reference/trigger/object\"><code>triggers</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectTriggers",
+        "type": "query"
+      },
+      {
+        "description": "Return graphs from the template in the <a href=\"/documentation/current/en/manual/api/reference/graph/object\"><code>graphs</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectGraphs",
+        "type": "query"
+      },
+      {
+        "description": "Return the macros from the template in the <code>macros</code> property.",
+        "name": "selectMacros",
+        "type": "query"
+      },
+      {
+        "description": "Return dashboards from the template in the <a href=\"/documentation/current/en/manual/api/reference/templatedashboard/object\"><code>dashboards</code></a> property.<br><br>Supports <code>count</code>.",
+        "name": "selectDashboards",
+        "type": "query"
+      },
+      {
+        "description": "Return a <a href=\"/documentation/current/en/manual/api/reference/valuemap/object\"><code>valuemaps</code></a> property with template value maps.",
+        "name": "selectValueMaps",
+        "type": "query"
+      },
+      {
+        "description": "Limits the number of records returned by subselects.<br><br>Applies to the following subselects:<br><code>selectTemplates</code> - results will be sorted by <code>name</code>;<br><code>selectHosts</code> - sorted by <code>host</code>;<br><code>selectParentTemplates</code> - sorted by <code>host</code>;<br><code>selectItems</code> - sorted by <code>name</code>;<br><code>selectDiscoveries</code> - sorted by <code>name</code>;<br><code>selectTriggers</code> - sorted by <code>description</code>;<br><code>selectGraphs</code> - sorted by <code>name</code>;<br><code>selectDashboards</code> - sorted by <code>name</code>.",
+        "name": "limitSelects",
+        "type": "integer"
+      },
+      {
+        "description": "Sort the result by the given properties.<br><br>Possible values: <code>hostid</code>, <code>host</code>, <code>name</code>, <code>status</code>.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "This parameter is deprecated, please use <code>selectTemplateGroups</code> instead.<br>Return the template groups that the template belongs to in the <a href=\"/documentation/current/en/manual/api/reference/templategroup/object\"><code>groups</code></a> property.",
+        "name": "selectGroups<br>(deprecated)",
+        "type": "query"
+      },
+      {
+        "description": "Return the number of records in the result instead of the actual data.",
+        "name": "countOutput",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
+        "name": "editable",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that do not match the criteria given in the search parameter.",
+        "name": "excludeSearch",
+        "type": "boolean"
+      },
+      {
+        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
+        "name": "filter",
+        "type": "object"
+      },
+      {
+        "description": "Limit the number of records returned.",
+        "name": "limit",
+        "type": "integer"
+      },
+      {
+        "description": "Object properties to be returned. Default: extend.",
+        "name": "output",
+        "type": "query"
+      },
+      {
+        "description": "Use IDs as keys in the resulting array.",
+        "name": "preservekeys",
+        "type": "boolean"
+      },
+      {
+        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
+        "name": "search",
+        "type": "object"
+      },
+      {
+        "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
+        "name": "searchByAny",
+        "type": "boolean"
+      },
+      {
+        "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
+        "name": "searchWildcardsEnabled",
+        "type": "boolean"
+      },
+      {
+        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
+        "name": "sortfield",
+        "type": "string/array"
+      },
+      {
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
+        "PossibleValues": {
+          "ASC": {
+            "default": true,
+            "description": "ascending"
+          },
+          "DESC": {
+            "default": false,
+            "description": "descending."
+          }
+        },
+        "name": "sortorder",
+        "type": "string/array"
+      },
+      {
+        "description": "The search parameter will compare the beginning of fields, that is, perform a LIKE \"…%\" search instead. Ignored if searchWildcardsEnabled is set to true.",
+        "name": "startSearch",
+        "type": "boolean"
+      }
+    ]
+  }
+}

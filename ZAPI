@@ -41,18 +41,19 @@ Header="Content-Type: application/json-rpc"
 
 function Ayuda()
 {
-   echo " $(basename $0) Invocacioin de la API de Zabbix
-   Uso
+   echo -e " $(basename $0) Invocacioin de la API de Zabbix
+   ${Green}Uso${Normal}
           $(basename $0) [--help|-h] [--variables|-v]
-   Listados
-          $(basename $0) --list-conexiones   --> lista las conexiones (Archivos de configuracion)
+   ${Green}Listados${Normal}
+          $(basename $0) --which-conf   --> Nombre del archivo de configuracion
+          $(basename $0) --list-conexiones [filtro]  --> lista las conexiones (Archivos de configuracion)
           $(basename $0) --def      --> Listado de toda la definicion
           $(basename $0) --def_nom  --> Listado de los nombres de las funciones
           $(basename $0) Funcion --def[_api[name],ret[urns],des[cription],par[ameters]  --> Listado de los parametros de Funcion
           $(basename $0) Funcion --def=par[ameters] [cond] --> Listado de los parametros de Funcion filtradas por condicion
                 cond --> name=Data,description=pass --> busca los parametros fitrando por los que tengan Data en nombre o pass en description
 
-   Llamado a una funcion
+   ${Green}Llamado a una funcion${Normal}
           $(basename $0) -c Arch [--no-format] Funcion param=valor ...
                Arch por defecto es ZAPI.zapi
                Arch tiene la configuración entre otras, la URL y token para conectarse ( Ver -C )
@@ -81,7 +82,7 @@ function Ayuda()
 
    Las funciones estan definidas en el archivo '${APIDefFunc}' (se configura en el archivo de conexiones)
 
-   Variables de ambiente para no especificar archivo de conexion
+   ${Green}Variables de ambiente para no especificar archivo de conexion${Normal}
       export ZAPI_Conf=/home/gguido/ZAPI/Conexiones/Scottish.zapi           Para que cambie el archivo por defecto que usa
       export URL=http://67.207.86.91/api_jsonrpc.php                        Toma precedencia sobre la especificada en el archivo de conf
 
@@ -535,7 +536,8 @@ function ShowDebug()
 function ListarConexiones()
 {
    #jq  '{( input_filename ): .Descripcion} ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
-   jq  '{( .Descripcion): input_filename } ' "${DirConn}"/*.zapi | sed '/[{}]/d; s/: /:\t/'
+   jq -rC '{( .Descripcion): input_filename } ' "${DirConn}"/*.zapi | grep -i "$*" | \
+       sed -rn '/[{}]/d; s/"//g; s/^([^:]+):(.*)$/\1:\n\t\2\n/p' | less -FR
 }
 
 function Controles()
@@ -592,7 +594,8 @@ do
                     exit;;
       --help | -h ) Ayuda; exit;;
       --def* ) ShowDef "$1" "$2"; exit;;
-      --list-conexiones ) ListarConexiones; exit;;
+      --list-conexiones ) shift ; ListarConexiones $* ; exit;;
+      --which-conf ) echo "${ArchConf}" ; exit;;
       --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
       --edit-traduccion ) # $2 debe traer el nombre de la funcion a editar o lo descartamos

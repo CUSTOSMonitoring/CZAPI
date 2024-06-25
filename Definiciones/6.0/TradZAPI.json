@@ -72,8 +72,8 @@
     "funcion": "TemplateToString"
   },
   "TriggerGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Trigger2String",
+    "funcion": "TriggerToString"
   },
   "UserCheckAuth": {
     "fuente": "",

@@ -17,10 +17,10 @@ function Gus_GetListaParametros()
 
 function GusDebug()
 {
-   echo $(date +"*%F %T") $* >> aux.log
+   #echo $(date +"*%F %T") $* >> aux.log
    #echo $(date +"*%F %T") $* >&2
    #echo $(date +"*%F %T") $* > /dev/null
-   #:
+   :
 }
 
 function Gus_Complete_ZAPI ()
@@ -49,7 +49,7 @@ function Gus_Complete_ZAPI ()
         band=""
      fi
    done
-   OptsGral="--def --def_nom --help --variables -c --show-debug --show-API-call --edit-conf --edit-funciones --edit-traduccion --no-format  --list-conexiones"
+   OptsGral="--def --def_nom --help --variables -c --show-debug --show-API-call --edit-conf --edit-funciones --edit-traduccion --no-format --which-conf --list-conexiones"
    OptsFunc="--def --def_apiname --def_returns --def_description --def_parameters"
    OptsParams="description= name= type="
 

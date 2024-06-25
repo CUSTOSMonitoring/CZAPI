@@ -20,6 +20,9 @@ done
 
 echo "Preparando para el directorio '${dir}'"
 
-PATH=$PATH:${dir}
+if ! echo ${PATH} | grep -q -- "${dir}"
+then
+   PATH=$PATH:${dir}
+fi
 . ${dir}/CompletarZAPI.sh
 . ${dir}/CompletarObjCreate.sh

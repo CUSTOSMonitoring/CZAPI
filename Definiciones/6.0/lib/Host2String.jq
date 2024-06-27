@@ -1,7 +1,9 @@
-#vim: set ts=3 expandtab:
+#vim: set ts=3 expandtab shiftwidth=3:
 include "Gral2String";
 include "Tag2String";
 include "Trigger2String";
+
+include "Hostinterface2String";
 
 def HostStatusToString( status ):
    if status=="0" then "monitored host"

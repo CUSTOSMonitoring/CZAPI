@@ -10,7 +10,7 @@ Light_Red='\033[1;31m'
 Green='\033[0;32m'
 Light_Green='\033[1;32m'
 Orange='\033[0;33m'
-Yellow='\033[1;33m'
+Yellow='\033[0;33m'
 Blue='\033[0;34m'
 Light_Blue='\033[1;34m'
 Purple='\033[0;35m'
@@ -43,52 +43,61 @@ function Ayuda()
 {
    echo -e " $(basename $0) Invocacioin de la API de Zabbix
    ${Green}Uso${Normal}
-          $(basename $0) [--help|-h] [--variables|-v]
+          $(basename $0) [opciones]
+
    ${Green}Listados${Normal}
-          $(basename $0) --which-conf   --> Nombre del archivo de configuracion
-          $(basename $0) --list-conexiones [filtro]  --> lista las conexiones (Archivos de configuracion)
-          $(basename $0) --def      --> Listado de toda la definicion
-          $(basename $0) --def_nom  --> Listado de los nombres de las funciones
-          $(basename $0) Funcion --def[_api[name],ret[urns],des[cription],par[ameters]  --> Listado de los parametros de Funcion
-          $(basename $0) Funcion --def=par[ameters] [cond] --> Listado de los parametros de Funcion filtradas por condicion
-                cond --> name=Data,description=pass --> busca los parametros fitrando por los que tengan Data en nombre o pass en description
+          $(basename $0) --list-conexiones [filtro]
+                Lista las conexiones (Archivos de configuracion)
+          $(basename $0) --def
+                Listado de toda la definicion, basicamente un cat del archivo de definición de funciones
+          $(basename $0) --def_nom
+                Listado de los nombres de las funciones
+          $(basename $0) Funcion --def[_api[name],ret[urns],des[cription],par[ameters]
+                Listado de los parametros,nombre, descripcion, retorno de Funcion
+          $(basename $0) Funcion --def=par[ameters] [cond]
+                Listado de los parametros de Funcion filtradas por condicion
+                   cond --> name=Data,description=pass --> busca los parametros fitrando por los que tengan Data en nombre o pass en description
 
-   ${Green}Llamado a una funcion${Normal}
-          $(basename $0) -c Arch [--no-format] Funcion param=valor ...
-               Arch por defecto es ZAPI.zapi
-               Arch tiene la configuración entre otras, la URL y token para conectarse ( Ver -C )
-                   Si no se especifica esta opción, se cargan valores por defecto desde el archvivo $(dirname $0)/$(basename $0).zapi
-               --no-format No pasa el resultado por la funcion de formateo
-
-          $(basename $0) --show-API-call Funcion param=valor ...
-               No hace la llamada pero muestra cuál tiene que ser
-
-          $(basename $0) -C Arch
+   ${Green}Generar un archivo de configuración${Normal}
+          $(basename $0) -C [Arch]
                Genera el archivo de conexión utilizando la funcion login para generar el token.
                Si el archivo existe, toma los valores por defecto de esa estructura
                Debe llamarse a la función logout para eliminar la validez del token
 
+   ${Green}Llamado a una funcion${Normal}
+          $(basename $0) -c Arch [--no-format] Funcion param=valor ...
+               Arch tiene la configuración entre otras, la URL y token para conectarse ( Ver -C )
+               Por defect se cargan valores desde el archvivo $(dirname $0)/$(basename $0).zapi (o el que especifique la variable de ambiente)
+               --no-format No pasa el resultado por la funcion de formateo
+          $(basename $0) --show-API-call Funcion param=valor ...
+               No hace la llamada pero muestra cuál tiene que ser
           $(basename $0) --show-debug
                Hace un less del archivo de debug
 
-          $(basename $0) --edit-conf
-               Edita el archivo de configuracion utilizado
+    ${Green}Despliegue de variables${Normal}
+          $(basename $0) [-c ArchiConf] --which-conf
+               Muestra el nombre del archivo de configuración, útil cuando se usan variables de ambiente para determinarlo
+          $(basename $0) [-c ArchiConf] --variables
+               Muestra todas las variables definidas en el archivo de configuración
 
+    ${Green}Edición de los archivos de definiciones${Normal}
+          $(basename $0) --edit-conf
+               Las funciones estan definidas en el archivo '${APIDefFunc}' (se configura en el archivo de conexiones)
+               Edita el archivo de configuracion utilizado
           $(basename $0) --edit-funciones
                Edita el archivo de definicion de funciones utilizado
-
-          $(basename $0) --edit-traduccion 
+          $(basename $0) --edit-traduccion
                Edita el archivo de traducciones de funciones utilizado
 
-   Las funciones estan definidas en el archivo '${APIDefFunc}' (se configura en el archivo de conexiones)
+    ${Green}Variables de ambiente para no especificar archivo de conexion${Normal}
+          Para que cambie el archivo por defecto que usa
+             ${Green}export ${Yellow}ZAPI_Conf${Normal}=${Blue}/Path/to/conf/file/ArchConf.zapi${Normal}
+          Toma precedencia sobre la especificada en el archivo de conf
+             ${Green}export ${Yellow}URL${Normal}=${Blue}http://67.207.86.91/api_jsonrpc.php${Normal}
 
-   ${Green}Variables de ambiente para no especificar archivo de conexion${Normal}
-      export ZAPI_Conf=/home/gguido/ZAPI/Conexiones/Scottish.zapi           Para que cambie el archivo por defecto que usa
-      export URL=http://67.207.86.91/api_jsonrpc.php                        Toma precedencia sobre la especificada en el archivo de conf
-
-      Para agregar a futuro, todas las que pueden ser especificadas en el arch de conf
-      export authtoken=null  (Inicializar para usar la funcion login, luego cargarla con el token que retorna la funcion)
-                             (en caso de usar API token, se puede inicializar con ese valor)
+          Para agregar a futuro, todas las que pueden ser especificadas en el arch de conf
+          export authtoken=null  (Inicializar para usar la funcion login, luego cargarla con el token que retorna la funcion)
+                                 (en caso de usar API token, se puede inicializar con ese valor)
 
   Los parametros tienen tipo
       Se hace un tratamiento especial para algunos.
@@ -103,10 +112,15 @@ function Ayuda()
 
   FALTA
       considerar los parametros comunes a todos los Get, hoy estan repetidos en todas las funciones, lo que no es muy eficiente
+      incluir el llamado a las funciones de update, delte etc
+      agregar variables de ambiente para todas las posibles configuraciones
+      agregar sugerencias en los parametros de funciones con valores determinados
+      agregar sugerencias para la construcción de objetos para los parámetros
 
   Ayuda
       Existen dos archivos base para generar la definición de funciones y la de objetos.
-      Existe ejecutables que traen los datos de la página de ayuda y hacen una primer versión de las funcione y objetos. Probablemente los arhivos generados deban ser editados
+      Existe ejecutables que traen los datos de la página de ayuda y hacen una primer versión de las funcione y objetos.
+      Probablemente los arhivos generados deban ser editados
 "
 }
 
@@ -130,7 +144,7 @@ function ShowVariables()
    Archivo de log '${Log}'
    Log Level: ${NivelDebug}
    Formateo: ${ArchFormat}
-   Libreria: ${libreria} 
+   Libreria: ${libreria}
 "
    else
       case ${1,,} in
@@ -156,7 +170,7 @@ function Mensaje()
    then
       echo "$*"
    fi
-   debug 0 "$*" 
+   debug 0 "$*"
 }
 
 function debug()
@@ -184,7 +198,7 @@ function ValidarParametro()
    par=$(echo "${Funcion}" | jq '.parameters[] | select( .name == "'${parametro}'")' )
    debug 0 "Funcion '${Funcion}'
      Prametro encontrado '${par}'
-   " 
+   "
    if [ "${parValor}" == "?" ]
    then
       echo ${par} | jq -S '.'
@@ -231,13 +245,13 @@ function ValidarFuncion()
 {
    #local NombreDeFuncion
    NombreDeFuncion="${1}"
-   debug 1 "Validando la funcion ${NombreDeFuncion}" 
+   debug 1 "Validando la funcion ${NombreDeFuncion}"
    Funcion=$( jq '.["'${NombreDeFuncion}'"]' "${APIDefFunc}" )
    if [ "${Funcion}" == null ]
    then
       ERRORES="${ERRORES}\nFuncion '${NombreDeFuncion}' no encontrada"
    else
-      debug 0 Encontramos la funcion ${NombreDeFuncion} ${Funcion} 
+      debug 0 Encontramos la funcion ${NombreDeFuncion} ${Funcion}
    fi
 }
 
@@ -267,7 +281,7 @@ function GetAPICall()
              "params":'${Parametros}',
              "id":1
              '${Authorization}'}
-             ' 
+             '
       fi
    else
       debug 2 "No se especifico funcion"
@@ -287,13 +301,13 @@ function callAPI()
    fi
    if [ "${APICall_data}" ]
    then
-      debug 3 "curl --insecure -sS -H '${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}" 
+      debug 3 "curl --insecure -sS -H '${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}"
       curl --insecure -sS -H "${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}" -d "${APICall_data}" ${URL}
       # --insecure, --show-error
       #      When used with -s, --silent, it makes curl show an error message if it fails.
       # -s, --silent
       #      Silent or quiet mode. Do not show progress meter or error messages. Makes Curl mute. It  will still
-      #      output the data you ask for, potentially even to the terminal/stdout unless you redirect it. 
+      #      output the data you ask for, potentially even to the terminal/stdout unless you redirect it.
       # -S, --show-error
       #      When used with -s, --silent, it makes curl show an error message if it fails.
    else
@@ -313,7 +327,7 @@ function ShowDef()
          nom* ) jqcmd='keys';;
          * ) jqcmd=".";;
       esac
-      debug 0 jq "${jqcmd}" ${APIDefFunc} 
+      debug 0 jq "${jqcmd}" ${APIDefFunc}
       jq -S "${jqcmd}" "${APIDefFunc}"
    else
       [[ "${que}" =~ api ]] && jqcmd="${jqcmd:+${jqcmd},}apiname"
@@ -464,7 +478,7 @@ function CreateArchConect ()
   fi
   # cargamos los campos "faltantes" desde el archivo por defecto ${DirHome}/ZAPI.zapi
   aux=$( jq --slurpfile ZAPI "${DirHome}/ZAPI.zapi" '$ZAPI[0] + .' "${Arch}" )
-  while [ "${opcion}" != "SALIR" ] 
+  while [ "${opcion}" != "SALIR" ]
   do
      echo "${aux}" | jq -S '.' # mostramos el archivo generado hasta ahora
      echo
@@ -493,7 +507,7 @@ function CreateArchConect ()
            done
            echo -e ${Normal}
            opcion=${vecopcion[0]}
-        fi 
+        fi
         if [ "${opcion}" -a "${opcion}" != "SALIR" ]
         then
            val_def=$(echo "${aux}" | jq -r '.["'${opcion}'"]?' )
@@ -514,7 +528,7 @@ function CreateArchConect ()
      done
   done
   read -p "Salvamos el archivo?: (s/N) " valor
-  if [[ "${valor}" =~ ^[Ss] ]] 
+  if [[ "${valor}" =~ ^[Ss] ]]
   then
      read -p "Ingrese el nombre de archivo: (${Arch})" Aux
      [ "${Aux}" ] && Arch="${Aux}"
@@ -583,7 +597,7 @@ primero="true"
 SetVariables "${ArchConf}"
 while [ $# -gt 0 ]
 do
-   debug 0 "Analizando ${1}" 
+   debug 0 "Analizando ${1}"
    case $1 in
       --var* | -v ) if [[ ${1} =~ --variables= ]]
                     then
@@ -607,15 +621,19 @@ do
                              then
                                 ${EDITOR:-vi} -c "set cmdheight=3" "${libreria}/${fuente}.jq"  +"/${formatfunc}"  -c "set cmdheight=1"
                              else
-                                ${EDITOR:-vi} "${ArchFormat}"
+                                read -p "No se encontro el archivo de formateo para la función '$2', editamos el archivo de formateo? s/N" a
+                                if [[ "$a" =~ sS ]]
+                                then
+                                   ${EDITOR:-vi} "${ArchFormat}"
+                                fi
                              fi
                           else
                              ${EDITOR:-vi} "${ArchFormat}"
                           fi
-                          exit;; 
+                          exit;;
                           # en caso de que no esté configurada, debemos editar el archivo de traducciones
                           # el comando para editar el fuente especificado
-         
+
       --show-API-call ) ShowAPICall=1;;
       --no-format ) raw=si;;
       -c ) ArchConf="$2"
@@ -647,9 +665,9 @@ else
    else
       if [ "$( GetAPICall )" ]
       then
-         debug 1 "Archivo de traduccion '${ArchFormat}'" 
+         debug 1 "Archivo de traduccion '${ArchFormat}'"
          if [ "${ArchFormat}" -a -r "${ArchFormat}" -a "${Funcion}" ]
-         then 
+         then
             fuente=$(jq -r ' .'"${NombreDeFuncion}"'.fuente // empty' "${ArchFormat}" )
             funcion=$(jq -r ' .'"${NombreDeFuncion}"'.funcion // empty' "${ArchFormat}" )
          fi
@@ -660,7 +678,7 @@ else
             #callAPI | jq 'include "'"${fuente}"'" {"search":"'"${libreria}"'" } ; if ( type( .result ) == "array" ) then
             callAPI | jq -L${libreria} 'include "'"${fuente}"'"; .result | if ( type == "array" ) then
                                                                    .[] |= '${funcion}'( . )
-                                                                else 
+                                                                else
                                                                    . |= '${funcion}'( . )
                                                                 end '
          else
@@ -668,7 +686,7 @@ else
             callAPI
             echo
          fi
-      else 
+      else
          debug 1 "Sin datos para la llamada a la API"
          Ayuda
       fi

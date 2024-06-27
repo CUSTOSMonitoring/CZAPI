@@ -42,7 +42,11 @@ def ProxyToString( value ):
                         elif .key == "tls_connect" then
                            .value = Proxytls_connectToString( .value )
                         elif .key == "tags" then
-                           .value[] |= TagToString( . )
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TagToString( . )
+                           else
+                              .
+                           end
                         else
                            .
                         end) | from_entries ;

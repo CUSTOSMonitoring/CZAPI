@@ -1,4 +1,5 @@
 #vim: set ts=3 expandtab:
+include "Gral2String";
 
 def AlertTypeToString( type ):
    if type=="0" then "message"
@@ -20,11 +21,12 @@ def AlertStatusToString( status; type ):
    else "desconocido" end;
 
 def AlertToString( alert ):
-   alert | to_entries | map( if .key == "type" then
+   (alert.alerttype as $type), alert | to_entries | map( if .key == "type" then
                            .value = AlertTypeToString( .value )
                         elif .key == "status" then
-                           .value = AlertTypeToString( .value, alert.type )
+                           .value = AlertStatusToString( .value; $type )
+                        elif .key == "clock" then
+                           .value = DateToString( .value )
                         else
                            .
                         end) | from_entries ;
-                       

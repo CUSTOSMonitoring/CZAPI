@@ -72,7 +72,11 @@ def TriggerToString( value ):
                         elif .key == "flags" then
                            .value = TriggerFlagsToString( .value )
                         elif .key == "tags" then
-                           .value[] |= TagToString( . )
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TagToString( . )
+                           else
+                              .
+                           end
                         else
                            .
                         end) | from_entries ;

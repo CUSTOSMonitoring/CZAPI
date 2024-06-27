@@ -74,9 +74,17 @@ def HostToString( host ):
                         elif .key == "flags" then
                            .value = HostFlagsToString( .value )
                         elif .key == "tags" then
-                           .value[] |= TagToString( . )
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TagToString( . )
+                           else
+                              .
+                           end
                         elif .key == "triggers" then
-                           .value[] |= TriggerToString( . )
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= TriggerToString( . )
+                           else
+                              .
+                           end
                         else
                            .
                         end) | from_entries ;

@@ -21,7 +21,7 @@ def AlertStatusToString( status; type ):
    else "desconocido" end;
 
 def AlertToString( alert ):
-   (alert.alerttype as $type), alert | to_entries | map( if .key == "type" then
+   alert.alerttype as $type | alert | to_entries | map( if .key == "type" then
                            .value = AlertTypeToString( .value )
                         elif .key == "status" then
                            .value = AlertStatusToString( .value; $type )

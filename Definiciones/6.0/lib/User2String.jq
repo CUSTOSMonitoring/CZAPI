@@ -1,5 +1,10 @@
-#vim: set ts=3 expandtab:
+#vim: set ts=3 expandtab shiftwidth=3:
 include "Gral2String";
+#include "Mediatype2String";
+
+def UserAutologoutToString( value ):
+   if value=="0" then "autologout disabled"
+   else value end;
 
 def UserAutologinToString( value ):
    if value=="0" then "autologin disabled"
@@ -36,6 +41,8 @@ def UserToString( User ):
                            .value = DateToString ( .value )
                         elif .key == "autologin" then
                            .value = UserAutologinToString( .value )
+                        elif .key == "autologout" then
+                           .value = UserAutologoutToString( .value )
                         elif .key == "type" then
                            .value = UserTypeToString( .value )
                         elif .key == "gui_access" then
@@ -44,6 +51,8 @@ def UserToString( User ):
                            .value = UserDebug_modeToString( .value )
                         elif .key == "users_status" then
                            .value = UserUsers_statusToString( .value )
+                        #elif .key == "medias" then
+                           #.value[] |= MediatypeToString( .value )
                         else
                            .
                         end) | from_entries ;

@@ -11,7 +11,11 @@ def HostGroupToString( hostgroup ):
  hostgroup | to_entries | map( if .key == "flags" then
                            .value = HostGroupFlagsToString( .value )
                         elif .key == "hosts" then
-                           .value[] |= HostToString( . ) 
+                           if ( ( .key | type ) == "array" ) then
+                              .value[] |= HostToString( . ) 
+                           else
+                              .
+                           end
                         else
                            .
                         end) | from_entries ;

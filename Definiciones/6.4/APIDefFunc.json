@@ -208,20 +208,6 @@
     ],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/action/update"
   },
-  "AlertCreate": {
-    "apiname": "alert.create",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/alert/create"
-  },
-  "AlertDelete": {
-    "apiname": "alert.delete",
-    "description": "",
-    "parameters": [
-      "Array of ID to delete"
-    ],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/alert/delete"
-  },
   "AlertGet": {
     "apiname": "alert.get",
     "description": "",
@@ -379,31 +365,11 @@
     ],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/alert/get"
   },
-  "AlertUpdate": {
-    "apiname": "alert.update",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/alert/update"
-  },
   "Apiinfo": {
     "apiname": "apiinfo.version",
     "description": "",
     "parameters": [],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/apiinfo"
-  },
-  "AuditlogCreate": {
-    "apiname": "auditlog.create",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/auditlog/create"
-  },
-  "AuditlogDelete": {
-    "apiname": "auditlog.delete",
-    "description": "",
-    "parameters": [
-      "Array of ID to delete"
-    ],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/auditlog/delete"
   },
   "AuditlogGet": {
     "apiname": "auditlog.get",
@@ -521,26 +487,6 @@
       }
     ],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/auditlog/get"
-  },
-  "AuditlogUpdate": {
-    "apiname": "auditlog.update",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/auditlog/update"
-  },
-  "AuthenticationCreate": {
-    "apiname": "authentication.create",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/authentication/create"
-  },
-  "AuthenticationDelete": {
-    "apiname": "authentication.delete",
-    "description": "",
-    "parameters": [
-      "Array of ID to delete"
-    ],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/authentication/delete"
   },
   "AuthenticationGet": {
     "apiname": "authentication.get",
@@ -2965,15 +2911,9 @@
     "parameters": [],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/hanode/update"
   },
-  "HistoryCreate": {
-    "apiname": "history.create",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/history/create"
-  },
-  "HistoryDelete": {
-    "apiname": "history.delete",
-    "description": "",
+  "HistoryClear": {
+    "apiname": "history.clear",
+    "description": "This method allows to clear item history.",
     "parameters": [
       "Array of ID to delete"
     ],
@@ -3095,12 +3035,6 @@
       }
     ],
     "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/history/get"
-  },
-  "HistoryUpdate": {
-    "apiname": "history.update",
-    "description": "",
-    "parameters": [],
-    "url": "https://www.zabbix.com/documentation/6.4/en/manual/api/reference/history/update"
   },
   "HostCreate": {
     "apiname": "host.create",
@@ -3395,11 +3329,6 @@
         "description": "Return only hosts that have inventory data matching the given wildcard search.<br><br>This parameter is affected by the same additional parameters as <code>search</code>.",
         "name": "searchInventory",
         "type": "object"
-      },
-      {
-        "description": "Sort the result by the given properties.<br><br>Possible values: <code>hostid</code>, <code>host</code>, <code>name</code>, <code>status</code>.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "rowspan=\"10\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/6.4/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
@@ -4726,13 +4655,8 @@
     "description": "",
     "parameters": [
       {
-        "description": "Item <a href=\"/documentation/6.4/en/manual/api/reference/item/object#item-preprocessing\">preprocessing</a> options.",
-        "name": "preprocessing",
-        "type": "array"
-      },
-      {
-        "description": "Item <a href=\"/documentation/6.4/en/manual/api/reference/item/object#item-tag\">tags</a>.",
-        "name": "tags",
+        "description": "Vector de Item con dos propiedades extra preprocessing y tags.",
+        "name": "",
         "type": "array"
       }
     ],

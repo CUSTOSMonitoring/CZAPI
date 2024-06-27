@@ -23,12 +23,13 @@ function Ayuda()
 "
 }
 
+url="${URL_base}"
 while [ $# -gt 0 ]
 do
    case $1 in
       -u | --url ) url=$2; shift;;
       -o | --object ) ZAPIObj="$2"; shift;;
-      -d | --description ) Description=$2; shift;;
+      -d | --description ) Description="$2"; shift;;
       -h | --help) Ayuda; exit;
    esac
    shift
@@ -44,9 +45,9 @@ then
    exit 1
 fi
 
-{
+#{
 echo ' { "'"${ZAPIObj}"'": { "properties":{ ' ;
-wget -S -qO- ${url} 2>/dev/null | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
+wget -S -qO- "${url}/${ZAPIObj}/object#${ZAPIObj}" 2>/dev/null | grep '[/<]td[>]\|[/<]tr[>]' | sed 's/^\s*//' | awk '
 BEGIN {
  Nombre = ""
  Tipo = ""
@@ -69,4 +70,5 @@ BEGIN {
                       Descripcion=substr( $0, 5, index($0, "</td>") -5)
                      ; next }
 ' ;
-echo '}}}' ; } # > toma.gus # | tee GUSTI | jq .
+echo '}}}' 
+#; } # > toma.gus # | tee GUSTI | jq .

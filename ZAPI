@@ -271,10 +271,10 @@ function GetAPICall()
                Authorization=${authtoken:+,'"auth"':\"${authtoken}\"}
             fi
          fi
-         if [[ "${method}" == "user.login" ]]
-         then
-            Parametros='{ "user": "'"${user}"'", "password": "'"${passwd}"'"}'
-         fi
+         #if [[ "${method}" == "user.login" ]]
+         #then
+            #Parametros='{ "user": "'"${user}"'", "password": "'"${passwd}"'"}'
+         #fi
 
          data='{"jsonrpc":"2.0",
              "method":"'${method}'",
@@ -610,6 +610,7 @@ do
       --def* ) ShowDef "$1" "$2"; exit;;
       --list-conexiones ) shift ; ListarConexiones $* ; exit;;
       --which-conf ) echo "${ArchConf}" ; exit;;
+      --which-url ) echo "${ArchConf}" ; exit;;
       --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
       --edit-traduccion ) # $2 debe traer el nombre de la funcion a editar o lo descartamos
@@ -619,12 +620,22 @@ do
                              formatfunc=$(jq -r ' .["'"$2"'"].funcion ' "${ArchFormat}")
                              if [[ "${fuente}" && "${fuente}" != "null" ]]
                              then
-                                ${EDITOR:-vi} -c "set cmdheight=3" "${libreria}/${fuente}.jq"  +"/${formatfunc}"  -c "set cmdheight=1"
+                                ${EDITOR:-vi} "${libreria}/${fuente}.jq"
                              else
-                                read -p "No se encontro el archivo de formateo para la función '$2', editamos el archivo de formateo? s/N" a
-                                if [[ "$a" =~ sS ]]
+                                read -p "No se encontro el archivo de formateo para la función '$2', editamos el archivo de ruteo de formateo? s/N" a
+                                if [[ "$a" =~ [sS] ]]
                                 then
                                    ${EDITOR:-vi} "${ArchFormat}"
+                                   fuente=$(jq -r ' .["'"$2"'"].fuente' "${ArchFormat}")
+                                   formatfunc=$(jq -r ' .["'"$2"'"].funcion ' "${ArchFormat}")
+                                   if [[ "${fuente}" && "${fuente}" != "null" ]]
+                                   then
+                                      read -p "Editamos el archivo de formateo? s/N" a
+                                      if [[ "$a" =~ [sS] ]]
+                                      then
+                                         ${EDITOR:-vi}  "${libreria}/${fuente}.jq"
+                                      fi
+                                   fi
                                 fi
                              fi
                           else

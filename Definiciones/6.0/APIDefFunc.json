@@ -467,11 +467,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
-      },
-      {
         "description": "Limit the number of records returned.",
         "name": "limit",
         "type": "integer"
@@ -3229,11 +3224,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
-      },
-      {
         "description": "Limit the number of records returned.",
         "name": "limit",
         "type": "integer"
@@ -3247,11 +3237,6 @@
         "description": "Use IDs as keys in the resulting array.",
         "name": "preservekeys",
         "type": "boolean"
-      },
-      {
-        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
-        "name": "search",
-        "type": "object"
       },
       {
         "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
@@ -4748,11 +4733,6 @@
         "description": "Return results that do not match the criteria given in the search parameter.",
         "name": "excludeSearch",
         "type": "boolean"
-      },
-      {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
       },
       {
         "description": "Limit the number of records returned.",
@@ -7892,21 +7872,6 @@
         "type": "boolean"
       },
       {
-        "description": "Limit the amount of retrieved objects.",
-        "name": "limit",
-        "type": "integer"
-      },
-      {
-        "description": "Set fields to output.",
-        "name": "output",
-        "type": "query"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -8195,11 +8160,6 @@
         "type": "query"
       },
       {
-        "description": "Return only those results that exactly match the given filter.<br><br>Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against.<br><br>Supports additional filters:<br><code>host</code> - technical name of the host that the trigger belongs to;<br><code>hostid</code> - ID of the host that the trigger belongs to.",
-        "name": "filter",
-        "type": "object"
-      },
-      {
         "description": "Limits the number of records returned by subselects.<br><br>Applies to the following subselects:<br><code>selectHosts</code> - results will be sorted by <code>host</code>.",
         "name": "limitSelects",
         "type": "integer"
@@ -8211,11 +8171,6 @@
       },
       {
         "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -8263,11 +8218,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
@@ -8464,11 +8414,6 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "Return the number of records in the result instead of the actual data.",
         "name": "countOutput",
         "type": "boolean"
@@ -8482,11 +8427,6 @@
         "description": "Return results that do not match the criteria given in the search parameter.",
         "name": "excludeSearch",
         "type": "boolean"
-      },
-      {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
       },
       {
         "description": "Limit the number of records returned.",
@@ -8517,11 +8457,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
@@ -8649,13 +8584,16 @@
       },
       {
         "description": "Sort the result by the given properties.<br><br>Possible values are: <code>userid</code> and <code>username</code>.",
+        "PossibleValues": {
+          "userid": {
+            "description": "Order by the user id"
+          },
+          "username": {
+            "description": "Ordeer by the user name"
+          }
+        },
         "name": "sortfield",
         "type": "string/array"
-      },
-      {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
       },
       {
         "description": "Return the number of records in the result instead of the actual data.",
@@ -8706,11 +8644,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
@@ -8862,11 +8795,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -8910,11 +8838,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
@@ -9035,11 +8958,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -9083,11 +9001,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
@@ -9147,14 +9060,17 @@
         "type": "query"
       },
       {
-        "description": "Sort the result by the given properties.<br><br>Possible values are: <code>valuemapid</code>, <code>name</code>.",
+        "description": "Sort the result by the given properties.",
+        "PossibleValues": {
+          "valuemapid": {
+            "default": true
+          },
+          "name": {
+            "default": false
+          }
+        },
         "name": "sortfield",
         "type": "string/array"
-      },
-      {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
       },
       {
         "description": "Return the number of records in the result instead of the actual data.",
@@ -9205,11 +9121,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",

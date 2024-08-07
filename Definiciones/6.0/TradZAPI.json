@@ -13,9 +13,9 @@
     "fuente": "Alert2String",
     "funcion": "AlertToString"
   },
-  "AuditLogGet": {
-    "fuente": "",
-    "funcion": ""
+  "AuditlogGet": {
+    "fuente": "Auditlog2String",
+    "funcion": "AuditlogToString"
   },
   "DiscoveryRuleGet": {
     "fuente": "LLD2String",

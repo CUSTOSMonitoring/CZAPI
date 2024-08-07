@@ -5,9 +5,9 @@
       "funcion": "Nombre de la función a llamar en el fuente, se le va a pasar como paráemtro el objeto que retorna la función"
     }
   },
-  "MaintenanceGet": {
-    "fuente": "Maintenance2String",
-    "funcion": "MaintenanceToString"
+  "ActionGet": {
+    "fuente": "Action2String",
+    "funcion": "ActionToString"
   },
   "AlertGet": {
     "fuente": "Alert2String",
@@ -29,6 +29,10 @@
     "fuente": "",
     "funcion": ""
   },
+  "HostinterfaceGet": {
+    "fuente": "Hostinterface2String",
+    "funcion": "HostinterfaceToString"
+  },
   "HostGet": {
     "fuente": "Host2String",
     "funcion": "HostToString"
@@ -48,6 +52,14 @@
   "ItemPrototypeGet": {
     "fuente": "",
     "funcion": ""
+  },
+  "MaintenanceGet": {
+    "fuente": "Maintenance2String",
+    "funcion": "MaintenanceToString"
+  },
+  "MediatypeGet": {
+    "fuente": "Mediatype2String",
+    "funcion": "MediatypeToString"
   },
   "Novan": {
     "APIInfo": {
@@ -72,8 +84,8 @@
     "funcion": "TemplateToString"
   },
   "TriggerGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Trigger2String",
+    "funcion": "TriggerToString"
   },
   "UserCheckAuth": {
     "fuente": "",

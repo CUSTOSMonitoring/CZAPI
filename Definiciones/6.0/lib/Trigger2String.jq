@@ -57,6 +57,8 @@ def TriggerToString( value ):
                            .value = TriggerPriorityToString( .value )
                         elif .key == "status" then
                            .value = TriggerStatusToString( .value )
+                        elif .key == "lastchange" then
+                           .value = DateToString( .value )
                         elif .key == "state" then
                            .value = TriggerStateToString( .value )
                         elif .key == "type" then

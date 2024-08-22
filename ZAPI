@@ -689,6 +689,8 @@ else
             #callAPI | jq 'include "'"${fuente}"'" {"search":"'"${libreria}"'" } ; if ( type( .result ) == "array" ) then
             callAPI | jq -L${libreria} 'include "'"${fuente}"'"; .result | if ( type == "array" ) then
                                                                    .[] |= '${funcion}'( . )
+                                                                elif ( type == "string" ) then
+                                                                   .
                                                                 else
                                                                    . |= '${funcion}'( . )
                                                                 end '

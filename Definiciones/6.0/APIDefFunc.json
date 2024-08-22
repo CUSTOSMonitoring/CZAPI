@@ -3209,11 +3209,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"

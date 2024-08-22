@@ -1,4 +1,10 @@
 {
+  "Apiinfo": {
+    "apiname": "apiinfo.version",
+    "description": "This method allows to retrieve the version of the Zabbix API.",
+    "parameters": [],
+    "returns": "(string) Returns the version of the Zabbix API."
+  },
   "ActionGet": {
     "apiname": "action.get",
     "description": "",

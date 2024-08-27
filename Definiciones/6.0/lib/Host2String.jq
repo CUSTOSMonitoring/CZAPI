@@ -76,16 +76,22 @@ def HostToString( host ):
                         elif .key == "flags" then
                            .value = HostFlagsToString( .value )
                         elif .key == "tags" then
-                           if ( ( .key | type ) == "array" ) then
+                           if ( ( .value | type ) == "array" ) then
                               .value[] |= TagToString( . )
                            else
                               .
                            end
                         elif .key == "triggers" then
-                           if ( ( .key | type ) == "array" ) then
+                           if ( ( .value | type ) == "array" ) then
                               .value[] |= TriggerToString( . )
                            else
                               .
+                           end
+                        elif .key == "interfaces" then
+                           if ( ( .value | type ) == "array" ) then
+                              .value[] |= InterfaceToString( . )
+                           else
+                              .value = TriggerToString( .value )
                            end
                         else
                            .

@@ -301,8 +301,8 @@ function callAPI()
    fi
    if [ "${APICall_data}" ]
    then
-      debug 3 "curl --insecure -sS -H '${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}"
-      curl --insecure -sS -H "${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}" -d "${APICall_data}" ${URL}
+      debug 3 "curl --insecure -sS -H '${Header}' '${AuthInHeader:+-H Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}"
+      curl --insecure -sS -H "${Header}" ${AuthInHeader:+-H Authorization: Bearer ${authtoken}} -d "${APICall_data}" ${URL}
       # --insecure, --show-error
       #      When used with -s, --silent, it makes curl show an error message if it fails.
       # -s, --silent
@@ -672,7 +672,7 @@ then
 else
    if [ "${ShowAPICall}" ]
    then
-      echo "curl --insecure -sS -H \"${Header} ${AuthInHeader:+Authorization: Bearer ${authtoken}}\"  -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
+      echo "curl --insecure -sS -H \"${Header}\" ${AuthInHeader:+-H \"Authorization: Bearer ${authtoken}\"}  -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
    else
       if [ "$( GetAPICall )" ]
       then

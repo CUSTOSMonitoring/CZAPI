@@ -91,7 +91,7 @@ def HostToString( host ):
                            if ( ( .value | type ) == "array" ) then
                               .value[] |= InterfaceToString( . )
                            else
-                              .value = TriggerToString( .value )
+                              .
                            end
                         else
                            .

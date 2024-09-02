@@ -2,7 +2,6 @@
   "ActionCreate": {
     "apiname": "action.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/create",
     "parameters": [
       {
         "description": "Action <a href=\"/documentation/6.0/en/manual/api/reference/action/object#action-filter\">filter</a> object for the action.",
@@ -24,20 +23,20 @@
         "name": "update_operations",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/create"
   },
   "ActionDelete": {
     "apiname": "action.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/delete"
   },
   "ActionGet": {
     "apiname": "action.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/get",
     "parameters": [
       {
         "description": "Return only actions with the given IDs.",
@@ -110,11 +109,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -160,12 +154,6 @@
         "type": "boolean"
       },
       {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
-      },
-      {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -176,6 +164,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -184,12 +173,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/get"
   },
   "ActionUpdate": {
     "apiname": "action.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/update",
     "parameters": [
       {
         "description": "Action <a href=\"/documentation/6.0/en/manual/api/reference/action/object#action-filter\">filter</a> object to replace the current filter.",
@@ -211,26 +200,26 @@
         "name": "update_operations",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/action/update"
   },
   "AlertCreate": {
     "apiname": "alert.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/create"
   },
   "AlertDelete": {
     "apiname": "alert.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/delete"
   },
   "AlertGet": {
     "apiname": "alert.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/get",
     "parameters": [
       {
         "description": "Return only alerts with the given IDs.",
@@ -318,11 +307,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -368,12 +352,6 @@
         "type": "boolean"
       },
       {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
-      },
-      {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -384,6 +362,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -392,24 +371,24 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/get"
   },
   "AlertUpdate": {
     "apiname": "alert.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/alert/update"
   },
   "Apiinfo": {
     "apiname": "apiinfo.version",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/apiinfo/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/apiinfo/create"
   },
   "AuditlogGet": {
     "apiname": "auditlog.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/auditlog/get",
     "parameters": [
       {
         "description": "Return only audit log with the given IDs.",
@@ -442,17 +421,7 @@
         "type": "object"
       },
       {
-        "description": "Case insensitive sub-string search in content of fields: <code>username</code>, <code>ip</code>, <code>resourcename</code>, <code>details</code>.",
-        "name": "search",
-        "type": "object"
-      },
-      {
         "description": "rowspan=\"9\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -497,12 +466,6 @@
         "type": "boolean"
       },
       {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
-      },
-      {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -513,6 +476,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -521,36 +485,36 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/auditlog/get"
   },
   "AuthenticationGet": {
     "apiname": "authentication.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/authentication/get",
     "parameters": [
       {
         "description": "This parameter being common for all get methods described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "output",
         "type": "query"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/authentication/get"
   },
   "AuthenticationUpdate": {
     "apiname": "authentication.update",
     "description": "Este metodo no admite un array como parametros es un objeto directo",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/authentication/update",
     "parameters": [
       {
         "description": "Objeto con las propiedades a cambiar",
         "name": "Los parametros no son un array, es el objeto de autenticación directo",
         "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/authentication/update"
   },
   "AutoregistrationGet": {
     "apiname": "autoregistration.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/autoregistration/get",
     "parameters": [
       {
         "description": "This parameter being common for all <code>get</code> methods described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
@@ -583,11 +547,6 @@
         "type": "integer"
       },
       {
-        "description": "Object properties to be returned. Default: extend.",
-        "name": "output",
-        "type": "query"
-      },
-      {
         "description": "Use IDs as keys in the resulting array.",
         "name": "preservekeys",
         "type": "boolean"
@@ -613,7 +572,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -624,6 +582,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -632,33 +591,21 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/autoregistration/get"
   },
   "AutoregistrationUpdate": {
     "apiname": "autoregistration.update",
     "description": "El parámetro es directamente el objeto a modificar ",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/autoregistration/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/autoregistration/update"
   },
   "ConfigurationExport": {
     "apiname": "configuration.export",
     "description": "This method allows to export configuration data as a serialized string. This method is available to users of any type. Permissions to call the method can be revoked in user role settings. See User roles for more information. El parametro es de una el objeto",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/configuration/export",
     "parameters": [
       {
-        "description": "Format in which the data must be exported.",
-        "name": "format",
-        "required": true,
-        "type": "string",
         "PossibleValues": {
-          "yaml": {
-            "default": false,
-            "description": "YAML"
-          },
-          "xml": {
-            "default": false,
-            "description": "XML"
-          },
           "json": {
             "default": false,
             "description": "JSON"
@@ -666,79 +613,91 @@
           "raw": {
             "default": false,
             "description": "unprocessed PHP array"
+          },
+          "xml": {
+            "default": false,
+            "description": "XML"
+          },
+          "yaml": {
+            "default": false,
+            "description": "YAML"
           }
-        }
+        },
+        "description": "Format in which the data must be exported.",
+        "name": "format",
+        "required": true,
+        "type": "string"
       },
       {
+        "description": "Make the output more human readable by adding indentation.",
         "name": "prettyprint",
         "required": false,
-        "type": "boolean",
-        "description": "Make the output more human readable by adding indentation."
+        "type": "boolean"
       },
       {
-        "name": "options",
-        "required": true,
-        "type": "object",
-        "description": "Objects to be exported.",
         "ObjectProperties": [
           {
+            "description": "IDs of host groups to export",
             "name": "groups",
-            "type": "(array)",
-            "description": "IDs of host groups to export"
+            "type": "(array)"
           },
           {
+            "description": "IDs of hosts to export",
             "name": "hosts",
-            "type": "(array)",
-            "description": "IDs of hosts to export"
+            "type": "(array)"
           },
           {
+            "description": "IDs of images to export",
             "name": "images",
-            "type": "(array)",
-            "description": "IDs of images to export"
+            "type": "(array)"
           },
           {
+            "description": "IDs of maps to export",
             "name": "maps",
-            "type": "(array)",
-            "description": "IDs of maps to export"
+            "type": "(array)"
           },
           {
+            "description": "IDs of media types to export",
             "name": "mediaTypes",
-            "type": "(array)",
-            "description": "IDs of media types to export"
+            "type": "(array)"
           },
           {
+            "description": "IDs of templates to export",
             "name": "templates",
-            "type": "(array)",
-            "description": "IDs of templates to export"
+            "type": "(array)"
           }
-        ]
+        ],
+        "description": "Objects to be exported.",
+        "name": "options",
+        "required": true,
+        "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/configuration/export"
   },
   "ConnectorCreate": {
     "apiname": "connector.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/create"
   },
   "ConnectorDelete": {
     "apiname": "connector.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/delete"
   },
   "ConnectorUpdate": {
     "apiname": "connector.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/connector/update"
   },
   "CorrelationCreate": {
     "apiname": "correlation.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/create",
     "parameters": [
       {
         "description": "Correlation <a href=\"/documentation/6.0/en/manual/api/reference/correlation/object#correlation-operation\">operations</a> to create for the correlation.",
@@ -750,20 +709,20 @@
         "name": "filter",
         "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/create"
   },
   "CorrelationDelete": {
     "apiname": "correlation.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/delete"
   },
   "CorrelationGet": {
     "apiname": "correlation.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/get",
     "parameters": [
       {
         "description": "Return only correlations with the given IDs.",
@@ -787,11 +746,6 @@
       },
       {
         "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -841,12 +795,6 @@
         "type": "boolean"
       },
       {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
-      },
-      {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -857,6 +805,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -865,12 +814,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/get"
   },
   "CorrelationUpdate": {
     "apiname": "correlation.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/update",
     "parameters": [
       {
         "description": "Correlation <a href=\"/documentation/6.0/en/manual/api/reference/correlation/object#correlation-filter\">filter</a> object to replace the current filter.",
@@ -882,12 +831,12 @@
         "name": "operations",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/correlation/update"
   },
   "DashboardCreate": {
     "apiname": "dashboard.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/create",
     "parameters": [
       {
         "description": "Dashboard <a href=\"object#dashboard-page\">pages</a> to be created for the dashboard. Dashboard pages will be ordered in the same order as specified. At least one dashboard page object is required for <code>pages</code> property.",
@@ -904,20 +853,20 @@
         "name": "userGroups",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/create"
   },
   "DashboardDelete": {
     "apiname": "dashboard.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/delete"
   },
   "DashboardGet": {
     "apiname": "dashboard.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/get",
     "parameters": [
       {
         "description": "Return only dashboards with the given IDs.",
@@ -950,11 +899,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return the number of records in the result instead of the actual data.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "If set to true return only objects that the user has write permissions to.  Default: false.",
         "name": "editable",
         "type": "boolean"
@@ -1000,12 +944,6 @@
         "type": "boolean"
       },
       {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
-      },
-      {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1016,6 +954,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1024,12 +963,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/get"
   },
   "DashboardUpdate": {
     "apiname": "dashboard.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/update",
     "parameters": [
       {
         "description": "Dashboard <a href=\"object#dashboard-page\">pages</a> to replace the existing dashboard pages.<br><br>Dashboard pages are updated by the <code>dashboard_pageid</code> property. New dashboard pages will be created for objects without <code>dashboard_pageid</code> property and the existing dashboard pages will be deleted if not reused. Dashboard pages will be ordered in the same order as specified. Only the specified properties of the dashboard pages will be updated. At least one dashboard page object is required for <code>pages</code> property.",
@@ -1046,26 +985,26 @@
         "name": "userGroups",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dashboard/update"
   },
   "DcheckCreate": {
     "apiname": "dcheck.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/create"
   },
   "DcheckDelete": {
     "apiname": "dcheck.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/delete"
   },
   "DcheckGet": {
     "apiname": "dcheck.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/get",
     "parameters": [
       {
         "description": "Return only discovery checks with the given IDs.",
@@ -1148,7 +1087,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1159,6 +1097,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1167,32 +1106,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/get"
   },
   "DcheckUpdate": {
     "apiname": "dcheck.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dcheck/update"
   },
   "DhostCreate": {
     "apiname": "dhost.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/create"
   },
   "DhostDelete": {
     "apiname": "dhost.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/delete"
   },
   "DhostGet": {
     "apiname": "dhost.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/get",
     "parameters": [
       {
         "description": "Return only discovered hosts with the given IDs.",
@@ -1290,7 +1229,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1301,6 +1239,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1309,18 +1248,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/get"
   },
   "DhostUpdate": {
     "apiname": "dhost.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dhost/update"
   },
   "DiscoveryruleCreate": {
     "apiname": "discoveryrule.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/create",
     "parameters": [
       {
         "description": "LLD rule <a href=\"/documentation/6.0/en/manual/api/reference/discoveryrule/object#lld-rule-filter\">filter</a> object for the LLD rule.",
@@ -1342,20 +1281,20 @@
         "name": "overrides",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/create"
   },
   "DiscoveryruleDelete": {
     "apiname": "discoveryrule.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/delete"
   },
   "DiscoveryruleGet": {
     "apiname": "discoveryrule.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/get",
     "parameters": [
       {
         "description": "Return only LLD rules with the given IDs.",
@@ -1518,7 +1457,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1529,6 +1467,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1537,12 +1476,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/get"
   },
   "DiscoveryruleUpdate": {
     "apiname": "discoveryrule.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/update",
     "parameters": [
       {
         "description": "LLD rule <a href=\"/documentation/6.0/en/manual/api/reference/discoveryrule/object#lld-rule-filter\">filter</a> object to replace the current filter.",
@@ -1564,32 +1503,32 @@
         "name": "overrides",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/discoveryrule/update"
   },
   "DruleCreate": {
     "apiname": "drule.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/create",
     "parameters": [
       {
         "description": "Discovery <a href=\"/documentation/6.0/en/manual/api/reference/dcheck/object\">checks</a> to create for the discovery rule.",
         "name": "dchecks",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/create"
   },
   "DruleDelete": {
     "apiname": "drule.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/delete"
   },
   "DruleGet": {
     "apiname": "drule.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/get",
     "parameters": [
       {
         "description": "Return only discovery rules that created the given discovered hosts.",
@@ -1687,7 +1626,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1698,6 +1636,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1706,38 +1645,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/get"
   },
   "DruleUpdate": {
     "apiname": "drule.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/update",
     "parameters": [
       {
         "description": "Discovery <a href=\"/documentation/6.0/en/manual/api/reference/dcheck/object\">checks</a> to replace existing checks.",
         "name": "dchecks",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/drule/update"
   },
   "DserviceCreate": {
     "apiname": "dservice.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/create"
   },
   "DserviceDelete": {
     "apiname": "dservice.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/delete"
   },
   "DserviceGet": {
     "apiname": "dservice.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/get",
     "parameters": [
       {
         "description": "Return only discovered services with the given IDs.",
@@ -1845,7 +1784,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -1856,6 +1794,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -1864,32 +1803,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/get"
   },
   "DserviceUpdate": {
     "apiname": "dservice.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/dservice/update"
   },
   "EventCreate": {
     "apiname": "event.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/create"
   },
   "EventDelete": {
     "apiname": "event.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/delete"
   },
   "EventGet": {
     "apiname": "event.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/get",
     "parameters": [
       {
         "description": "Return only events with the given IDs.",
@@ -2077,7 +2016,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2088,6 +2026,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2096,38 +2035,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/get"
   },
   "EventUpdate": {
     "apiname": "event.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/event/update"
   },
   "GraphCreate": {
     "apiname": "graph.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/create",
     "parameters": [
       {
         "description": "Graph <a href=\"/documentation/6.0/en/manual/api/reference/graphitem/object\">items</a> to be created for the graph.",
         "name": "gitems",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/create"
   },
   "GraphDelete": {
     "apiname": "graph.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/delete"
   },
   "GraphGet": {
     "apiname": "graph.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/get",
     "parameters": [
       {
         "description": "Return only graphs with the given IDs.",
@@ -2275,7 +2214,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2286,6 +2224,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2294,38 +2233,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/get"
   },
   "GraphUpdate": {
     "apiname": "graph.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/update",
     "parameters": [
       {
         "description": "Graph <a href=\"/documentation/6.0/en/manual/api/reference/graphitem/object\">items</a> to replace existing graph items. If a graph item has the <code>gitemid</code> property defined it will be updated, otherwise a new graph item will be created.",
         "name": "gitems",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graph/update"
   },
   "GraphitemCreate": {
     "apiname": "graphitem.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/create"
   },
   "GraphitemDelete": {
     "apiname": "graphitem.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/delete"
   },
   "GraphitemGet": {
     "apiname": "graphitem.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/get",
     "parameters": [
       {
         "description": "Return only graph items that belong to the given graphs.",
@@ -2413,7 +2352,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2424,6 +2362,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2432,38 +2371,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/get"
   },
   "GraphitemUpdate": {
     "apiname": "graphitem.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphitem/update"
   },
   "GraphprototypeCreate": {
     "apiname": "graphprototype.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/create",
     "parameters": [
       {
         "description": "Graph <a href=\"/documentation/6.0/en/manual/api/reference/graphitem/object\">items</a> to be created for the graph prototypes. Graph items can reference both items and item prototypes, but at least one item prototype must be present.",
         "name": "gitems",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/create"
   },
   "GraphprototypeDelete": {
     "apiname": "graphprototype.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/delete"
   },
   "GraphprototypeGet": {
     "apiname": "graphprototype.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/get",
     "parameters": [
       {
         "description": "Return only graph prototypes that belong to the given discovery rules.",
@@ -2606,7 +2545,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2617,6 +2555,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2625,38 +2564,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/get"
   },
   "GraphprototypeUpdate": {
     "apiname": "graphprototype.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/update",
     "parameters": [
       {
         "description": "Graph <a href=\"/documentation/6.0/en/manual/api/reference/graphitem/object\">items</a> to replace existing graph items. If a graph item has the <code>gitemid</code> property defined it will be updated, otherwise a new graph item will be created.",
         "name": "gitems",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/graphprototype/update"
   },
   "HanodeCreate": {
     "apiname": "hanode.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/create"
   },
   "HanodeDelete": {
     "apiname": "hanode.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/delete"
   },
   "HanodeGet": {
     "apiname": "hanode.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/get",
     "parameters": [
       {
         "description": "Return only nodes with the given node IDs.",
@@ -2734,7 +2673,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2745,6 +2683,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2753,32 +2692,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/get"
   },
   "HanodeUpdate": {
     "apiname": "hanode.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hanode/update"
   },
   "HistoryCreate": {
     "apiname": "history.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/create"
   },
   "HistoryDelete": {
     "apiname": "history.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/delete"
   },
   "HistoryGet": {
     "apiname": "history.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/get",
     "parameters": [
       {
         "description": "History object types to return.<br><br>Possible values:<br>0 - numeric float;<br>1 - character;<br>2 - log;<br>3 - numeric unsigned;<br>4 - text.<br><br>Default: 3.",
@@ -2871,7 +2810,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -2882,6 +2820,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -2890,18 +2829,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/get"
   },
   "HistoryUpdate": {
     "apiname": "history.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/history/update"
   },
   "HostCreate": {
     "apiname": "host.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/create",
     "parameters": [
       {
         "description": "Host groups to add the host to.The host groups must have the groupid property defined.",
@@ -2933,20 +2872,20 @@
         "name": "inventory",
         "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/create"
   },
   "HostDelete": {
     "apiname": "host.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/delete"
   },
   "HostGet": {
     "apiname": "host.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/get",
     "parameters": [
       {
         "description": "Return only hosts that belong to the given groups.",
@@ -3249,7 +3188,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -3260,6 +3198,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -3268,12 +3207,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/get"
   },
   "HostUpdate": {
     "apiname": "host.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/update",
     "parameters": [
       {
         "description": "Host <a href=\"/documentation/6.0/en/manual/api/reference/hostgroup/object#host-group\">groups</a> to replace the current host groups the host belongs to.<br><br>The host groups must have the <code>groupid</code> property defined. All host groups that are not listed in the request will be unlinked.",
@@ -3310,26 +3249,26 @@
         "name": "templates_clear",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/host/update"
   },
   "HostgroupCreate": {
     "apiname": "hostgroup.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/create"
   },
   "HostgroupDelete": {
     "apiname": "hostgroup.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/delete"
   },
   "HostgroupGet": {
     "apiname": "hostgroup.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/get",
     "parameters": [
       {
         "description": "Return only host groups that contain hosts or templates with the given graphs.",
@@ -3527,7 +3466,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -3538,6 +3476,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -3546,32 +3485,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/get"
   },
   "HostgroupUpdate": {
     "apiname": "hostgroup.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostgroup/update"
   },
   "HostinterfaceCreate": {
     "apiname": "hostinterface.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/create"
   },
   "HostinterfaceDelete": {
     "apiname": "hostinterface.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/delete"
   },
   "HostinterfaceGet": {
     "apiname": "hostinterface.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/get",
     "parameters": [
       {
         "description": "Return only host interfaces used by the given hosts.",
@@ -3674,7 +3613,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -3685,6 +3623,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -3693,18 +3632,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/get"
   },
   "HostinterfaceUpdate": {
     "apiname": "hostinterface.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostinterface/update"
   },
   "HostprototypeCreate": {
     "apiname": "hostprototype.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/create",
     "parameters": [
       {
         "description": "Group <a href=\"/documentation/6.0/en/manual/api/reference/hostprototype/object#group-link\">links</a> to be created for the host prototype.",
@@ -3741,20 +3680,20 @@
         "name": "templates",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/create"
   },
   "HostprototypeDelete": {
     "apiname": "hostprototype.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/delete"
   },
   "HostprototypeGet": {
     "apiname": "hostprototype.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/get",
     "parameters": [
       {
         "description": "Return only host prototypes with the given IDs.",
@@ -3877,7 +3816,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -3888,6 +3826,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -3896,12 +3835,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/get"
   },
   "HostprototypeUpdate": {
     "apiname": "hostprototype.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/update",
     "parameters": [
       {
         "description": "Group <a href=\"/documentation/6.0/en/manual/api/reference/hostprototype/object#group-link\">links</a> to replace the current group links on the host prototype.",
@@ -3933,26 +3872,26 @@
         "name": "templates",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/hostprototype/update"
   },
   "HousekeepingCreate": {
     "apiname": "housekeeping.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/create"
   },
   "HousekeepingDelete": {
     "apiname": "housekeeping.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/delete"
   },
   "HousekeepingGet": {
     "apiname": "housekeeping.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/get",
     "parameters": [
       {
         "description": "This parameter being common for all <code>get</code> methods described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
@@ -4015,7 +3954,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -4026,6 +3964,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -4034,18 +3973,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/get"
   },
   "HousekeepingUpdate": {
     "apiname": "housekeeping.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/housekeeping/update"
   },
   "HttptestCreate": {
     "apiname": "httptest.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/create",
     "parameters": [
       {
         "description": "Web scenario <a href=\"/documentation/6.0/en/manual/api/reference/httptest/object#scenario-step\">steps</a>.",
@@ -4057,20 +3996,20 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/create"
   },
   "HttptestDelete": {
     "apiname": "httptest.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/delete"
   },
   "HttptestGet": {
     "apiname": "httptest.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/get",
     "parameters": [
       {
         "description": "Return only web scenarios that belong to the given host groups.",
@@ -4208,7 +4147,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -4219,6 +4157,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -4227,12 +4166,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/get"
   },
   "HttptestUpdate": {
     "apiname": "httptest.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/update",
     "parameters": [
       {
         "description": "Scenario <a href=\"/documentation/6.0/en/manual/api/reference/httptest/object#scenario-step\">steps</a> to replace existing steps.",
@@ -4244,32 +4183,32 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/httptest/update"
   },
   "IconmapCreate": {
     "apiname": "iconmap.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/create",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/iconmap/object#icon-mapping\">Icon mappings</a> to be created for the icon map.",
         "name": "mappings",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/create"
   },
   "IconmapDelete": {
     "apiname": "iconmap.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/delete"
   },
   "IconmapGet": {
     "apiname": "iconmap.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/get",
     "parameters": [
       {
         "description": "Return only icon maps with the given IDs.",
@@ -4352,7 +4291,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -4363,6 +4301,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -4371,24 +4310,24 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/get"
   },
   "IconmapUpdate": {
     "apiname": "iconmap.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/update",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/iconmap/object#icon-mapping\">Icon mappings</a> to replace the existing icon mappings.",
         "name": "mappings",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/iconmap/update"
   },
   "ImageCreate": {
     "apiname": "image.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/create",
     "parameters": [
       {
         "description": "Name of the image.",
@@ -4405,20 +4344,20 @@
         "name": "image",
         "type": "string"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/create"
   },
   "ImageDelete": {
     "apiname": "image.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/delete"
   },
   "ImageGet": {
     "apiname": "image.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/get",
     "parameters": [
       {
         "description": "Return only images with the given IDs.",
@@ -4501,7 +4440,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -4512,6 +4450,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -4520,24 +4459,24 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/get"
   },
   "ImageUpdate": {
     "apiname": "image.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/update",
     "parameters": [
       {
         "description": "Base64 encoded image. The maximum size of the encoded image is 1 MB. Maximum size can be adjusted by changing ZBX_MAX_IMAGE_SIZE constant value.<br>Supported image formats are: PNG, JPEG, GIF.",
         "name": "image",
         "type": "string"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/image/update"
   },
   "ItemCreate": {
     "apiname": "item.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/create",
     "parameters": [
       {
         "description": "Item <a href=\"/documentation/6.0/en/manual/api/reference/item/object#item-preprocessing\">preprocessing</a> options.",
@@ -4549,20 +4488,20 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/create"
   },
   "ItemDelete": {
     "apiname": "item.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/delete"
   },
   "ItemGet": {
     "apiname": "item.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/get",
     "parameters": [
       {
         "description": "Return only items with the given IDs.",
@@ -4765,7 +4704,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -4776,6 +4714,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -4784,12 +4723,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/get"
   },
   "ItemUpdate": {
     "apiname": "item.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/update",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/item/object#item-preprocessing\">Item preprocessing</a> options to replace the current preprocessing options.",
@@ -4801,12 +4740,12 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/item/update"
   },
   "ItemprototypeCreate": {
     "apiname": "itemprototype.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/create",
     "parameters": [
       {
         "description": "ID of the LLD rule that the item belongs to.",
@@ -4823,20 +4762,20 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/create"
   },
   "ItemprototypeDelete": {
     "apiname": "itemprototype.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/delete"
   },
   "ItemprototypeGet": {
     "apiname": "itemprototype.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/get",
     "parameters": [
       {
         "description": "Return only item prototypes that belong to the given LLD rules.",
@@ -4994,7 +4933,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5005,6 +4943,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5013,12 +4952,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/get"
   },
   "ItemprototypeUpdate": {
     "apiname": "itemprototype.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/update",
     "parameters": [
       {
         "description": "Item prototype <a href=\"/documentation/6.0/en/manual/api/reference/itemprototype/object#item-prototype-preprocessing\">preprocessing</a> options to replace the current preprocessing options.",
@@ -5030,12 +4969,12 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/itemprototype/update"
   },
   "MaintenanceCreate": {
     "apiname": "maintenance.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/create",
     "parameters": [
       {
         "description": "Host <a href=\"/documentation/6.0/en/manual/api/reference/hostgroup/object\">groups</a> that will undergo maintenance.<br><br>The host groups must have the <code>groupid</code> property defined.<br><br>At least one object of <code>groups</code> or <code>hosts</code> must be specified.",
@@ -5067,20 +5006,20 @@
         "name": "hostids",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/create"
   },
   "MaintenanceDelete": {
     "apiname": "maintenance.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/delete"
   },
   "MaintenanceGet": {
     "apiname": "maintenance.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/get",
     "parameters": [
       {
         "description": "Return only maintenances that are assigned to the given host groups.",
@@ -5183,7 +5122,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5194,6 +5132,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5202,12 +5141,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/get"
   },
   "MaintenanceUpdate": {
     "apiname": "maintenance.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/update",
     "parameters": [
       {
         "description": "Host <a href=\"/documentation/6.0/en/manual/api/reference/hostgroup/object\">groups</a> to replace the current groups.<br><br>The host groups must have the <code>groupid</code> property defined.",
@@ -5239,12 +5178,12 @@
         "name": "hostids",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/maintenance/update"
   },
   "MapCreate": {
     "apiname": "map.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/create",
     "parameters": [
       {
         "description": "Map <a href=\"/documentation/6.0/en/manual/api/reference/map/object#map-link\">links</a> to be created on the map.",
@@ -5281,20 +5220,20 @@
         "name": "lines",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/create"
   },
   "MapDelete": {
     "apiname": "map.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/delete"
   },
   "MapGet": {
     "apiname": "map.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/get",
     "parameters": [
       {
         "description": "Returns only maps with the given IDs.",
@@ -5417,7 +5356,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5428,6 +5366,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5436,12 +5375,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/get"
   },
   "MapUpdate": {
     "apiname": "map.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/update",
     "parameters": [
       {
         "description": "Map <a href=\"/documentation/6.0/en/manual/api/reference/map/object#map-link\">links</a> to replace the existing links.",
@@ -5478,12 +5417,12 @@
         "name": "lines",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/map/update"
   },
   "MediatypeCreate": {
     "apiname": "mediatype.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/create",
     "parameters": [
       {
         "description": "<a href=\"object#webhook-parameters\">Webhook parameters</a> to be created for the media type.",
@@ -5495,20 +5434,20 @@
         "name": "message_templates",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/create"
   },
   "MediatypeDelete": {
     "apiname": "mediatype.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/delete"
   },
   "MediatypeGet": {
     "apiname": "mediatype.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/get",
     "parameters": [
       {
         "description": "Return only media types with the given IDs.",
@@ -5601,7 +5540,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5612,6 +5550,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5620,12 +5559,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/get"
   },
   "MediatypeUpdate": {
     "apiname": "mediatype.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/update",
     "parameters": [
       {
         "description": "<a href=\"object#webhook-parameters\">Webhook parameters</a> to replace the current webhook parameters.",
@@ -5637,46 +5576,46 @@
         "name": "message_templates",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/mediatype/update"
   },
   "ModuleCreate": {
     "apiname": "module.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/create"
   },
   "ModuleDelete": {
     "apiname": "module.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/delete"
   },
   "ModuleUpdate": {
     "apiname": "module.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/module/update"
   },
   "ProblemCreate": {
     "apiname": "problem.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/create"
   },
   "ProblemDelete": {
     "apiname": "problem.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/delete"
   },
   "ProblemGet": {
     "apiname": "problem.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/get",
     "parameters": [
       {
         "description": "Return only problems with the given IDs.",
@@ -5839,7 +5778,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5850,6 +5788,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5858,18 +5797,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/get"
   },
   "ProblemUpdate": {
     "apiname": "problem.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/problem/update"
   },
   "ProxyCreate": {
     "apiname": "proxy.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/create",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/host/object\">Hosts</a> to be monitored by the proxy. If a host is already monitored by a different proxy, it will be reassigned to the current proxy.<br><br>The hosts must have the <code>hostid</code> property defined.",
@@ -5881,20 +5820,20 @@
         "name": "interface",
         "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/create"
   },
   "ProxyDelete": {
     "apiname": "proxy.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/delete"
   },
   "ProxyGet": {
     "apiname": "proxy.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/get",
     "parameters": [
       {
         "description": "Return only proxies with the given IDs.",
@@ -5977,7 +5916,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -5988,6 +5926,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -5996,12 +5935,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/get"
   },
   "ProxyUpdate": {
     "apiname": "proxy.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/update",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/host/object\">Hosts</a> to be monitored by the proxy. If a host is already monitored by a different proxy, it will be reassigned to the current proxy.<br><br>The hosts must have the <code>hostid</code> property defined.",
@@ -6013,32 +5952,32 @@
         "name": "interface",
         "type": "object"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/proxy/update"
   },
   "RegexpCreate": {
     "apiname": "regexp.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/create",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/regexp/object#expressions\">Expressions</a> options.",
         "name": "expressions",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/create"
   },
   "RegexpDelete": {
     "apiname": "regexp.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/delete"
   },
   "RegexpGet": {
     "apiname": "regexp.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/get",
     "parameters": [
       {
         "description": "Return only regular expressions with the given IDs.",
@@ -6116,7 +6055,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6127,6 +6065,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6135,24 +6074,24 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/get"
   },
   "RegexpUpdate": {
     "apiname": "regexp.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/update",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/regexp/object#expressions\">Expressions</a> options.",
         "name": "expressions",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/regexp/update"
   },
   "ReportCreate": {
     "apiname": "report.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/create",
     "parameters": [
       {
         "description": "<a href=\"object#users\">Users</a> to send the report to.",
@@ -6164,20 +6103,20 @@
         "name": "user_groups",
         "type": "object/array of objects"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/create"
   },
   "ReportDelete": {
     "apiname": "report.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/delete"
   },
   "ReportGet": {
     "apiname": "report.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/get",
     "parameters": [
       {
         "description": "Return only scheduled reports with the given report IDs.",
@@ -6265,7 +6204,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6276,6 +6214,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6284,12 +6223,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/get"
   },
   "ReportUpdate": {
     "apiname": "report.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/update",
     "parameters": [
       {
         "description": "<a href=\"object#users\">Users</a> to replace the current users assigned to the scheduled report.",
@@ -6301,32 +6240,32 @@
         "name": "user_groups",
         "type": "object/array of objects"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/report/update"
   },
   "RoleCreate": {
     "apiname": "role.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/create",
     "parameters": [
       {
         "description": "Role <a href=\"object#role-rules\">rules</a> to be created for the role.",
         "name": "rules",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/create"
   },
   "RoleDelete": {
     "apiname": "role.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/delete"
   },
   "RoleGet": {
     "apiname": "role.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/get",
     "parameters": [
       {
         "description": "Return only roles with the given IDs.",
@@ -6409,7 +6348,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6420,6 +6358,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6428,38 +6367,38 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/get"
   },
   "RoleUpdate": {
     "apiname": "role.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/update",
     "parameters": [
       {
         "description": "Access <a href=\"object#role-rules\">rules</a> to replace the current access rules assigned to the role.",
         "name": "rules",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/role/update"
   },
   "ScriptCreate": {
     "apiname": "script.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/create"
   },
   "ScriptDelete": {
     "apiname": "script.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/delete"
   },
   "ScriptGet": {
     "apiname": "script.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/get",
     "parameters": [
       {
         "description": "Return only scripts that can be run on the given host groups.",
@@ -6562,7 +6501,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6573,6 +6511,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6581,18 +6520,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/get"
   },
   "ScriptUpdate": {
     "apiname": "script.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/script/update"
   },
   "ServiceCreate": {
     "apiname": "service.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/create",
     "parameters": [
       {
         "description": "Child services to be linked to the service.<br><br>The children must have the <code>serviceid</code> property defined.",
@@ -6619,20 +6558,20 @@
         "name": "status_rules",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/create"
   },
   "ServiceDelete": {
     "apiname": "service.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/delete"
   },
   "ServiceGet": {
     "apiname": "service.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/get",
     "parameters": [
       {
         "description": "Return only services with the given IDs.",
@@ -6780,7 +6719,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6791,6 +6729,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6799,12 +6738,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/get"
   },
   "ServiceUpdate": {
     "apiname": "service.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/update",
     "parameters": [
       {
         "description": "Child services to replace the current service children.<br><br>The children must have the <code>serviceid</code> property defined.",
@@ -6831,26 +6770,26 @@
         "name": "status_rules",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/service/update"
   },
   "SettingsCreate": {
     "apiname": "settings.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/create"
   },
   "SettingsDelete": {
     "apiname": "settings.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/delete"
   },
   "SettingsGet": {
     "apiname": "settings.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/get",
     "parameters": [
       {
         "description": "This parameter being common for all <code>get</code> methods described in the <a href=\"/documentation/6.0/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
@@ -6913,7 +6852,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -6924,6 +6862,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -6932,18 +6871,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/get"
   },
   "SettingsUpdate": {
     "apiname": "settings.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/settings/update"
   },
   "SlaCreate": {
     "apiname": "sla.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/create",
     "parameters": [
       {
         "description": "SLA service tags to be created for the SLA.<br>At least one service tag must be specified.",
@@ -6960,20 +6899,20 @@
         "name": "excluded_downtimes",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/create"
   },
   "SlaDelete": {
     "apiname": "sla.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/delete"
   },
   "SlaGet": {
     "apiname": "sla.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/get",
     "parameters": [
       {
         "description": "Return only SLAs with the given IDs.",
@@ -7066,7 +7005,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7077,6 +7015,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7085,12 +7024,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/get"
   },
   "SlaUpdate": {
     "apiname": "sla.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/update",
     "parameters": [
       {
         "description": "SLA <a href=\"/documentation/6.0/en/manual/api/reference/sla/object#sla-service-tag\">service tags</a> to replace the current SLA service tags.<br><br>At least one service tag must be specified.",
@@ -7107,12 +7046,12 @@
         "name": "excluded_downtimes",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/sla/update"
   },
   "TaskCreate": {
     "apiname": "task.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/create",
     "parameters": [
       {
         "description": "Task type.<br><br>Possible values:<br>1 - Diagnostic information;<br>6 - Check now.",
@@ -7129,20 +7068,20 @@
         "name": "proxy_hostid",
         "type": "integer"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/create"
   },
   "TaskDelete": {
     "apiname": "task.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/delete"
   },
   "TaskGet": {
     "apiname": "task.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/get",
     "parameters": [
       {
         "description": "Return only tasks with the given IDs.",
@@ -7210,7 +7149,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7221,6 +7159,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7229,18 +7168,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/get"
   },
   "TaskUpdate": {
     "apiname": "task.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/task/update"
   },
   "TemplateCreate": {
     "apiname": "template.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/create",
     "parameters": [
       {
         "description": "Host <a href=\"/documentation/6.0/en/manual/api/reference/hostgroup/object\">groups</a> to add the template to.<br><br>The host groups must have the <code>groupid</code> property defined.",
@@ -7262,20 +7201,20 @@
         "name": "macros",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/create"
   },
   "TemplateDelete": {
     "apiname": "template.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/delete"
   },
   "TemplateGet": {
     "apiname": "template.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/get",
     "parameters": [
       {
         "description": "Return only templates with the given template IDs.",
@@ -7478,7 +7417,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7489,6 +7427,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7497,12 +7436,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/get"
   },
   "TemplateUpdate": {
     "apiname": "template.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/update",
     "parameters": [
       {
         "description": "Host <a href=\"/documentation/6.0/en/manual/api/reference/hostgroup/object\">groups</a> to replace the current host groups the templates belong to.<br><br>The host groups must have the <code>groupid</code> property defined.",
@@ -7529,32 +7468,32 @@
         "name": "templates_clear",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/template/update"
   },
   "TemplatedashboardCreate": {
     "apiname": "templatedashboard.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/create",
     "parameters": [
       {
         "description": "Template dashboard <a href=\"object#dashboard-page\">pages</a> to be created for the dashboard. Dashboard pages will be ordered in the same order as specified. At least one dashboard page object is required for <code>pages</code> property.",
         "name": "pages",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/create"
   },
   "TemplatedashboardDelete": {
     "apiname": "templatedashboard.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/delete"
   },
   "TemplatedashboardGet": {
     "apiname": "templatedashboard.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/get",
     "parameters": [
       {
         "description": "Return only template dashboards with the given IDs.",
@@ -7637,7 +7576,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7648,6 +7586,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7656,58 +7595,58 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/get"
   },
   "TemplatedashboardUpdate": {
     "apiname": "templatedashboard.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/update",
     "parameters": [
       {
         "description": "Template dashboard <a href=\"object#template-dashboard-page\">pages</a> to replace the existing dashboard pages.<br><br>Dashboard pages are updated by the <code>dashboard_pageid</code> property. New dashboard pages will be created for objects without <code>dashboard_pageid</code> property and the existing dashboard pages will be deleted if not reused. Dashboard pages will be ordered in the same order as specified. Only the specified properties of the dashboard pages will be updated. At least one dashboard page object is required for <code>pages</code> property.",
         "name": "pages",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templatedashboard/update"
   },
   "TemplategroupCreate": {
     "apiname": "templategroup.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/create"
   },
   "TemplategroupDelete": {
     "apiname": "templategroup.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/delete"
   },
   "TemplategroupUpdate": {
     "apiname": "templategroup.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/templategroup/update"
   },
   "TokenCreate": {
     "apiname": "token.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/create"
   },
   "TokenDelete": {
     "apiname": "token.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/delete"
   },
   "TokenGet": {
     "apiname": "token.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/get",
     "parameters": [
       {
         "description": "Return only tokens with the given IDs.",
@@ -7800,7 +7739,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7811,6 +7749,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7819,32 +7758,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/get"
   },
   "TokenUpdate": {
     "apiname": "token.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/token/update"
   },
   "TrendCreate": {
     "apiname": "trend.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/create"
   },
   "TrendDelete": {
     "apiname": "trend.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/delete"
   },
   "TrendGet": {
     "apiname": "trend.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/get",
     "parameters": [
       {
         "description": "Return only trends with the given item IDs.",
@@ -7917,7 +7856,6 @@
         "type": "string/array"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -7928,6 +7866,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -7936,18 +7875,18 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/get"
   },
   "TrendUpdate": {
     "apiname": "trend.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trend/update"
   },
   "TriggerCreate": {
     "apiname": "trigger.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/create",
     "parameters": [
       {
         "description": "Triggers that the trigger is dependent on.<br><br>The triggers must have the <code>triggerid</code> property defined.",
@@ -7959,20 +7898,20 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/create"
   },
   "TriggerDelete": {
     "apiname": "trigger.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/delete"
   },
   "TriggerGet": {
     "apiname": "trigger.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/get",
     "parameters": [
       {
         "description": "Return only triggers with the given IDs.",
@@ -8215,7 +8154,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -8226,6 +8164,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -8234,12 +8173,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/get"
   },
   "TriggerUpdate": {
     "apiname": "trigger.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/update",
     "parameters": [
       {
         "description": "Triggers that the trigger is dependent on.<br><br>The triggers must have the <code>triggerid</code> property defined.",
@@ -8251,12 +8190,12 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/trigger/update"
   },
   "TriggerprototypeCreate": {
     "apiname": "triggerprototype.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/create",
     "parameters": [
       {
         "description": "Triggers and trigger prototypes that the trigger prototype is dependent on.<br><br>The triggers must have the <code>triggerid</code> property defined.",
@@ -8268,20 +8207,20 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/create"
   },
   "TriggerprototypeDelete": {
     "apiname": "triggerprototype.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/delete"
   },
   "TriggerprototypeGet": {
     "apiname": "triggerprototype.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/get",
     "parameters": [
       {
         "description": "Return only enabled trigger prototypes that belong to monitored hosts.",
@@ -8454,7 +8393,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -8465,6 +8403,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -8473,12 +8412,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/get"
   },
   "TriggerprototypeUpdate": {
     "apiname": "triggerprototype.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/update",
     "parameters": [
       {
         "description": "Triggers and trigger prototypes that the trigger prototype is dependent on.<br><br>The triggers must have the <code>triggerid</code> property defined.",
@@ -8490,12 +8429,12 @@
         "name": "tags",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/triggerprototype/update"
   },
   "UserCreate": {
     "apiname": "user.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/create",
     "parameters": [
       {
         "description": "User's password.<br><br>Can be omitted if user is added only to groups that have LDAP access.",
@@ -8517,20 +8456,20 @@
         "name": "user_medias",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/create"
   },
   "UserDelete": {
     "apiname": "user.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/delete"
   },
   "UserGet": {
     "apiname": "user.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/get",
     "parameters": [
       {
         "description": "Return only users that use the given media.",
@@ -8578,7 +8517,6 @@
         "type": "query"
       },
       {
-        "description": "Sort the result by the given properties.<br><br>Possible values are: <code>userid</code> and <code>username</code>.",
         "PossibleValues": {
           "userid": {
             "description": "Order by the user id"
@@ -8587,6 +8525,7 @@
             "description": "Ordeer by the user name"
           }
         },
+        "description": "Sort the result by the given properties.<br><br>Possible values are: <code>userid</code> and <code>username</code>.",
         "name": "sortfield",
         "type": "string/array"
       },
@@ -8641,7 +8580,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -8652,6 +8590,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -8660,12 +8599,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/get"
   },
   "UserUpdate": {
     "apiname": "user.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/update",
     "parameters": [
       {
         "description": "User's password.<br><br>Can be empty string if user belongs to or is moved only to groups that have LDAP access.",
@@ -8687,32 +8626,32 @@
         "name": "user_medias",
         "type": "array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/user/update"
   },
   "UserdirectoryCreate": {
     "apiname": "userdirectory.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/create"
   },
   "UserdirectoryDelete": {
     "apiname": "userdirectory.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/delete"
   },
   "UserdirectoryUpdate": {
     "apiname": "userdirectory.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/userdirectory/update"
   },
   "UsergroupCreate": {
     "apiname": "usergroup.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/create",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/usergroup/object#permission\">Permissions</a> to assign to the group",
@@ -8729,20 +8668,20 @@
         "name": "users",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/create"
   },
   "UsergroupDelete": {
     "apiname": "usergroup.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/delete"
   },
   "UsergroupGet": {
     "apiname": "usergroup.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/get",
     "parameters": [
       {
         "description": "Return only user groups with the given status.<br><br>Refer to the <a href=\"object#user-group\">user group page</a> for a list of supported statuses.",
@@ -8835,7 +8774,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -8846,6 +8784,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -8854,12 +8793,12 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/get"
   },
   "UsergroupUpdate": {
     "apiname": "usergroup.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/update",
     "parameters": [
       {
         "description": "<a href=\"/documentation/6.0/en/manual/api/reference/usergroup/object#permission\">Permissions</a> to replace the current permissions assigned to the user group.",
@@ -8876,26 +8815,26 @@
         "name": "users",
         "type": "object/array"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usergroup/update"
   },
   "UsermacroCreate": {
     "apiname": "usermacro.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/create"
   },
   "UsermacroDelete": {
     "apiname": "usermacro.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/delete"
   },
   "UsermacroGet": {
     "apiname": "usermacro.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/get",
     "parameters": [
       {
         "description": "Return global macros instead of host macros.",
@@ -8998,7 +8937,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -9009,6 +8947,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -9017,32 +8956,32 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/get"
   },
   "UsermacroUpdate": {
     "apiname": "usermacro.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/usermacro/update"
   },
   "ValuemapCreate": {
     "apiname": "valuemap.create",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/create",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/create"
   },
   "ValuemapDelete": {
     "apiname": "valuemap.delete",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/delete",
     "parameters": [
       "Array of ID to delete"
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/delete"
   },
   "ValuemapGet": {
     "apiname": "valuemap.get",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/get",
     "parameters": [
       {
         "description": "Return only value maps with the given IDs.",
@@ -9055,15 +8994,15 @@
         "type": "query"
       },
       {
-        "description": "Sort the result by the given properties.",
         "PossibleValues": {
-          "valuemapid": {
-            "default": true
-          },
           "name": {
             "default": false
+          },
+          "valuemapid": {
+            "default": true
           }
         },
+        "description": "Sort the result by the given properties.",
         "name": "sortfield",
         "type": "string/array"
       },
@@ -9118,7 +9057,6 @@
         "type": "boolean"
       },
       {
-        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "PossibleValues": {
           "ASC": {
             "default": true,
@@ -9129,6 +9067,7 @@
             "description": "descending."
           }
         },
+        "description": "Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.",
         "name": "sortorder",
         "type": "string/array"
       },
@@ -9137,12 +9076,13 @@
         "name": "startSearch",
         "type": "boolean"
       }
-    ]
+    ],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/get"
   },
   "ValuemapUpdate": {
     "apiname": "valuemap.update",
     "description": "",
-    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/update",
-    "parameters": []
+    "parameters": [],
+    "url": "https://www.zabbix.com/documentation/6.0/en/manual/api/reference/valuemap/update"
   }
 }

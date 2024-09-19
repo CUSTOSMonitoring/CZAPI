@@ -1,4 +1,5 @@
 #vim: set ts=3 expandtab:
+include "Gral2String";
 
 def ItemTypeToString( type ):
    if type=="0" then "Zabbix agent"
@@ -124,6 +125,8 @@ def ItemToString( item ):
                            .value = ItemOutputFormatToString( .value )
                         elif .key == "request_method" then
                            .value = ItemRequestMethodToString( .value )
+                        elif .key == "lastclock" then
+                           .value = DateToString( .value )
                         elif .key == "retrieve_mode" then
                            .value = ItemRetrieveModeToString( .value )
                         else

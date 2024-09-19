@@ -1,0 +1,4 @@
+#!/bin/bash
+# para poder usar el ArrangeCols.sh sin problemas desde el directorio de ZAPI, ya el sel SetEnvironment altera el path
+
+/home/gguido/custos/git/MySQLScripts/ArrangeCols.sh "$@"

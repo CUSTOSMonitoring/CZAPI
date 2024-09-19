@@ -43,6 +43,7 @@ function Ayuda()
       --variables                   Muesta las variable configuradas
       --help|-h                     Muestra la ayuda
       --init JSON_OBJ               Inicializar con un objeto
+      --ignore-read-only            Admite el ingreso de propiedades read only en los objetos
       (-t | --traduccion) Objeto [prop [regexp]]      Traducción entre código y descripcion
          Ej 
             $(basename $0) -t Item                    Todas las propiedades del objeto
@@ -288,7 +289,7 @@ Seleccione el parametro para ingresar el valor
            SALIR ) salir="S"; break;;
             * ) AyudaOpcion ${opcion};
                 readonly=$(echo ${Objeto} | jq -r '.properties.'"${opcion}"'.readonly // false');
-                if [ "${readonly}" != "true" ]
+                if [ "${readonly}" != "true" -o "${IgnoreReadOnly}" ] 
                 then # se puede ingresar un valor al objeto
                    valorAct=$(echo ${ObjAux} | jq -r '.'${opcion} );
                    TipoValor=$( echo ${Objeto} | jq -r '.properties.'"${opcion}"'.type' )
@@ -327,7 +328,7 @@ Seleccione el parametro para ingresar el valor
                    fi
                 else
                    echo
-                   echo -e "${Green} ${Blinking}NOTA: ${Red} La propiedad es READ ONLY${Normal}"
+                   echo -e "${Green} ${Blinking}NOTA: ${Red} La propiedad es READ ONLY${Normal}\npuede utilizar la opción --ignore-read-only"
                    echo 
                 fi;;
         esac
@@ -412,6 +413,7 @@ do
          --init ) Init=$( jq -n "${Init}"' + '"$2" ); shift;;
          --lista-objetos ) ListaObjetos "$2"; exit;;
          --lista-propiedades ) ListaPropiedades "${2}" "$3" ; exit;;
+         --ignore-read-only ) IgnoreReadOnly="true";;
          -t | --tra* ) # $0 -t Obj propiedad valor
                        # Traducir objeto propiedad valor 
                        # el valor puede ser el código o el texto

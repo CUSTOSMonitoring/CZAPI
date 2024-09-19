@@ -1,0 +1,28 @@
+#!/bin/bash
+# vim: set ts=3 expandtab:
+
+function Ayuda()
+{
+  echo "Para hacer el logout del tocken que se está usando
+  uso $(basename $0) ArchConn [-h|--help]
+"
+}
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -h|--help ) Ayuda; exit;;
+      * ) ArchConn="$1";;
+   esac
+   shift
+done
+
+token=$( jq -r '.authtoken' "${ArchConn}")
+url=$( jq -r '.URL' "${ArchConn}")
+data='{ "jsonrpc": "2.0",
+  "method": "user.logout",
+  "params": [],
+  "auth": "'$token'",
+  "id": 1 }'
+
+curl --insecure -sS -H 'Content-Type: application/json-rpc' -d "${data}" ${url}

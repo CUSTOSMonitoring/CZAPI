@@ -8,7 +8,7 @@ function Gus_Complete_ObjCreate ()
    cur="${COMP_WORDS[COMP_CWORD]}"
    prev="${COMP_WORDS[COMP_CWORD-1]}"
    AntPrev="${COMP_WORDS[COMP_CWORD-2]}"
-   OptsGral="-c --configuration --def --def_nom --help --variables --init -t --traduccion --lista-objetos --lista-propiedades --edit-objetos --debug-level"
+   OptsGral="--ignore-read-only -c --configuration --def --def_nom --help --variables --init -t --traduccion --lista-objetos --lista-propiedades --edit-objetos --debug-level"
 
    i=1
    while [ $i -lt ${COMP_CWORD} ]

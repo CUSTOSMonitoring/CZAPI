@@ -13,9 +13,17 @@
     "fuente": "",
     "funcion": ""
   },
+  "DcheckGet": {
+    "fuente": "DCheck2String",
+    "funcion": "DcheckToString"
+  },
   "DiscoveryRuleGet": {
     "fuente": "LLD2String",
     "funcion": "LLDToString"
+  },
+  "DserviceGet": {
+    "fuente": "Dservice2String",
+    "funcion": "DserviceToString"
   },
   "EventGet": {
     "fuente": "",
@@ -29,13 +37,13 @@
     "fuente": "Host2String",
     "funcion": "HostToString"
   },
-  "HostgroupGet": {
-    "fuente": "HostGroup2String",
-    "funcion": "HostGroupToString"
-  },
   "HostInterfaceGet": {
     "fuente": "HostInterface2String",
     "funcion": "InterfaceToString"
+  },
+  "HostgroupGet": {
+    "fuente": "HostGroup2String",
+    "funcion": "HostGroupToString"
   },
   "ItemGet": {
     "fuente": "Item2String",
@@ -55,6 +63,10 @@
     "fuente": "Problem2String",
     "funcion": "ProblemToString"
   },
+  "ProxyGet": {
+    "fuente": "Proxy2String",
+    "funcion": "ProxyToString"
+  },
   "RoleGet": {
     "fuente": "",
     "funcion": ""
@@ -63,21 +75,9 @@
     "fuente": "",
     "funcion": ""
   },
-  "DserviceGet": {
-    "fuente": "Dservice2String",
-    "funcion": "DserviceToString"
-  },
-  "DcheckGet": {
-    "fuente": "DCheck2String",
-    "funcion": "DcheckToString"
-  },
   "TemplateGet": {
     "fuente": "Template2String",
     "funcion": "TemplateToString"
-  },
-  "ProxyGet": {
-    "fuente": "Proxy2String",
-    "funcion": "ProxyToString"
   },
   "TriggerGet": {
     "fuente": "Trigger2String",

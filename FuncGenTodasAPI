@@ -46,9 +46,9 @@ fi
 
 Functions=(
    get
-   #create
-   #delete
-   #update 
+   create
+   delete
+   update 
 )
 
 Objects=(

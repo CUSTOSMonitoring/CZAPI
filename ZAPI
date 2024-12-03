@@ -2,26 +2,6 @@
 # vim: set ts=3 expandtab shiftwidth=3:
 # Se quiereinterpretar los parametro de comandos a partir de descripciones
 
-#para colorear
-Black='\033[0;30m'
-Dark_Gray='\033[1;30m'
-Red='\033[0;31m'
-Light_Red='\033[1;31m'
-Green='\033[0;32m'
-Light_Green='\033[1;32m'
-Orange='\033[0;33m'
-Yellow='\033[0;33m'
-Blue='\033[0;34m'
-Light_Blue='\033[1;34m'
-Purple='\033[0;35m'
-Light_Purple='\033[1;35m'
-Cyan='\033[0;36m'
-Light_Cyan='\033[1;36m'
-Light_Gray='\033[0;37m'
-White='\033[1;37m'
-Blinking='\033[5m'
-Normal='\033[0m'
-
 DirHome="$(dirname $0)"
 APIDefFunc="${DirHome}/APIDefFunc.json"
 DirConn="${DirHome}/Conexiones"
@@ -39,9 +19,41 @@ libreria="$(pwd)/lib"
 # Header para llamar a las API de Zabbix
 Header="Content-Type: application/json-rpc"
 
+
+# opciones del less para mostrar la ayuda
+lessOpt="-MFR"
+
+. ${DirHome}/echoformats.sh
+
+#Colores por defecto a usar
+CLR_MostrarAyuda_Nombres="${Light_Red}${Bold}"
+
+CLR_FormatHTML_code="${Green}"
+CLR_FormatHTML_CLOSE_code="${Normal}"
+CLR_FormatHTML_link="${Light_Blue}${Underlined}(\1)${Normal}${Blue}"
+CLR_FormatHTML_CLOSE_link="${Normal}"
+
+# Valores para le formato de HTML
+Opts="Ig" # ignore case global para la sustitucion con sed y conversión del html
+# codigos html que buscamos
+From=( "<br>" "<code>"                 "<\/code>"                     "<a \([^>]*\)>"           "<\/a>"                        ) 
+# porque los sustituimos
+  To=( "\n"   "${CLR_FormatHTML_code}" "${CLR_FormatHTML_CLOSE_code}" "${CLR_FormatHTML_link} " "${CLR_FormatHTML_CLOSE_link}" )
+# Armado del comando para sed
+for i in $( seq 0 $(( ${#From[*]} -1 )) )
+do
+   CMD_FormatHTML="${CMD_FormatHTML:+$CMD_FormatHTML;}s/${From[$i]}/${To[$i]}/${Opts}"
+done
+
+function FormatHTML()
+{
+  echo -e "$( sed "${CMD_FormatHTML}" )
+  "
+}
+
 function Ayuda()
 {
-   echo -e " $(basename $0) Invocacioin de la API de Zabbix
+   echo -e " $(basename $0) Invocacion de la API de Zabbix
    ${Green}Uso${Normal}
           $(basename $0) [opciones]
 
@@ -77,8 +89,21 @@ function Ayuda()
     ${Green}Despliegue de variables${Normal}
           $(basename $0) [-c ArchiConf] --which-conf
                Muestra el nombre del archivo de configuración, útil cuando se usan variables de ambiente para determinarlo
-          $(basename $0) [-c ArchiConf] --variables
+          $(basename $0) [-c ArchiConf] --variables[=var]
                Muestra todas las variables definidas en el archivo de configuración
+               var puede ser:
+                  des[cripcion]	Muestra la descripcion
+                  url 				Muestra la URL de conexion
+                  tok				Muestra el token de conexion
+                  auth				Muestra si el tiken va en el header
+                  def            Muestra el archivo de definiciones de funciones
+                  log  				Muestra el archivo de log
+                  user           Muestra el user para conectarse
+                  pas* 				Muestra la password del usuario
+                  cmdprev        Muestra el comando previo a conectarse
+                  for[mat]       Muestra el archivo de formateo
+                  conf           Muestra el archivo de configuracion
+                  dirconn        Muestra el directorio de conexiones
 
     ${Green}Edición de los archivos de definiciones${Normal}
           $(basename $0) --edit-conf
@@ -128,7 +153,7 @@ function ShowVariables()
 {
    if [ $# -eq 0 ]
    then
-      echo "Variables que utiliza $0 desde el archivo '${ArchConf}'
+      echo -e "Variables que utiliza ${Green}${0}${Normal} desde el archivo ${Red}'${ArchConf}'${Normal}
 
    DirConn '${DirConn}'
    Descripcion: ${DescConn}
@@ -180,6 +205,18 @@ function debug()
    [ ${NivelDebug} -le ${severidad} ] && echo "$(date +"%F %T") PID:$$ ###DescCon:${DescConn} Nivel:${severidad} Func:${FUNCNAME[1]}### $*" >> "${Log}"
 }
 
+function MostrarAyuda()
+{
+   local par
+   par="$1"
+   echo -e "
+${CLR_MostrarAyuda_Nombres}Nombre${Normal}\t\t$( echo ${par} | jq -r '.name' )
+${CLR_MostrarAyuda_Nombres}Tipo${Normal}\t\t$( echo ${par} | jq -r '.type' )
+${CLR_MostrarAyuda_Nombres}Descripcion${Normal}\n\t$(echo ${par} | jq -r '.description' )
+<br>
+" | FormatHTML | less ${lessOpt}
+}
+
 function ValidarParametro()
 {
    local parametro parValor parName parDataType
@@ -201,7 +238,7 @@ function ValidarParametro()
    "
    if [ "${parValor}" == "?" ]
    then
-      echo ${par} | jq -S '.'
+      MostrarAyuda "${par}"
       ERRORES="Despliegue de ayuda" # para evitar que ejecute la llamada a la funcion
    else
       if [ "${par}" ]
@@ -354,7 +391,7 @@ function ShowDef()
          fi
          debug 0 "filtro de parametros ${jqcmd}"
       fi
-      echo ${Funcion} | jq -S "${jqcmd}"
+      echo ${Funcion} | jq -S "${jqcmd}" | FormatHTML
    fi
 }
 
@@ -554,6 +591,11 @@ function ListarConexiones()
        sed -rn '/[{}]/d; s/"//g; s/^([^:]+):(.*)$/\1:\n\t\2\n/p' | less -FR
 }
 
+function ListFunctions()
+{
+   jq -r 'keys[] | select( . | test( "'"$1"'" ) )' "${APIDefFunc}"
+}
+
 function Controles()
 {
    # Controlar que existan los directorios y archivos necesarios
@@ -588,6 +630,16 @@ function Controles()
 #
 }
 
+function WhichConf()
+{
+   if [ "$1" ]
+   then
+      jq -r '.'"$1" "${ArchConf}"
+   else
+      echo "${ArchConf}"
+   fi
+}
+
 if [ $# -eq 0 ]
 then
    Ayuda; exit 1
@@ -606,11 +658,10 @@ do
                        ShowVariables
                     fi
                     exit;;
-      --help | -h ) Ayuda; exit;;
       --def* ) ShowDef "$1" "$2"; exit;;
+      --list-functions ) ListFunctions "$2"; exit;;
       --list-conexiones ) shift ; ListarConexiones $* ; exit;;
-      --which-conf ) echo "${ArchConf}" ; exit;;
-      --which-url ) echo "${ArchConf}" ; exit;;
+      --which-conf ) WhichConf "$2"  ; exit;;
       --edit-conf ) ${EDITOR:-vi} "${ArchConf}"; exit;;
       --edit-funciones ) ${EDITOR:-vi} "${APIDefFunc}"; exit;;
       --edit-traduccion ) # $2 debe traer el nombre de la funcion a editar o lo descartamos
@@ -651,6 +702,7 @@ do
            SetVariables "$2"; shift;;
       -C ) CreateArchConect "$2"; exit;;
       --show-debug ) ShowDebug; exit;;
+      --help | -h ) Ayuda; exit;;
       *) if [ "${primero}" ]
          then
              ValidarFuncion "$1";
@@ -667,12 +719,14 @@ if [ "${ERRORES}" ]
 then
    if [ "${ERRORES}" != "Despliegue de ayuda" ]
    then
-      echo -e ERRORES${ERRORES}
+      {
+      echo -e ERRORES${ERRORES};
+      Ayuda; } | less -Fr
    fi
 else
    if [ "${ShowAPICall}" ]
    then
-      echo "curl --insecure -sS -H \"${Header}\" ${AuthInHeader:+-H \"Authorization: Bearer ${authtoken}\"}  -d '$( GetAPICall | jq -S  )' ${URL:-URL_SIN_ESPECIFICAR}"
+      echo "curl --insecure -sS -H \"${Header}\" ${AuthInHeader:+-H \"Authorization: Bearer ${authtoken}\"}  -d '$( GetAPICall | jq -S )' ${URL:-URL_SIN_ESPECIFICAR}"
    else
       if [ "$( GetAPICall )" ]
       then
@@ -685,8 +739,6 @@ else
          if [ "${fuente}" -a "${funcion}" -a -z "${raw}" ]
          then
             debug 1 "Formateamos con '${fuente}' y la funcion '${funcion}'"
-            #callAPI | jq 'include "'"${libreria}/${fuente}.jq"'"; if ( type( .result ) == "array" ) then
-            #callAPI | jq 'include "'"${fuente}"'" {"search":"'"${libreria}"'" } ; if ( type( .result ) == "array" ) then
             callAPI | jq -L${libreria} 'include "'"${fuente}"'"; .result | if ( type == "array" ) then
                                                                    .[] |= '${funcion}'( . )
                                                                 elif ( type == "string" ) then
@@ -695,13 +747,13 @@ else
                                                                    . |= '${funcion}'( . )
                                                                 end '
          else
-            debug 1 "Sin formateo"
+            debug 1 "Sin formateo ${raw:+a pedido explicito}"
             callAPI
             echo
          fi
       else
          debug 1 "Sin datos para la llamada a la API"
-         Ayuda
+         Ayuda | less -Fr
       fi
    fi
 fi

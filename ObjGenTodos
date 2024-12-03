@@ -5,7 +5,7 @@ URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
 
 function Ayuda()
 {
-   echo "$(basename $0) Genera los archivos para el create objetc
+   echo "$(basename $0) Genera los archivos para la creacion de objetos ObjCreate
    AL MENOS LA PRIMER VERSION - puede necesitar alguan edición
 
    Uso $(basename $0) [-u URL] [-h]
@@ -161,9 +161,14 @@ then
       fi
    done | { if [ ! "${a}" ]
    then
-      jq --slurp 'add' "${DirSalida}/"* > "${ArchSalida}"
+      #jq --slurp 'add' "${DirSalida}/"* > "${ArchSalida}"
+      jq --slurp 'add' > "${ArchSalida}"
    else
-      jq --slurp 'add' "${DirSalida}/"* > "${a}"
+      #jq --slurp 'add' "${DirSalida}/"* > "${a}"
+      jq --slurp 'add' > "${a}"
    fi }
-   echo -n "Encontramos estos archivos con errores\n${ERROR}"
+   if [ "${ERROR}" ]
+   then
+      echo -e "Encontramos estos archivos con errores\n${ERROR}"
+   fi
 fi

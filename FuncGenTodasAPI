@@ -5,45 +5,7 @@ URL_base="https://www.zabbix.com/documentation/current/en/manual/api/reference"
 DirOut="$(pwd)"
 ArchOpComunesGet="$(dirname $(readlink -f $0))/ObjParamsComunes.json"
 
-function Ayuda()
-{
-   echo "$(basename $0) Genera archivos con la definicón de funciones en el directorio especificado.
-   AL MENOS LA PRIMER VERSION - puede necesitar alguna edición
-
-   Uso $(basename $0) [-u URL] [-d dirout] [-g ArchOpComunesGet] [-h]
-       $(basename $0) [--url_base URL] [--dir-out dirout] [--opciones-comunes-get ArchOpComunesGet] [--help]
-   
-       -u | --url_base             -> direccion base donde vamos a buscar info ('${URL_base}')
-       -g | --opciones-comunes-get -> Archivo JSON con las opciones comunes a la funcion get ('${ArchOpComunesGet}')
-       -d | --dir-out              -> donde se generan los archivos ('${DirOut}')
-       -h --help                   -> muestra esta ayuda
-"
-}
-
-while [ $# -gt 0 ]
-do
-   case $1 in
-      -h | --help ) Ayuda; exit;;
-      -d | --dir-out ) DirOut="$( readlink -f "$2" )"; DirOutDef=No; shift;;
-      -g | --opciones-comunes-get ) ArchOpComunesGet="$2"; shift;;
-      -u | --url-base ) URL_base="$2"; shift;;
-   esac
-   shift
-done
-
-if [ -z "${DirOutDef}" ]
-then
-   read -p "Generar la salida al directorio '${DirOut}'? (sN)" a
-   if ! [[ "${a}" =~ s|S ]]
-   then
-      echo "
-Especifique un directorio de salida
-      "
-      Ayuda
-      exit
-   fi
-fi
-
+# valores por defecto de los nombres de funciones
 Functions=(
    get
    create
@@ -51,6 +13,7 @@ Functions=(
    update 
 )
 
+#Valores por defecto de los Objetos
 Objects=(
    "action"
    "alert"
@@ -112,6 +75,50 @@ Objects=(
    "valuemap"
    "httptest" # "webscenario"
 )
+
+function Ayuda()
+{
+   echo "$(basename $0) Genera archivos con la definicón de funciones en el directorio especificado.
+   AL MENOS LA PRIMER VERSION - puede necesitar alguna edición
+
+   Uso $(basename $0) [-u URL] [-d dirout] [-g ArchOpComunesGet] [-h]
+       $(basename $0) [--url_base URL] [--dir-out dirout] [--opciones-comunes-get ArchOpComunesGet] [--help]
+   
+       -u | --url_base             -> direccion base donde vamos a buscar info ('${URL_base}')
+       -f | --functions            -> los nombres de las funciones para las que queremos generar las definiciones
+       -o | --objects              -> los nombres de los objetos para las que queremos generar las definiciones
+       -g | --opciones-comunes-get -> Archivo JSON con las opciones comunes a la funcion get ('${ArchOpComunesGet}')
+       -d | --dir-out              -> donde se generan los archivos individuales por funcion ('${DirOut}')
+       -h | --help                 -> muestra esta ayuda
+"
+}
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -f | --functions  ) Functions=( ${2//,/ } ); shift;;
+      -o | --objects    ) Objects=( ${2//,/ } ); shift;;
+      -d | --dir-out    ) DirOut="$( readlink -f "$2" )"; DirOutDef=No; shift;;
+      -g | --opciones-comunes-get ) ArchOpComunesGet="$2"; shift;;
+      -u | --url-base   ) URL_base="$2"; shift;;
+      -h | --help       ) Ayuda; exit;;
+   esac
+   shift
+done
+
+if [ -z "${DirOutDef}" ]
+then
+   read -p "Generar la salida al directorio '${DirOut}'? (sN)" a
+   if ! [[ "${a}" =~ s|S ]]
+   then
+      echo "
+Especifique un directorio de salida
+      "
+      Ayuda
+      exit
+   fi
+fi
+
 
 function GenerarObjFunc()
 {

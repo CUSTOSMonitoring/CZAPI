@@ -1,10 +1,21 @@
 #!/bin/bash
 # vim: set ts=3 expandtab shiftwidth=3:
 
+. echoformats.sh
+
+# valores por defecto
+if [ "$(which ZAPI)" ]
+then
+   DefFunc="$(ZAPI --variables=def)"
+fi
+
 function Ayuda()
 {
    echo "$(basename $0) -d ArchDefFunc [-h|--help]
-   busca parametros con el mimso nombre en las definiciones de funciones
+   busca parametros con el mismmo nombre en las definiciones de funciones
+   por defecto busca en '${DefFunc}'
+
+   Si ZAPI está en el path, se toma por defecto el nombre del archivo de definiciones de funciones
 "
 }
 
@@ -21,7 +32,10 @@ done
 
 [ "${ERR}" ] && echo -e "${ERR}" && Ayuda && exit 1;
 
-jq '
+{
+echo -e "Repetidos en el archivo ${Red}'${DefFunc}'${Normal}
+" ;
+jq -C '
     to_entries | map( select ( (.value.parameters | map(.name?) | length ) != (.value.parameters | map(.name?) | unique | length ) ) ) 
     | .[] | .key, ( .value.parameters |  group_by(.name?) | map( select( length > 1) | .[0]  ))
-    ' "${DefFunc}"
+    ' "${DefFunc}" ; } | less -Fr

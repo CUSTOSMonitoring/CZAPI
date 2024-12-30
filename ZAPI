@@ -47,6 +47,8 @@ done
 
 function FormatHTML()
 {
+  debug 0 "echo -e \"$( sed \"${CMD_FormatHTML}\" )
+  "
   echo -e "$( sed "${CMD_FormatHTML}" )
   "
 }
@@ -202,7 +204,7 @@ function debug()
 {  local serveridad
    severidad=${1}
    shift
-   [ ${NivelDebug} -le ${severidad} ] && echo "$(date +"%F %T") PID:$$ ###DescCon:${DescConn} Nivel:${severidad} Func:${FUNCNAME[1]}### $*" >> "${Log}"
+   [ ${NivelDebug} -le ${severidad} ] && echo "$(date +"%F %T") PID:$$ ###DescCon:${DescConn} Nivel:${severidad} Func:${FUNCNAME[1]}### $@" >> "${Log}"
 }
 
 function MostrarAyuda()
@@ -364,7 +366,7 @@ function ShowDef()
          nom* ) jqcmd='keys';;
          * ) jqcmd=".";;
       esac
-      debug 0 jq "${jqcmd}" ${APIDefFunc}
+      debug 0 "jq \"${jqcmd}\" ${APIDefFunc}"
       jq -S "${jqcmd}" "${APIDefFunc}"
    else
       [[ "${que}" =~ api ]] && jqcmd="${jqcmd:+${jqcmd},}apiname"
@@ -375,6 +377,7 @@ function ShowDef()
       then
          if [ "${jqcmd}" == "parameters" -a "$2" ]
          then #especificamos condiciones sobre los parametros
+            debug 0 "buscando el parametro '$2'"
             filpar="${2}"
             while [ "${filpar}" ]
             do
@@ -391,7 +394,12 @@ function ShowDef()
          fi
          debug 0 "filtro de parametros ${jqcmd}"
       fi
-      echo ${Funcion} | jq -S "${jqcmd}" | FormatHTML
+      if [[ "${que}" =~ des ]]
+      then
+         echo ${Funcion} | jq -S "${jqcmd}" | FormatHTML
+      else
+         echo ${Funcion} | jq -S "${jqcmd}" 
+      fi
    fi
 }
 

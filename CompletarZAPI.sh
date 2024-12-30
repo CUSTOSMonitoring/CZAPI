@@ -10,14 +10,15 @@ function Gus_GetListaFunctions()
 function Gus_GetListaParametros()
 {
 # el segundo parametro opcional es el archivo de conf en la forma "-c Arch"
-   GusDebug En Gus_GetListaParametros 
+   GusDebug "En Gus_GetListaParametros ZAPI $2 \"$1\" --def_para | jq -r '.parameters[] | .name'"
+   GusDebug $( ZAPI $2 "$1" --def_para | jq -r '.parameters[] | .name' )
    ZAPI $2 "$1" --def_para | jq -r '.parameters[] | .name'
    GusDebug Saliendo Gus_GetListaParametros 
 }
 
 function GusDebug()
 {
-   #echo $(date +"*%F %T") $* >> aux.log
+   #echo $(date +"*%F %T") $* >> /home/gguido/ZAPI/aux.log
    #echo $(date +"*%F %T") $* >&2
    #echo $(date +"*%F %T") $* > /dev/null
    :

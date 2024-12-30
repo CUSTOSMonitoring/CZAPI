@@ -85,12 +85,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
+        "description": "These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -138,11 +133,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "PossibleValues": {
@@ -260,12 +250,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
-        "description": "Return the number of records in the result instead of the actual data.",
+        "description": "These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -313,11 +298,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "PossibleValues": {
@@ -388,11 +368,6 @@
         "type": "object"
       },
       {
-        "description": "rowspan=\"9\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
-        "name": "countOutput",
-        "type": "boolean"
-      },
-      {
         "description": "Return the number of records in the result instead of the actual data.",
         "name": "countOutput",
         "type": "boolean"
@@ -406,11 +381,6 @@
         "description": "Return results that do not match the criteria given in the search parameter.",
         "name": "excludeSearch",
         "type": "boolean"
-      },
-      {
-        "description": "Return only those results that exactly match the given filter. Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. Doesn't work for text fields.",
-        "name": "filter",
-        "type": "object"
       },
       {
         "description": "Limit the number of records returned.",
@@ -428,11 +398,6 @@
         "type": "boolean"
       },
       {
-        "description": "Return results that match the given wildcard search (case-insensitive). Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE \"%…%\" search. Works only for string and text fields.",
-        "name": "search",
-        "type": "object"
-      },
-      {
         "description": "If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. Default: false.",
         "name": "searchByAny",
         "type": "boolean"
@@ -441,11 +406,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "PossibleValues": {
@@ -696,7 +656,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -827,7 +787,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -963,7 +923,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1078,7 +1038,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1200,7 +1160,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1403,7 +1363,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1549,7 +1509,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1689,7 +1649,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1906,7 +1866,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -1959,11 +1919,6 @@
         "description": "If set to true enables the use of \"*\" as a wildcard character in the search parameter. Default: false.",
         "name": "searchWildcardsEnabled",
         "type": "boolean"
-      },
-      {
-        "description": "Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting. If no value is specified, data will be returned unsorted.",
-        "name": "sortfield",
-        "type": "string/array"
       },
       {
         "PossibleValues": {
@@ -2099,7 +2054,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -2224,7 +2179,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"6\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -2412,7 +2367,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -2527,7 +2482,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"5\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "flag"
       },
@@ -2644,7 +2599,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -2730,10 +2685,10 @@
     "apiname": "host.create",
     "description": "",
     "parameters": [
-	    {
+      {
         "description": "Vector con los objetos a crear. Array of objects host to create, it may have extra properties, No ha sido testeado",
         "type": "@Array(@Object(host,createprop))"
-	    }
+      }
     ],
     "url": "https://www.zabbix.com/documentation/current/en/manual/api/reference/host/create"
   },
@@ -3005,7 +2960,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"10\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -3236,7 +3191,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -3397,7 +3352,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -3568,7 +3523,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -3849,7 +3804,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -3980,7 +3935,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -4111,7 +4066,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -4367,7 +4322,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -4573,7 +4528,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -4724,7 +4679,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -4900,7 +4855,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5041,7 +4996,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5162,7 +5117,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">Reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">Reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5362,7 +5317,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5485,7 +5440,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5611,7 +5566,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5747,7 +5702,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -5878,7 +5833,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -6029,7 +5984,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -6230,7 +6185,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -6466,7 +6421,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -6817,7 +6772,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -6953,7 +6908,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -7144,7 +7099,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -7285,7 +7240,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -7708,7 +7663,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -7954,7 +7909,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"11\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -8120,7 +8075,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -8422,7 +8377,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -8593,7 +8548,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a> page.",
         "name": "countOutput",
         "type": "boolean"
       },
@@ -8714,7 +8669,7 @@
         "type": "string/array"
       },
       {
-        "description": "rowspan=\"12\">These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
+        "description": "These parameters being common for all <code>get</code> methods are described in detail in the <a href=\"/documentation/current/en/manual/api/reference_commentary#common-get-method-parameters\">reference commentary</a>.",
         "name": "countOutput",
         "type": "boolean"
       },

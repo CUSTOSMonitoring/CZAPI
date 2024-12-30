@@ -22,8 +22,8 @@
     "funcion": "LLDToString"
   },
   "EventGet": {
-    "fuente": "",
-    "funcion": ""
+    "fuente": "Event2String",
+    "funcion": "EventToString"
   },
   "HistoryGet": {
     "fuente": "",
@@ -37,7 +37,7 @@
     "fuente": "Host2String",
     "funcion": "HostToString"
   },
-  "HostGroupGet": {
+  "HostgroupGet": {
     "fuente": "HostGroup2String",
     "funcion": "HostGroupToString"
   },

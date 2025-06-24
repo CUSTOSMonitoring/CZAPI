@@ -11,33 +11,25 @@ function Ayuda()
    Uso $(basename $0) [-u URL] [-h]
        $(basename $0) [--url URL]  [--help]
 
-       -u --url   -> base de la url de la ayuda por defecto ${URL_base}
-       -d --dir   -> Directorio de salida de todos los archivos
-       -h --help  -> muestra esta ayuda
+       -u --url        -> base de la url de la ayuda por defecto ${URL_base}
+       -d --dir        -> Directorio de salida de todos los archivos
+       -o | --object   -> lista de objetos a generar, hay un valor por defecto que incluyea a la mayoría
+       --list-objetos  -> lista de objetos a generar
+       -h --help       -> muestra esta ayuda
 "
+}
+
+function ListaObjetos()
+{
+   for i in ${Objects[*]}
+   do
+      echo $i
+   done
+   
 }
 
 #Por defecto generamos los archivos en el directorio donde estamos parados
 DirSalida="." 
-
-while [ $# -gt 0 ]
-do
-   case $1 in
-      -u | --url ) URL_base=$2; shift;;
-      -d | --dir ) DirSalida="$2"; shift;;
-      -h | --help) Ayuda; exit;
-   esac
-   shift
-done
-
-[ -z "${URL_base}" ] && ERROR="\nDebe especificar una url"
-
-if [ "${ERROR}" ]
-then
-   echo -e "Error${ERROR}"
-   Ayuda
-   exit 1
-fi
 
 Objects=(
 action
@@ -94,6 +86,29 @@ usermacro
 valuemap
 webscenario
 )
+
+while [ $# -gt 0 ]
+do
+   case $1 in
+      -u | --url ) URL_base=$2; shift;;
+      -o | --object ) IFS="," read -ra Objects <<< "$2"; shift;;
+      --list-objetos ) ListaObjetos; exit;;
+      -d | --dir ) DirSalida="$2"; shift;;
+      -h | --help) Ayuda; exit;;
+      *) echo opción no reconocida "'$1'"; exit 1;;
+   esac
+   shift
+done
+
+[ -z "${URL_base}" ] && ERROR="\nDebe especificar una url"
+
+if [ "${ERROR}" ]
+then
+   echo -e "Error${ERROR}"
+   Ayuda
+   exit 1
+fi
+
 
 function GenArch()
 {

@@ -296,6 +296,30 @@ function ValidarFuncion()
 
 function GetAPICall()
 {
+   # retorna si hay que poner la autorización en la llamada
+   if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+   then 
+      return 1 # el método no lleva autorizacion
+   else
+      return 0 # el método lleva autorizacion
+   fi
+}
+
+function MetodoSinAuth ()
+{
+   # retorna si hay que pasar la autorización en la llamada al metodo, podría cambiarse a que sea un parámetro en la definición de la funcion
+   local method
+   method=$(echo ${Funcion} | jq -r '.apiname')
+   if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+   then
+      return 1
+   else
+      return 0
+   fi
+}
+
+function GetAPICall()
+{
    local method Authorization data
    if [ "${Funcion}" ]
    then
@@ -305,7 +329,8 @@ function GetAPICall()
       then
          if ! [ ${AuthInHeader} ]
          then # en la versión 7 el auth se pasa al header
-            if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+            #if [[ "${method}" != "apiinfo.version" ]] && [[ "${method}" != "user.login" ]]
+            if MetodoSinAuth "${Funcion}"
             then # Hay metodos que no llevan e autorization
                Authorization=${authtoken:+,'"auth"':\"${authtoken}\"}
             fi
@@ -340,8 +365,14 @@ function callAPI()
    fi
    if [ "${APICall_data}" ]
    then
-      debug 3 "curl --insecure -sS -H '${Header}' '${AuthInHeader:+-H Authorization: Bearer ${authtoken}}' -d '${data}' ${URL}"
-      curl --insecure -sS -H "${Header}" ${AuthInHeader:+-H Authorization: Bearer ${authtoken}} -d "${APICall_data}" ${URL}
+      if MetodoSinAuth "${Funcion}"
+      then
+         debug 3 "curl --insecure -sS -H '${Header}' -d '${data}' ${URL}"
+         curl --insecure -sS -H "${Header}" -d "${APICall_data}" ${URL}
+      else
+         debug 3 "curl --insecure -sS -H '${Header}' '${AuthInHeader:+-H "Authorization: Bearer ${authtoken}"}' -d '${data}' ${URL}"
+         curl --insecure -sS -H "${Header}" ${AuthInHeader:+-H "Authorization: Bearer ${authtoken}"} -d "${APICall_data}" ${URL}
+      fi
       # --insecure, --show-error
       #      When used with -s, --silent, it makes curl show an error message if it fails.
       # -s, --silent
@@ -575,7 +606,7 @@ function CreateArchConect ()
   read -p "Salvamos el archivo?: (s/N) " valor
   if [[ "${valor}" =~ ^[Ss] ]]
   then
-     read -p "Ingrese el nombre de archivo: (${Arch})" Aux
+     read -p "Ingrese el nombre de archivo: (${Arch}) " Aux
      [ "${Aux}" ] && Arch="${Aux}"
      if [ "${Arch}" ]
      then
@@ -734,7 +765,12 @@ then
 else
    if [ "${ShowAPICall}" ]
    then
-      echo "curl --insecure -sS -H \"${Header}\" ${AuthInHeader:+-H \"Authorization: Bearer ${authtoken}\"}  -d '$( GetAPICall | jq -S )' ${URL:-URL_SIN_ESPECIFICAR}"
+      if MetodoSinAuth "${Funcion}"
+      then
+         echo "curl --insecure -sS -H \"${Header}\" -d '$( GetAPICall | jq -S )' ${URL:-URL_SIN_ESPECIFICAR}"
+      else
+         echo "curl --insecure -sS -H \"${Header}\" ${AuthInHeader:+-H \"Authorization: Bearer ${authtoken}\"}  -d '$( GetAPICall | jq -S )' ${URL:-URL_SIN_ESPECIFICAR}"
+      fi
    else
       if [ "$( GetAPICall )" ]
       then
@@ -747,13 +783,14 @@ else
          if [ "${fuente}" -a "${funcion}" -a -z "${raw}" ]
          then
             debug 1 "Formateamos con '${fuente}' y la funcion '${funcion}'"
-            callAPI | jq -L${libreria} 'include "'"${fuente}"'"; .result | if ( type == "array" ) then
+            callAPI | jq -L${libreria} 'include "'"${fuente}"'"; if .error != null then . else
+                                                                    .result? | if ( type == "array" ) then
                                                                    .[] |= '${funcion}'( . )
                                                                 elif ( type == "string" ) then
                                                                    .
                                                                 else
                                                                    . |= '${funcion}'( . )
-                                                                end '
+                                                                end end'
          else
             debug 1 "Sin formateo ${raw:+a pedido explicito}"
             callAPI
